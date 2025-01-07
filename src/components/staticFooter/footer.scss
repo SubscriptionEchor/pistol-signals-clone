@@ -1,0 +1,25 @@
+@use '../../styles/mixins' as *;
+
+.footer-container {
+    padding-top: 30px !important;
+    padding-bottom: 30px !important;
+
+    @include themed() {
+        border-top: 2px solid themed('border-color');
+        background-color: themed('surface-high');
+    }
+}
+
+.footer-items {
+    cursor: pointer;
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+
+    @include themed() {
+        color: themed('senary-color');
+
+        &:hover {
+            color: themed('primary-color');
+        }
+    }
+}

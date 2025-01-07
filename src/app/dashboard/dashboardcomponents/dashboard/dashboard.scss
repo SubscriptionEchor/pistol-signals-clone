@@ -1,0 +1,175 @@
+@use '../../styles/mixins' as *;
+
+@mixin common-class($theme-color) {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('semi-bold');
+
+    @include themed() {
+        color: themed($theme-color);
+    }
+}
+
+.welcome-text {
+    font-size: fontSize('xl');
+    font-weight: fontWeight('normal');
+    line-height: 32px;
+
+    @include themed() {
+        color: themed('quaternary-color')
+    }
+}
+
+.welcome-text-content {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+    line-height: 18px;
+
+    @include themed() {
+        color: themed('text-light')
+    }
+}
+
+.trading-cards-data {
+    @include themed() {
+        color: themed('text-light');
+        border-bottom: 1px solid themed('border-color')
+    }
+}
+
+.gradient-shadow {
+    width: 250px;
+    height: 193px;
+    position: absolute;
+    right: -100px;
+    top: 100px;
+    z-index: 1000;
+    border-radius: 50%;
+    filter: blur(100px);
+
+    @include themed() {
+        background: themed('primary-color');
+    }
+}
+
+.cards {
+    width: 100%;
+
+    @media (min-width: 576px) {
+        width: 37%;
+    }
+
+    @media (min-width: 1200px) {
+        width: 38%
+    }
+
+}
+
+.card-2 {
+    width: 100%;
+
+    @media (min-width: 576px) {
+        width: 26%;
+    }
+
+    @media (min-width: 1200px) {
+        width: 24%
+    }
+}
+
+.gainers-loosers-card {
+    border-radius: 12px;
+
+    .heading {
+        font-size: fontSize('md');
+        font-weight: fontWeight('semi-bold');
+        line-height: normal;
+
+        @include themed() {
+            color: themed('quaternary-color');
+            border-bottom: 1px solid themed('border-color')
+        }
+    }
+
+    .price {
+        text-decoration: none;
+    }
+
+    @include themed() {
+        background: themed('quinary-color')
+    }
+
+    .index {
+        @include common-class('text-light')
+    }
+
+    .coin-name {
+        @include common-class('text-light')
+    }
+
+    .price {
+        @include common-class('quaternary-color')
+    }
+
+    .profit-percentage {
+        @include common-class('secondary-color');
+        font-size: fontSize('xs');
+        font-weight: fontWeight('normal');
+
+    }
+
+    .loss-percentage {
+        @include common-class('alert');
+        font-size: fontSize('xs');
+        font-weight: fontWeight('normal');
+    }
+
+}
+
+.marketcap-text {
+    font-size: fontSize('md');
+    font-weight: fontWeight('semi-bold');
+    line-height: 22px;
+
+    @include themed() {
+        color: themed('quaternary-color')
+    }
+}
+
+.marketcap-value {
+    font-size: fontSize('lg');
+    font-weight: fontWeight('medium');
+    line-height: 28px;
+
+    @include themed() {
+        color: themed('quaternary-color')
+    }
+}
+
+.market-percentage-positive {
+    font-size: fontSize('xs');
+    font-weight: fontWeight('normal');
+
+    @include themed() {
+        color: themed('secondary-color')
+    }
+}
+
+.market-percentage-negative {
+    font-size: fontSize('xs');
+    font-weight: fontWeight('normal');
+
+    @include themed() {
+        color: themed('alert')
+    }
+}
+
+.active-card {
+    font-size: fontSize('xs');
+    font-weight: fontWeight('semi-bold');
+    border-top-left-radius: 12px;
+
+    @include themed() {
+        background: themed('quaternary-color');
+        color: themed('black-secondary')
+    }
+}

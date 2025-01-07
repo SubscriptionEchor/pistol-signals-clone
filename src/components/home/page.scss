@@ -1,0 +1,222 @@
+@use '../../styles/mixins' as *;
+
+
+@mixin common-class($theme-color) {
+  font-size: fontSize('lg');
+  font-weight: fontWeight('medium');
+  line-height: 28px;
+  text-align: center;
+
+  @include themed() {
+    color: themed($theme-color);
+  }
+}
+
+.insights-container {
+  @include themed() {
+    background: themed('surface-high');
+  }
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  /* Adjust as needed */
+  height: 600px;
+  /* Adjust as needed */
+  // overflow: hidden;
+  /* Hide overflow if necessary */
+}
+
+.background-gradient {
+  position: absolute;
+  /* Position it absolutely within the container */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(54.41% 42.25% at 56.68% 35.89%, rgba(0, 0, 0, 0) 0%, #000000 100%)
+    /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */
+  ;
+
+  pointer-events: none;
+  z-index: 10;
+  /* Ensure it is behind the video */
+}
+
+.video {
+  position: relative;
+  /* Position relative to stack above the gradient */
+  z-index: 2;
+  /* Ensure it is above the gradient */
+  width: 100%;
+  /* Full width */
+  height: 600px;
+  background-repeat: no-repeat;
+  object-fit: cover;
+  /* Maintain aspect ratio */
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  // 
+
+}
+
+.gradient-btn {
+  display: flex;
+  width: fit-content;
+  height: fit-content;
+  background: linear-gradient(244.78deg, rgba(55, 175, 60, 0.45) 9.97%, rgba(94, 106, 210, 0.45) 77.19%);
+}
+
+.btn-text {
+  background-color: transparent;
+
+  @include themed() {
+    color: themed('quaternary-color')
+  }
+}
+
+.btn1 {
+  font-size: fontSize('base');
+  font-weight: fontWeight('medium');
+
+  @include themed() {
+    border-right: 2px solid themed('quaternary-color')
+  }
+}
+
+.btn2 {
+  font-size: fontSize('sm');
+  font-weight: fontWeight('normal');
+}
+
+.hero-title {
+  font-size: fontSize('xxl');
+  font-weight: fontWeight('semi-bold');
+  text-align: center;
+  width: 75%;
+
+  @include themed() {
+    color: themed('quaternary-color')
+  }
+
+  @media (min-width: 1200px) {
+    font-size: fontSize('xxxl');
+    font-weight: fontWeight('bold');
+    line-height: 72px;
+    width: 50%
+  }
+}
+
+.hero-text {
+  font-size: fontSize('lg');
+  font-weight: fontWeight('medium');
+  line-height: 24px;
+  text-align: center;
+  width: 80%;
+
+  @include themed() {
+    color: themed('senary-color')
+  }
+
+  @media (min-width: 576px) {
+    width: 50%
+  }
+}
+
+.pricing-planing {
+  font-size: fontSize('base');
+  font-weight: fontWeight('medium');
+  line-height: 24px;
+  text-align: center;
+  width: 80%;
+  width: fit-content;
+  text-decoration: none;
+
+  @include themed() {
+    background: themed('primary-color');
+    color: themed('quaternary-color')
+  }
+}
+
+.offer-text {
+  font-size: fontSize('sm');
+  font-weight: fontWeight('normal');
+  line-height: 18px;
+  text-align: center;
+  width: 80%;
+  width: fit-content;
+
+  @include themed() {
+    color: themed('tertiary-color')
+  }
+}
+
+.common-bg {
+  background: linear-gradient(180deg, #111315 0%, #0A0A0A 58.21%);
+}
+
+.insights-bg {
+  background: linear-gradient(180deg, #111315 0%, #0A0A0A 58.21%);
+
+}
+
+.trade-smarter {}
+
+.section-2 {
+  .title {
+    @include common-class('quaternary-color')
+  }
+
+  .text {
+    @include common-class('tertiary-color')
+  }
+
+  .image {
+    // height: 250px;
+    // object-fit: cover;
+    // max-height: 500px;
+    // Common widescreen ratio
+    // or aspect-ratio: 4/3;  // Traditional ratio
+    object-fit: cover;
+
+    @media (min-width: 576px) {
+      height: 600px;
+    }
+  }
+
+  .video {
+    width: 100%;
+    /* Makes the video take the full width of the container */
+    height: auto;
+    /* Maintains the aspect ratio */
+    // max-width: 800px; /* Optional: Set a max width to prevent it from getting too large */
+    display: block;
+    /* Centers the video block */
+    margin: 0 auto;
+
+    @media (min-width: 576px) {
+      height: 400px;
+    }
+
+    @media (min-width: 1200px) {
+      height: 600px;
+    }
+  }
+}
+
+.pricing-container {
+  background: linear-gradient(180deg, #111315 0%, #0A0A0A 58.21%) !important;
+}

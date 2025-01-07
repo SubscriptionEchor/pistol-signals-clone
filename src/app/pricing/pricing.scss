@@ -1,0 +1,11 @@
+@use '../../styles/mixins' as *;
+
+.pricing-page {
+    @include themed() {
+        background: themed('surface-high');
+    }
+}
+
+.faq-container {
+    background: linear-gradient(180deg, #111315 0%, #0A0A0A 58.21%) !important;
+}

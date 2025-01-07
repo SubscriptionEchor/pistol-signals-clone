@@ -1,0 +1,57 @@
+@use '../../styles/mixins' as *;
+
+.insight-title {
+    font-weight: fontWeight('semi-bold');
+    font-size: fontSize('xxl');
+    line-height: 43px;
+
+    @include themed() {
+        color: themed('quaternary-color')
+    }
+}
+
+.current-insight-indicator {
+    width: fit-content;
+    z-index: 10;
+    height: 30px;
+    border-radius: 25px;
+    transition: border 1s ease;
+
+    @include themed() {
+        border: 2px solid themed('surface-lower');
+
+        &.selected {
+            border: 2px solid themed('secondary-color'); // Change border color when selected
+        }
+    }
+}
+
+.insight-text {
+    font-weight: fontWeight('semi-bold');
+    font-size: fontSize('md');
+    transition: color 1s ease;
+
+    @include themed() {
+        color: themed('tertiary-color');
+
+        &.selected-text {
+            color: themed('quaternary-color'); // Change border color when selected
+
+        }
+    }
+}
+
+.image-container {
+    position: relative;
+
+    img {
+        width: 100%;
+        height: 100%;
+        transition: filter 1s ease-in-out;
+        filter: grayscale(100%) opacity(0.5); // Default state is grayscale and faded
+
+        &.active {
+            filter: grayscale(0%) opacity(1); // Active state is full color
+        }
+    }
+}

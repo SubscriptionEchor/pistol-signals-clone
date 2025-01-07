@@ -1,0 +1,73 @@
+@use '../../styles/mixins' as *;
+
+.testimonials-header {
+    h2 {
+        font-size: fontSize('xxl');
+        font-weight: fontWeight('semi-bold');
+
+        @include themed() {
+            color: themed('quaternary-color')
+        }
+    }
+
+    p {
+        font-size: fontSize('sm');
+        font-weight: fontWeight('normal');
+
+        @include themed() {
+            color: themed('tertiary-color')
+        }
+    }
+}
+
+.testimonials-scroll {
+    display: flex;
+    overflow-x: auto;
+    width: 100%;
+    gap: 60px; // Better than using ms-2
+
+    // Hide scrollbar but keep functionality (optional)
+    &::-webkit-scrollbar {
+        display: none; // For Chrome, Safari, and Opera
+    }
+
+    -ms-overflow-style: none; // For IE and Edge
+    scrollbar-width: none; // For Firefox
+
+    // Smooth scrolling
+    scroll-behavior: smooth;
+}
+
+.testimonial-card {
+    min-width: 250px; // Use min-width instead of width
+    flex: 0 0 260px; // Prevent card from shrinking or growing
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(176.48deg, #3B4046 10.57%, #2D3236 53.97%, #212326 90.35%);
+    height: fit-content;
+    padding: 30px;
+
+    &.odd {
+        margin-top: 100px;
+    }
+
+    .review-text {
+        line-height: 20px;
+        font-size: fontSize('sm');
+        font-weight: fontWeight('normal');
+
+        @include themed() {
+            color: themed('quaternary-color')
+        }
+    }
+
+    .reviewer-name {
+        line-height: 20px;
+        font-size: fontSize('base');
+        font-weight: fontWeight('medium');
+
+        @include themed() {
+            color: themed('quaternary-color')
+        }
+    }
+}

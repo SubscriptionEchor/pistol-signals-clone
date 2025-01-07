@@ -1,0 +1,138 @@
+@use '../../styles/mixins' as *;
+
+.refer-container {
+    @include themed() {
+        border-bottom: 1px solid themed('border-color')
+    }
+}
+
+.refer-earn-text {
+    font-size: fontSize('xl');
+    font-style: normal;
+    // font-weight: fontWeight('semi-bold');
+    line-height: normal;
+
+    @include themed() {
+        color: themed('text-light')
+    }
+}
+
+.referal-description {
+    font-size: fontSize('base');
+    font-weight: fontWeight('normal');
+    line-height: normal;
+
+    @include themed() {
+        color: themed('quaternary-color')
+    }
+}
+
+.share-container {
+    outline: none;
+    font-size: fontSize('sm');
+    font-weight: fontWeight('semi-bold');
+
+    @include themed() {
+        color: themed('quaternary-color');
+        background: themed('surface-lowest');
+    }
+}
+
+.copy-btn {
+    height: fit-content;
+    font-size: fontSize('sm');
+    font-weight: fontWeight('semi-bold');
+
+    @include themed() {
+        background: themed('primary-color');
+        color: themed('quaternary-color');
+    }
+}
+
+::placeholder {
+    @include themed() {
+        color: themed('tertiary-color');
+    }
+
+    opacity: 1;
+    /* Firefox */
+}
+
+::-ms-input-placeholder {
+
+    /* Edge 12-18 */
+    @include themed() {
+        color: themed('tertiary-color');
+    }
+}
+
+.username {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+    line-height: 18px;
+
+    @include themed() {
+        color: themed('tertiary-color') !important;
+    }
+}
+
+.date {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+    line-height: 18px;
+
+    @include themed() {
+        color: themed('tertiary-color') !important;
+    }
+}
+
+.Completed {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+    line-height: 18px;
+
+    @include themed() {
+        color: themed('secondary-color') !important;
+    }
+}
+
+.Pending {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+    line-height: 18px;
+
+    @include themed() {
+        color: themed('warning') !important;
+    }
+}
+
+.earnings {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+    line-height: 18px;
+
+    @include themed() {
+        color: themed('tertiary-color') !important;
+    }
+}
+
+.action {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+    line-height: 18px;
+
+    @include themed() {
+        color: themed('tertiary-color') !important;
+    }
+}
+
+.button-disabled {
+    @include themed() {
+        $alert-color: themed('primary-color');
+
+        // Check if a valid color is returned
+        @if $alert-color !=null {
+            background: rgba($alert-color, 0.5); // Use the color with opacity
+        }
+    }
+}

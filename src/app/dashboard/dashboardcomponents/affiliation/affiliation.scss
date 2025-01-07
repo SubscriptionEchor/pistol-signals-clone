@@ -1,0 +1,235 @@
+@use '../../styles/mixins' as *;
+
+.affiliation-title {
+    font-size: fontSize('xl');
+    font-weight: fontWeight('semi-bold');
+
+    @include themed() {
+        color: themed('text-light');
+    }
+}
+
+.affiliation-subtitle {
+    font-size: fontSize('lg');
+
+    @include themed() {
+        color: themed('quaternary-color');
+    }
+}
+
+.affiliation-description {
+    font-size: fontSize('sm');
+    width: 100%;
+    align-self: center;
+
+    @include themed() {
+        color: themed('text-dark');
+    }
+
+    @media (min-width:578px) {
+        width: 50%;
+    }
+}
+
+.primary-btn {
+    width: fit-content;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: fontSize('base');
+    font-weight: fontWeight('medium');
+
+    @include themed() {
+        background: themed('primary-color');
+        color: themed('quaternary-color');
+    }
+}
+
+.benefit-card {
+    padding: 24px;
+    border-radius: 12px;
+    text-align: center;
+
+    @include themed() {
+        background: themed('surface-low');
+    }
+}
+
+.icon-wrapper {
+
+
+
+    @include themed() {
+        // background: rgba(themed('primary-color'), 0.1);
+    }
+}
+
+.benefit-title {
+    font-size: fontSize('md');
+    font-weight: fontWeight('semi-bold');
+
+    @include themed() {
+        color: themed('text-light');
+    }
+}
+
+.benefit-text {
+    font-size: fontSize('sm');
+
+    @include themed() {
+        color: themed('tertiary-color');
+    }
+}
+
+.why-join-section {
+    padding: 24px;
+    border-radius: 12px;
+    text-align: center;
+
+    @include themed() {
+        background: themed('surface-low');
+    }
+}
+
+.why-join-title {
+    font-size: fontSize('lg');
+    font-weight: fontWeight('semi-bold');
+
+    @include themed() {
+        color: themed('text-light');
+    }
+}
+
+.why-join-text {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+
+    @include themed() {
+        color: themed('tertiary-color');
+    }
+
+    @media (min-width:578px) {
+        width: 50%;
+    }
+}
+
+.dot {
+    height: fit-content;
+
+    @include themed() {
+        background: themed('primary-color');
+    }
+}
+
+.tags-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    // justify-content: center;
+    @media (min-width:578px) {
+        width: 50%;
+    }
+
+    @media (min-width:1200px) {
+        width: 30%;
+    }
+
+
+
+}
+
+
+.tag {
+    border-radius: 20px;
+    font-size: fontSize('sm');
+
+    @include themed() {
+        color: themed('tertiary-color');
+    }
+}
+
+.affiliation-faq-section {
+    background: transparent;
+
+    h2 {
+        background: transparent;
+        font-size: fontSize('xl');
+        font-weight: fontWeight('semi-bold');
+
+        @include themed() {
+            color: themed('quaternary-color');
+        }
+
+        @media (min-width: 576px) {
+            font-size: fontSize('md');
+            font-weight: fontWeight('bold');
+
+        }
+    }
+
+    .faqs {
+        background: transparent;
+    }
+
+    .faq-item {
+        border-radius: 12px;
+
+        &:hover {
+            @include themed() {
+                background: themed('surface-lowest');
+            }
+        }
+
+        @include themed() {
+            background: themed('surface-low');
+        }
+
+        cursor: pointer;
+
+        .faq-question {
+            background: transparent;
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: fontSize('md');
+            font-weight: fontWeight('normal');
+
+            @media (min-width: 576px) {
+                font-size: fontSize('base');
+                font-weight: fontWeight('medium');
+
+            }
+
+
+            span {
+                background: transparent;
+            }
+
+            @include themed() {
+                color: themed('quaternary-color');
+            }
+
+            .icon {
+                font-size: 20px;
+                background: transparent;
+
+                @include themed() {
+                    color: themed('tertiary-color');
+                }
+            }
+        }
+
+        .faq-answer {
+            background: transparent;
+            padding: 0 24px 20px;
+            font-size: fontSize('sm');
+
+            @include themed() {
+                color: themed('tertiary-color');
+            }
+
+        }
+    }
+}

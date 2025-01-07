@@ -1,0 +1,28 @@
+// Variables
+$colors: (
+  primary: #3366FF,
+  secondary: #8B5CF6,
+  success: #22C55E,
+  error: #EF4444,
+  warning: #F59E0B,
+  info: #3B82F6,
+);
+
+$font-sizes: (
+  xs: 0.75rem,
+  sm: 0.875rem,
+  base: 1rem,
+  lg: 1.125rem,
+  xl: 1.25rem,
+  '2xl': 1.5rem,
+  '3xl': 1.875rem,
+  '4xl': 2.25rem,
+);
+
+$breakpoints: (
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  '2xl': 1536px,
+);

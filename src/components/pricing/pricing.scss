@@ -1,0 +1,189 @@
+@use '../../styles/mixins' as *;
+
+
+.pricing-header {
+    margin-bottom: 48px;
+    padding-top: 50px;
+
+    h1 {
+        font-size: fontSize('xxl');
+        font-weight: fontWeight('bold');
+        margin-bottom: 16px;
+
+        @include themed() {
+            color: themed('quaternary-color');
+        }
+
+        @media (min-width: 576px) {
+            font-size: fontSize('xxxl');
+        }
+
+    }
+
+    p {
+        font-size: fontSize('sm');
+        line-height: 20px;
+        margin: 0 auto;
+        font-weight: fontWeight('normal');
+
+        @include themed() {
+            color: themed('tertiary-color');
+        }
+
+        @media (min-width: 576px) {
+            line-height: 24px;
+            width: 50%;
+
+        }
+    }
+}
+
+.pricing-card {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: transparent;
+
+    // flex-wrap: wrap; // Allow wrapping if necessary
+    &.selected {
+        border-radius: 12px;
+        background: linear-gradient(176.48deg, #4B5056 10.57%, #3D4246 53.97%, #313336 90.35%); // Slightly lighter gradient for selected state
+
+        &~.pricing-card {
+            border-right: none !important;
+
+        }
+    }
+
+    @media (min-width: 576px) {
+        &.with-border {
+            @include themed() {
+                border-right: 2px solid themed('border-color');
+            }
+        }
+    }
+
+    .plan-details {
+        background-color: transparent;
+    }
+
+
+    h3 {
+        background: transparent;
+        font-size: fontSize('lg');
+        font-weight: fontWeight('medium');
+
+        @include themed() {
+            color: themed('quaternary-color');
+        }
+    }
+
+    .price-wrapper {
+        margin-bottom: 8px;
+        font-size: fontSize('lg');
+        font-weight: fontWeight('medium');
+        background: transparent;
+
+        @include themed() {
+            color: themed('quaternary-color');
+        }
+
+        span {
+            background: transparent;
+
+        }
+    }
+
+    .savings-card {
+        background: transparent;
+    }
+
+    .saving {
+        text-decoration: line-through;
+        background: transparent;
+        font-size: fontSize('lg');
+        font-weight: fontWeight('medium');
+
+        @include themed() {
+            color: themed('tertiary-color');
+        }
+    }
+
+    .best-value {
+        background: transparent;
+        font-size: fontSize('xs');
+        height: fit-content;
+        font-weight: fontWeight('normal');
+
+        @include themed() {
+            background-color: themed('secondary-color');
+            color: themed('black-secondary');
+        }
+
+    }
+
+    .description {
+        background: transparent;
+        font-size: fontSize('sm');
+        line-height: 20px;
+        font-weight: fontWeight('normal');
+
+        @include themed() {
+            color: themed('senary-color');
+        }
+    }
+
+    .features {
+        background: transparent;
+        list-style: none;
+        padding: 0;
+        margin: 0 0 24px;
+        font-weight: fontWeight('normal');
+
+        li {
+            background: transparent;
+            font-size: fontSize('sm');
+            padding-left: 28px;
+            margin-bottom: 12px;
+            position: relative;
+
+            @include themed() {
+                color: themed('quaternary-color');
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 2px;
+                width: 20px;
+                height: 20px;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFFFFF'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E");
+                background-size: contain;
+            }
+        }
+    }
+
+    .get-started-btn {
+        align-self: flex-end;
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        font-size: fontSize('base');
+        font-weight: fontWeight('medium');
+        transition: opacity 0.2s;
+        cursor: pointer;
+
+        @include themed() {
+            background-color: themed('primary-color');
+            color: themed('quaternary-color');
+
+            &:hover {
+                opacity: 0.9;
+            }
+        }
+    }
+}

@@ -1,0 +1,49 @@
+@use '../../styles/mixins' as *;
+
+
+.notification-service {
+    @include themed() {
+        border: 1px solid themed('surface-lowest');
+    }
+
+    &:first-child {
+        border-top-left-radius: 12px;
+        border-bottom-left-radius: 12px;
+        border-left: 0;
+
+
+    }
+
+    // Second card (index 1)
+    &:nth-child(2) {
+        border-top-right-radius: 12px;
+        border-bottom-right-radius: 12px;
+        border-right: 0;
+    }
+
+    .notification-service-title {
+        font-size: fontSize('xl');
+        font-weight: fontWeight('semi-bold');
+
+        @include themed() {
+            color: themed('quaternary-color');
+        }
+    }
+
+    .dot {
+        height: fit-content;
+
+        @include themed() {
+            background: themed('primary-color');
+        }
+    }
+
+    .notification-service-text {
+        font-size: fontSize('sm');
+        font-weight: fontWeight('norma;');
+
+        @include themed() {
+            color: themed('tertiary-color');
+        }
+    }
+}

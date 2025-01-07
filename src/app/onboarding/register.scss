@@ -1,0 +1,182 @@
+@use '../../styles/mixins' as *;
+
+.register {
+    width: 100%;
+
+    @include themed() {
+        background: themed('surface-high');
+        border-radius: 8px;
+        box-shadow: 4px 3px 107.5px 0px rgba(57, 62, 68, 0.58);
+    }
+
+    @media (min-width: 576px) {
+        width: 50%;
+    }
+
+    @media (min-width: 1200px) {
+        width: 25%
+    }
+
+    .heading {
+        font-size: fontSize('xl');
+        font-weight: fontWeight('semi-bold');
+        line-height: normal;
+
+        @include themed() {
+            color: themed('quaternary-color');
+        }
+    }
+
+}
+
+.padding {
+    padding: 11px;
+}
+
+.sign-in-btn {
+    font-size: fontSize('base');
+    font-weight: fontWeight('normal');
+    line-height: normal;
+
+    @include themed() {
+        color: themed('quaternary-color');
+        background: themed('primary-color');
+        border-radius: 8px;
+        box-shadow: 4px 3px 107.5px 0px rgba(57, 62, 68, 0.58);
+    }
+}
+
+.continue {
+    font-size: fontSize('base');
+    font-weight: fontWeight('normal');
+    line-height: normal;
+
+    @include themed() {
+        color: themed('tertiary-color');
+        background: themed('quinary-color');
+        border-radius: 8px;
+        // border: 2px solid themed('border-color')
+    }
+}
+
+.email-input {
+    outline: none;
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+
+    @include themed() {
+        background: themed('input-bg');
+        border: 2px solid themed('border-color')
+    }
+}
+
+.email-input::placeholder {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+}
+
+.password-container {
+
+    @include themed() {
+        border: 2px solid themed('border-color');
+        background: themed('input-bg');
+    }
+}
+
+.password-input {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+    outline: none;
+    background: transparent;
+}
+
+.password-input::placeholder {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+}
+
+.or-text {
+    font-weight: fontWeight('medium');
+    font-size: fontSize('base');
+
+    @include themed() {
+        color: themed('text-light')
+    }
+}
+
+.warning {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+    cursor: pointer;
+
+    @include themed() {
+        color: themed('text-dark')
+    }
+}
+
+.min-char {
+    font-size: fontSize('xs');
+    font-weight: fontWeight('normal');
+
+    @include themed() {
+        color: themed('text-light')
+    }
+}
+
+.sign-in-description {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+
+    @include themed() {
+        color: themed('text-light')
+    }
+
+    span {
+        cursor: pointer;
+
+        @include themed() {
+            color: themed('secondary-color');
+            text-decoration: underline;
+        }
+    }
+}
+
+.change-plan-text {
+    outline: none;
+    cursor: pointer;
+    border: 0;
+    font-size: fontSize('base');
+    font-weight: fontWeight('medium');
+    line-height: normal;
+
+    @include themed() {
+        color: themed('tertiary-color');
+
+    }
+}
+
+.modal-container {
+    outline: none;
+
+    @include themed() {
+        background: themed('surface-lowest') !important;
+    }
+}
+
+.plan-modal {
+    @include themed() {
+        background: themed('surface-high') !important;
+    }
+}
+
+.close-btn {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 100;
+
+    @include themed() {
+        background: themed('surface-lowest') !important;
+        color: themd('quaternary-color')
+    }
+}

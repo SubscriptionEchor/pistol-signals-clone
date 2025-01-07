@@ -1,0 +1,168 @@
+@use '../../styles/mixins' as *;
+
+.table-container {
+    overflow-x: auto;
+    /* Enable horizontal scrolling */
+    max-width: 100%;
+    /* Adjust as needed */
+
+    @include themed() {
+        background: themed('quinary-color');
+        border: 1px solid themed('border-color')
+    }
+}
+
+.table {
+    border-collapse: collapse;
+    /* Collapse borders */
+    width: 100%;
+    /* Full-width table */
+    padding: 20px !important;
+
+    @include themed() {
+        background: themed('quinary-color');
+    }
+}
+
+.fixed-header {
+    position: sticky;
+    top: 0;
+    padding: 20px !important;
+    /* Fix to the top of the container */
+    left: 0;
+    /* Fix left for the first column */
+
+    @include themed() {
+        background: themed('quinary-color');
+        /* Set fixed header background */
+    }
+
+    z-index: 10;
+    /* Higher z-index to stay above other cells */
+}
+
+.fixed-cell {
+    vertical-align: middle;
+    position: sticky;
+    left: 0;
+    padding: 20px !important;
+    /* Fix left for the first column */
+
+    @include themed() {
+        background: themed('quinary-color') !important;
+        /* Ensure it matches the header */
+    }
+
+    z-index: 5;
+    /* Higher z-index */
+}
+
+/* Styling for table headers */
+.table th {
+    padding: 20px !important;
+    padding-bottom: 20px !important;
+    padding-left: 20px !important;
+    font-weight: fontWeight('normal');
+    font-size: fontSize('sm');
+
+    @include themed() {
+        background: themed('surface-low');
+        /* Ensure header cells have this color */
+        border-bottom: 1px solid themed('border-color');
+        color: themed('tertiary-color');
+    }
+}
+
+/* Optional: Styling for table body cells */
+.table td {
+    padding: 20px !important;
+    padding-bottom: 20px !important;
+    padding-left: 20px !important;
+    // padding: 10px;
+    /* Add padding for better spacing */
+    font-weight: fontWeight('normal');
+    font-size: fontSize('sm');
+
+    @include themed() {
+        background: themed('quinary-color');
+        /* Optional: Set body background */
+        border-bottom: 1px solid themed('border-color');
+        color: themed('text-light');
+    }
+}
+
+.loss {
+    width: fit-content;
+
+    @include themed() {
+        $alert-color: themed('alert');
+
+        // Check if a valid color is returned
+        @if $alert-color !=null {
+            background: rgba($alert-color, 0.05); // Use the color with opacity
+        }
+    }
+}
+
+.profit {
+    width: fit-content;
+
+    @include themed() {
+        $color: themed('secondary-color');
+
+        // Check if a valid color is returned
+        @if $color !=null {
+            background: rgba($color, 0.05); // Use the color with opacity
+        }
+
+    }
+}
+
+.coin-name {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('semi-bold');
+    line-height: normal;
+
+    @include themed() {
+        color: themed('text-light')
+    }
+}
+
+.time {
+    font-size: fontSize('xs');
+    font-weight: fontWeight('normal');
+    line-height: normal;
+
+    @include themed() {
+        color: themed('tertiary-color')
+    }
+}
+
+.entry-exit-type {
+    margin-right: 30px;
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+    line-height: normal;
+
+    @include themed() {
+        color: themed('tertiary-color')
+    }
+}
+
+.pnl {
+    font-size: fontSize('xs');
+    font-weight: fontWeight('normal');
+    line-height: 20px;
+}
+
+.positive-pnl {
+    @include themed() {
+        color: themed('secondary-color')
+    }
+}
+
+.negative-pnl {
+    @include themed() {
+        color: themed('alert')
+    }
+}

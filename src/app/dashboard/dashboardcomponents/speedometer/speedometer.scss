@@ -1,0 +1,19 @@
+@use '../../styles/mixins' as *;
+
+.tradeConfidence {
+    font-size: fontSize('md');
+    font-weight: fontWeight('semi-bold');
+
+    @include themed() {
+        color: themed('quaternary-color')
+    }
+}
+
+.type {
+    font-size: fontSize('base');
+    font-weight: fontWeight('semi-bold');
+
+    @include themed() {
+        color: themed('quaternary-color')
+    }
+}

@@ -1,0 +1,26 @@
+@use './variables' as v;
+@use 'sass:color';
+
+
+@mixin themed() {
+    @each $theme, $map in v.$themes {
+        .theme-#{$theme} & {
+            $theme-map: $map !global;
+            @content;
+            $theme-map: null !global;
+        }
+    }
+}
+
+@function themed($key) {
+    @return map-get($theme-map, $key);
+}
+
+
+@function fontSize($size) {
+    @return map-get(v.$typography, 'font-sizes', $size);
+}
+
+@function fontWeight($size) {
+    @return map-get(v.$typography, 'font-weight', $size);
+}

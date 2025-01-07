@@ -1,0 +1,102 @@
+.features-page {
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--foreground);
+
+  .hero-section {
+    padding-top: 120px;
+    margin-bottom: 60px;
+  }
+
+  .features-title {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    background: linear-gradient(to right, #3366FF, #8B5CF6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .features-subtitle {
+    font-size: 18px;
+    color: var(--foreground);
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .feature-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-5px);
+    }
+
+    .icon-container {
+      width: fit-content;
+      background: rgba(51, 102, 255, 0.1);
+    }
+
+    .feature-title {
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .feature-description {
+      color: var(--foreground);
+      opacity: 0.7;
+      font-size: 16px;
+    }
+  }
+
+  .advanced-features {
+    .section-title {
+      font-size: 36px;
+      font-weight: bold;
+    }
+
+    .feature-highlight {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+
+      .highlight-title {
+        font-size: 28px;
+        font-weight: 600;
+      }
+
+      .highlight-description {
+        color: var(--foreground);
+        opacity: 0.7;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .get-started-btn {
+        background: linear-gradient(to right, #3366FF, #8B5CF6);
+        border: none;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: opacity 0.3s ease;
+
+        &:hover {
+          opacity: 0.9;
+        }
+      }
+    }
+
+    .feature-preview {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      height: 400px; // Adjust as needed
+    }
+  }
+}

@@ -1,0 +1,147 @@
+@use '../../styles/mixins' as *;
+
+@mixin button-variant($background-color-key, $text-color-key: 'quaternary-color') {
+    padding: 0.5rem 1.25rem;
+    border: none;
+    border-radius: 0.5rem;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+    font-size: fontSize('base');
+    font-weight: fontWeight('medium');
+
+    @include themed() {
+        background-color: themed($background-color-key);
+        color: themed($text-color-key);
+
+        &:hover {
+            opacity: 0.9;
+        }
+    }
+}
+
+.btn {
+    outline: none;
+    border: 0;
+}
+
+.header {
+
+    @include themed() {
+        background-color: themed('surface-high');
+        border-bottom: 2px solid themed('border-color');
+    }
+
+    &-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    .nav-link {
+        font-size: 0.875rem;
+        text-decoration: none;
+        transition: color 0.2s ease;
+
+        @include themed() {
+            color: themed('quaternary-color');
+
+            &:hover {
+                color: themed('primary-color');
+            }
+        }
+    }
+
+    .get-started-btn {
+        @include button-variant('primary-color', 'quaternary-color')
+    }
+
+    .login {
+        @include button-variant('quinary-color', 'quaternary-color')
+    }
+
+    .nav-items {
+        font-size: fontSize('sm');
+        text-decoration: none;
+        cursor: pointer;
+        font-weight: fontWeight('normal');
+
+        @include themed() {
+            color: themed('quaternary-color');
+
+            &:hover {
+                color: themed('primary-color');
+                opacity: 0.5;
+            }
+
+            &.selected-nav-item {
+                color: themed('primary-color');
+            }
+        }
+
+
+    }
+
+
+    .offcanvas {
+        @include themed() {
+            color: themed('quaternary-color');
+            background: themed('surface-high');
+            border-left: 2px solid themed('border-color');
+
+            &:hover {
+                color: themed('primary-color');
+            }
+        }
+
+        .offcanvas-header {
+            .btn-close {
+                @include themed() {
+
+                    &:focus,
+                    &:active {
+                        outline: none;
+                        box-shadow: none;
+                        border: none;
+                    }
+
+                    filter: invert(1) grayscale(100%) brightness(200%); // For white color
+                    opacity: 0.7; // Matching your theme's opacity
+
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+
+        .offcanvas-body-cutsom {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+
+            .nav-items-offcanavs {
+                font-size: fontSize('sm');
+                text-decoration: none;
+                cursor: pointer;
+                font-weight: fontWeight('normal');
+
+                @include themed() {
+                    color: themed('quaternary-color');
+
+                    &:hover {
+                        color: themed('primary-color');
+                    }
+                }
+            }
+        }
+
+    }
+
+}
+
+.selected-nav-item {
+    @include themed() {
+        color: themed('primary-color');
+    }
+}

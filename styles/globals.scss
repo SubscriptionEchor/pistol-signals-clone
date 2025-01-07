@@ -1,0 +1,23 @@
+@use './variables' as v;
+@use 'sass:map';
+@use './mixins' as *;
+
+:root {
+    .theme-dark {
+        --background-color: #{map.get(v.$themes, 'dark', 'surface-high')};
+    }
+
+    .theme-light {
+        --background-color: #{map.get(v.$themes, 'light', 'primary-color')};
+    }
+}
+
+* {
+    font-family: var(--font-inter) !important;
+
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}

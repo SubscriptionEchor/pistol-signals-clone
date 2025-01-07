@@ -1,0 +1,88 @@
+@use '../../styles/mixins' as *;
+
+
+
+.faq-section {
+    background: transparent;
+
+    h2 {
+        background: transparent;
+        font-size: fontSize('xxl');
+        font-weight: fontWeight('semi-bold');
+
+        @include themed() {
+            color: themed('quaternary-color');
+        }
+
+        @media (min-width: 576px) {
+            font-size: fontSize('xxxl');
+            font-weight: fontWeight('bold');
+
+        }
+    }
+
+    .faqs {
+        background: transparent;
+    }
+
+    .faq-item {
+        border-radius: 12px;
+
+        &:hover {
+            @include themed() {
+                background: themed('surface-lowest');
+            }
+        }
+
+        @include themed() {
+            background: themed('surface-low');
+        }
+
+        cursor: pointer;
+
+        .faq-question {
+            background: transparent;
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: fontSize('sm');
+            font-weight: fontWeight('normal');
+
+            @media (min-width: 576px) {
+                font-size: fontSize('lg');
+                font-weight: fontWeight('medium');
+
+            }
+
+
+            span {
+                background: transparent;
+            }
+
+            @include themed() {
+                color: themed('quaternary-color');
+            }
+
+            .icon {
+                font-size: 20px;
+                background: transparent;
+
+                @include themed() {
+                    color: themed('tertiary-color');
+                }
+            }
+        }
+
+        .faq-answer {
+            background: transparent;
+            padding: 0 24px 20px;
+            font-size: fontSize('sm');
+
+            @include themed() {
+                color: themed('tertiary-color');
+            }
+
+        }
+    }
+}

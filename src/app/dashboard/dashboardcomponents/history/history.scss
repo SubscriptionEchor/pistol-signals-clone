@@ -1,0 +1,206 @@
+@use '../../styles/mixins' as *;
+
+.signals-history-heading {
+    font-size: fontSize('lg');
+    font-weight: fontWeight('semi-bold');
+    line-height: 18px;
+
+    @include themed() {
+        color: themed('quaternary-color')
+    }
+}
+
+.all-signals-heading {
+    font-size: fontSize('md');
+    font-weight: fontWeight('semi-bold');
+    line-height: 18px;
+
+    @include themed() {
+        color: themed('quaternary-color')
+    }
+}
+
+.signals-history-text {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+    line-height: 18px;
+
+    @include themed() {
+        color: themed('text-light')
+    }
+}
+
+.summary-card {
+    border-radius: 12px;
+    padding: 20px;
+
+    @include themed() {
+        background: themed('quinary-color')
+    }
+
+    .summary-text {
+        font-size: fontSize('md');
+        font-weight: fontWeight('semi-bold');
+        line-height: normal;
+
+        @include themed() {
+            color: themed('quaternary-color')
+        }
+    }
+}
+
+.overall-trades-profit-text {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+    line-height: 18px;
+
+    @include themed() {
+        color: themed('tertiary-color')
+    }
+}
+
+.overall-trades-value {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('semi-bold');
+    line-height: 18px;
+
+    @include themed() {
+        color: themed('quaternary-color')
+    }
+}
+
+.overall-profit-value {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('semi-bold');
+    line-height: 18px;
+
+    @include themed() {
+        color: themed('secondary-color')
+    }
+}
+
+.risk-text {
+    font-size: fontSize('base');
+    font-weight: fontWeight('semi-bold');
+    line-height: 18px;
+
+    @include themed() {
+        color: themed('warning')
+    }
+}
+
+.total-trades {
+    border-radius: 12px;
+    padding: 20px;
+    padding-bottom: 18px;
+
+    @include themed() {
+        background: themed('quinary-color')
+    }
+
+
+}
+
+.total-trades-text {
+    font-size: fontSize('md');
+    font-weight: fontWeight('semi-bold');
+    line-height: normal;
+
+    @include themed() {
+        color: themed('quaternary-color')
+    }
+}
+
+.total-trades-value {
+    font-size: fontSize('base');
+    font-weight: fontWeight('semi-bold');
+    line-height: normal;
+
+    @include themed() {
+        color: themed('quaternary-color')
+    }
+}
+
+.win-rate {
+    margin-top: 20px;
+    border-radius: 12px;
+    padding: 20px;
+    padding-bottom: 18px;
+
+    @include themed() {
+        background: themed('quinary-color')
+    }
+}
+
+.this-month-text {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+    line-height: 18px;
+
+    @include themed() {
+        color: themed('tertiary-color')
+    }
+}
+
+.profit-loss-percentage {
+    font-size: fontSize('base');
+    font-weight: fontWeight('semi-bold');
+    line-height: normal;
+
+    @include themed() {
+        color: themed('quaternary-color')
+    }
+}
+
+.profit-loss-trades {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+    line-height: normal;
+
+    @include themed() {
+        color: themed('secondary-color')
+    }
+}
+
+.current-month-profit-loss {
+    font-size: fontSize('md');
+    font-weight: fontWeight('semi-bold');
+    line-height: normal;
+
+    @include themed() {
+        color: themed('quaternary-color')
+    }
+}
+
+.current-month-profit-loss-percentage {
+    font-size: fontSize('md');
+    font-weight: fontWeight('normal');
+    line-height: normal;
+
+    @include themed() {
+        color: themed('secondary-color')
+    }
+}
+
+.results {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+    line-height: 18px;
+
+    @include themed() {
+        color: themed('tertiary-color');
+    }
+}
+
+.btns {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+    line-height: 20px;
+    padding: 8px 12px;
+
+    @include themed() {
+        background: themed('quinary-color');
+        border: 2px solid themed('border-color');
+        color: themed('quaternary-color')
+    }
+}

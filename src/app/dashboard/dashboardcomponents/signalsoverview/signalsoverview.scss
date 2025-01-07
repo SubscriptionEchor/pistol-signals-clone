@@ -1,0 +1,209 @@
+@use '../../styles/mixins' as *;
+
+//overview
+.signals-overviewText {
+    font-size: fontSize('xl');
+    font-weight: fontWeight('semi-bold');
+    line-height: normal;
+
+    @include themed() {
+        color: themed('text-light')
+    }
+}
+
+.signals-overview-card {
+    border-radius: 12px;
+    padding: 34px 24px 34px 24px;
+
+    @include themed() {
+        background: themed('quinary-color')
+    }
+}
+
+.coin-details {
+    @include themed() {
+        border-bottom: 1px solid themed('border-color')
+    }
+}
+
+.overview-coin {
+    font-size: fontSize('base');
+    font-weight: fontWeight('semi-bold');
+    line-height: normal;
+
+    @include themed() {
+        color: themed('text-light')
+    }
+}
+
+.overview-time {
+    font-size: fontSize('xs');
+    font-weight: fontWeight('normal');
+    line-height: 20px;
+
+    @include themed() {
+        color: themed('tertiary-color')
+    }
+}
+
+.spot {
+    font-size: fontSize('xs');
+    font-weight: fontWeight('normal');
+    line-height: 20px;
+    border-radius: 8px;
+
+    background: #FF5D2E;
+    opacity: 0.5;
+    width: fit-content;
+    height: fit-content;
+
+    @include themed() {
+        color: themed('quaternary-color')
+    }
+}
+
+.features {
+    font-size: fontSize('xs');
+    font-weight: fontWeight('normal');
+    line-height: 20px;
+    border-radius: 8px;
+
+    background: #DFB6FC;
+    width: fit-content;
+    height: fit-content;
+
+    @include themed() {
+        color: themed('black-secondary')
+    }
+}
+
+.spot-features-text {
+    padding: 4px 16px;
+    font-size: fontSize('sm');
+    font-weight: fontWeight('semi-bold');
+}
+
+.entry-exit {
+    font-size: fontSize('base');
+    font-weight: fontWeight('semi-bold');
+
+    @include themed() {
+        color: themed('tertiary-color')
+    }
+}
+
+.entry-exit-prices {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+
+    @include themed() {
+        color: themed('quaternary-color')
+    }
+}
+
+.stoploss-leverage {
+    @include themed() {
+        border: 1px solid themed('border-color')
+    }
+}
+
+.stoploss-leverage-text {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+
+    @include themed() {
+        color: themed('tertiary-color')
+    }
+}
+
+.stoploss-leverage-value {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+
+    @include themed() {
+        color: themed('quaternary-color')
+    }
+}
+
+.profit-loss-card {
+    font-size: fontSize('sm');
+    text-align: center;
+    font-weight: fontWeight('semi-bold');
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+
+    @include themed() {
+        background: themed('secondary-color');
+        color: themed('black-secondary')
+    }
+}
+
+.filter-container {
+    cursor: pointer;
+    height: fit-content;
+
+    @include themed() {
+        border: 1px solid themed('border-color')
+    }
+
+    .filters-text {
+        font-size: fontSize('base');
+        font-weight: fontWeight('normal');
+        line-height: normal;
+        cursor: pointer;
+
+        @include themed() {
+            color: themed('text-light')
+        }
+    }
+
+    .filters-section {
+        font-size: fontSize('base');
+        font-weight: fontWeight('normal');
+        line-height: normal;
+        cursor: pointer;
+        z-index: 100;
+        top: 40px;
+        right: 0;
+        text-wrap: nowrap;
+
+        @include themed() {
+            color: themed('text-light');
+            background: themed('surface-lowest');
+        }
+    }
+
+
+}
+
+.filters {
+    font-size: fontSize('sm');
+    font-weight: fontWeight('normal');
+
+    @include themed() {
+        background: themed('surface-lowest');
+    }
+}
+
+.filters:hover {
+    @include themed() {
+        color: themed('surface-lowest');
+        background: themed('senary-color');
+    }
+}
+
+.gradient-bottom-shadow {
+    // width: 25;
+    height: 60px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 60px;
+    opacity: 0.3;
+    z-index: 1000;
+    filter: blur(100px);
+
+    @include themed() {
+        background: themed('secondary-color');
+    }
+}
