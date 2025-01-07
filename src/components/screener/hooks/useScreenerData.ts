@@ -1,3 +1,4 @@
+
 import { useState, useMemo } from 'react';
 import { toast } from 'react-hot-toast';
 import type { CoinData, ScreenerFilters, TimeInterval } from '../types';
@@ -7,6 +8,12 @@ const generateMockData = (): CoinData[] => {
   return Array.from({ length: 100 }, (_, i) => ({
     symbol: `COIN${i + 1}/USDT`,
     price: `$${(Math.random() * 1000).toFixed(2)}`,
+    priceHistory: {
+      current: Math.random() * 1000,
+      past1: Math.random() * 1000,
+      past2: Math.random() * 1000,
+      past3: Math.random() * 1000
+    },
     intervals: {
       '5m': { change: (Math.random() * 10 - 5).toFixed(2), threshold: 1 },
       '15m': { change: (Math.random() * 10 - 5).toFixed(2), threshold: 4 },

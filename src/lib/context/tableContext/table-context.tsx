@@ -1,4 +1,3 @@
-// UserContext.js
 import { createContext, useContext, useState, useEffect, useRef } from 'react';
 
 export const TableContext = createContext();
@@ -21,7 +20,6 @@ export const TableProvider = ({ children }) => {
     const intervalRef = useRef(null);
     const wsRef = useRef(null);
 
-    // Function to fetch 7-day data
     const fetch7DayData = async (symbol) => {
         try {
             const response = await fetch(`https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1w&limit=2`);
@@ -39,7 +37,6 @@ export const TableProvider = ({ children }) => {
         }
     };
 
-    // Function to update 7-day data for all symbols
     const update7DayData = async () => {
         const symbols = [
             'BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'XRPUSDT', 'SOLUSDT',
@@ -60,7 +57,6 @@ export const TableProvider = ({ children }) => {
         }
     };
 
-    // Function to clean up WebSocket and interval
     const cleanup = () => {
         if (intervalRef.current) {
             clearInterval(intervalRef.current);
@@ -85,15 +81,13 @@ export const TableProvider = ({ children }) => {
             method: 'SUBSCRIBE',
             params: [
                 ...symbols.map(sym => `${sym.toLowerCase()}@ticker`),
-                ...symbols.map(sym => `${sym.toLowerCase()}@kline_1h`)
+                ...symbols.map(sym => `${sym.toLowerCase()}@kline_1h`),
+                ...symbols.map(sym => `${sym.toLowerCase()}@kline_5m`)
             ],
             id: 1
         };
 
-        // Initial 7-day data fetch
         update7DayData();
-
-        // Set up interval for regular updates
         intervalRef.current = setInterval(() => {
             const sortedData = Array.from(dataRef.current.values())
                 .sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
@@ -124,6 +118,13 @@ export const TableProvider = ({ children }) => {
                     symbol,
                     name: cryptoNames[symbol] || symbol,
                     price: parseFloat(data.c),
+                    priceHistory: {
+                        ...(currentData.priceHistory || {}),
+                        current: parseFloat(data.c),
+                        past1: currentData.priceHistory?.current || parseFloat(data.c),
+                        past2: currentData.priceHistory?.past1 || parseFloat(data.c),
+                        past3: currentData.priceHistory?.past2 || parseFloat(data.c)
+                    },
                     price24hChange: parseFloat(data.p),
                     price24hChangePercent: parseFloat(data.P),
                     marketCap: parseFloat(data.c) * parseFloat(data.v),
@@ -137,15 +138,17 @@ export const TableProvider = ({ children }) => {
                 dataRef.current.set(symbol, updatedData);
             }
 
-            if (data.e === 'kline' && data.k.i === '1h') {
+            if (data.e === 'kline') {
                 const symbol = data.s.replace('USDT', '');
                 const currentData = dataRef.current.get(symbol) || {};
-                const priceChange1h = ((parseFloat(data.k.c) - parseFloat(data.k.o)) / parseFloat(data.k.o)) * 100;
+                const priceChange = ((parseFloat(data.k.c) - parseFloat(data.k.o)) / parseFloat(data.k.o)) * 100;
 
-                dataRef.current.set(symbol, {
-                    ...currentData,
-                    price1hChangePercent: priceChange1h
-                });
+                if (data.k.i === '1h') {
+                    dataRef.current.set(symbol, {
+                        ...currentData,
+                        price1hChangePercent: priceChange
+                    });
+                }
             }
         };
 
@@ -159,7 +162,6 @@ export const TableProvider = ({ children }) => {
             cleanup();
         };
 
-        // Cleanup function for component unmount and page changes
         return () => {
             cleanup();
         };
