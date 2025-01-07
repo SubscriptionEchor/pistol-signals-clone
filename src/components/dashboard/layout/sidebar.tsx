@@ -1,4 +1,4 @@
-```tsx
+
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -10,54 +10,49 @@ import {
   Share2,
   HelpCircle,
   LogOut,
-  ChevronRight,
-  Settings
+  User2Icon,
+  MessageSquare,
+  LineChart
 } from 'lucide-react';
 
-const menuItems = [
-  { 
-    label: 'Dashboard', 
-    icon: LayoutDashboard, 
-    path: '/dashboard',
-    badge: null
-  },
-  { 
-    label: 'History', 
-    icon: History, 
-    path: '/history',
-    badge: null
-  },
-  { 
-    label: 'Subscription', 
-    icon: Crown, 
-    path: '/subscription',
-    badge: '7 days free',
-    disabled: true
-  },
-  { 
-    label: 'Refer a Buddy', 
-    icon: Users, 
-    path: '/refer',
-    badge: null
-  },
-  { 
-    label: 'Affiliation', 
-    icon: Share2, 
-    path: '/affiliate',
-    badge: null
-  },
-  { 
-    label: 'Support & FAQ', 
-    icon: HelpCircle, 
-    path: '/support',
-    badge: null
-  }
-];
-
-export function Sidebar() {
+export function Sidebar({ handleOpenPopup }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const menuItems = [
+    { 
+      label: 'Dashboard', 
+      icon: LayoutDashboard, 
+      path: '/dashboard',
+    },
+    { 
+      label: 'History', 
+      icon: History, 
+      path: '/history',
+    },
+    { 
+      label: 'Support & FAQ', 
+      icon: HelpCircle, 
+      path: '/support',
+    },
+    {
+      label: 'Profile',
+      icon: User2Icon,
+      path: '/profile'
+    },
+    {
+      label: 'Feedback',
+      icon: MessageSquare,
+      path: '/feedback'
+    },
+    {
+      label: 'Screener',
+      icon: LineChart,
+      path: '/screener',
+      badge: 'Free'
+    }
+  ];
 
   return (
     <motion.aside 
@@ -79,8 +74,7 @@ export function Sidebar() {
           return (
             <button
               key={item.label}
-              onClick={() => !item.disabled && navigate(item.path)}
-              disabled={item.disabled}
+              onClick={() => navigate(item.path)}
               className={`
                 w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm
                 transition-colors relative group
@@ -88,10 +82,8 @@ export function Sidebar() {
                   ? 'text-white bg-white/10' 
                   : 'text-gray-400 hover:text-white hover:bg-white/5'
                 }
-                ${item.disabled ? 'opacity-50 cursor-not-allowed' : ''}
               `}
             >
-              {/* Active Indicator */}
               {isActive && (
                 <motion.div
                   layoutId="activeIndicator"
@@ -122,15 +114,9 @@ export function Sidebar() {
               <p className="text-sm font-medium">John Doe</p>
               <p className="text-xs text-gray-400">Pro Plan</p>
             </div>
-            <button 
-              onClick={() => navigate('/settings')}
-              className="p-2 hover:bg-white/5 rounded-lg transition-colors"
-            >
-              <Settings className="w-5 h-5 text-gray-400" />
-            </button>
           </div>
           <button 
-            onClick={() => navigate('/logout')}
+            onClick={handleOpenPopup}
             className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-red-500/10 text-red-400 rounded-lg hover:bg-red-500/20 transition-colors"
           >
             <LogOut className="w-4 h-4" />
@@ -141,4 +127,3 @@ export function Sidebar() {
     </motion.aside>
   );
 }
-```

@@ -1,29 +1,33 @@
+
 import { DashboardLayout } from './layout';
 import { MarketOverview } from './market-overview';
 import { SignalsGrid } from './components/signals-grid';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 import { TelegramConnection } from './telegram-connection';
+import { SubscriptionOverlay } from './subscription-overlay';
+import { useUser } from '@/lib/context/user';
 
 export function Dashboard() {
+  const { userDetails } = useUser();
+  const hasValidSubscription = userDetails?.subscriptionEndDate && new Date(userDetails.subscriptionEndDate) > new Date();
 
   return (
     <DashboardLayout>
       <div className="min-h-screen bg-[#0A0A0A] text-white">
-        <main className="px-4 py-8 md:px-8 space-y-8">
-          {/* Market Overview Section */}
-          <TelegramConnection />
-          <MarketOverview />
-
-          {/* Active Signals Section */}
-          <div>
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold">Active Signals</h2>
-              {/* <button className="text-sm text-blue-400 hover:text-blue-300 transition-colors">
-                View All
-              </button> */}
+        <main className="relative px-4 py-8 md:px-8 space-y-8">
+          {!hasValidSubscription && (
+            <SubscriptionOverlay 
+              expiryDate={userDetails?.subscriptionEndDate} 
+            />
+          )}
+          <div className={!hasValidSubscription ? 'pointer-events-none filter blur-sm' : ''}>
+            <TelegramConnection />
+            <MarketOverview />
+            <div>
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-semibold">Active Signals</h2>
+              </div>
+              <SignalsGrid />
             </div>
-            <SignalsGrid />
           </div>
         </main>
       </div>

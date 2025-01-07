@@ -5,7 +5,8 @@ import {
   Crown, 
   Users, 
   Share2,
-  HelpCircle
+  HelpCircle,
+  LineChart
 } from 'lucide-react';
 
 export const menuItems = [
@@ -19,21 +20,11 @@ export const menuItems = [
     icon: History, 
     path: '/history',
   },
-  { 
-    label: 'Subscription', 
-    icon: Crown, 
-    path: '/subscription',
-    badge: '7 days free'
-  },
-  { 
-    label: 'Refer a Buddy', 
-    icon: Users, 
-    path: '/refer',
-  },
-  { 
-    label: 'Affiliation', 
-    icon: Share2, 
-    path: '/affiliate',
+  {
+    label: 'Screener',
+    icon: LineChart,
+    path: '/screener',
+    badge: 'Free'
   },
   { 
     label: 'Support & FAQ', 
