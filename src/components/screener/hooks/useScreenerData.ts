@@ -50,18 +50,16 @@ export function useScreenerData() {
   const filteredData = useMemo(() => {
     if (!isScreenerActive) return [];
 
-    const filtered = mockData
-      .filter(coin => {
-        if (filters.onlyFavorites && !favorites.has(coin.symbol)) {
-          return false;
-        }
-        const interval = coin.intervals[filters.timeInterval];
-        return Math.abs(interval.change) >= filters.thresholds[filters.timeInterval];
-      })
-      .map(coin => ({
-        ...coin,
-        isFavorite: favorites.has(coin.symbol)
-      }));
+    let filtered = mockData;
+    
+    if (filters.onlyFavorites) {
+      filtered = filtered.filter(coin => favorites.has(coin.symbol));
+    }
+
+    filtered = filtered.map(coin => ({
+      ...coin,
+      isFavorite: favorites.has(coin.symbol)
+    }));
 
     const start = (filters.page - 1) * filters.perPage;
     const end = start + filters.perPage;

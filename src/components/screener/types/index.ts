@@ -1,4 +1,3 @@
-```typescript
 export type TimeInterval = '5m' | '15m' | '30m' | '1h' | '4h';
 
 export interface PriceHistory {
@@ -22,11 +21,11 @@ export interface CoinData {
   };
   volume24h: string;
   isFavorite: boolean;
+  isHighlighted?: boolean;
 }
 
 export interface ScreenerFilters {
   timeInterval: TimeInterval;
-  search: string;
   onlyFavorites: boolean;
   thresholds: {
     [key in TimeInterval]: number;
@@ -34,4 +33,3 @@ export interface ScreenerFilters {
   page: number;
   perPage: number;
 }
-```
