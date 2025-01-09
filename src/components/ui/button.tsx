@@ -16,7 +16,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
   ...props
 }, ref) => {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    // Add ripple effect or other click animations here if needed
     if (onClick) {
       onClick(event);
     }
@@ -29,9 +28,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
       className={cn(
         'inline-flex items-center justify-center rounded-lg font-medium transition-all duration-300',
         {
-          'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:opacity-90': variant === 'gradient',
+          'relative bg-gradient-to-r from-[#00D1FF] via-[#00FFFF] to-[#00D1FF] text-black font-semibold hover:opacity-90 shadow-[0_0_20px_rgba(0,209,255,0.3)]': variant === 'gradient',
           'bg-white/10 text-white hover:bg-white/20': variant === 'secondary',
-          'bg-blue-600 text-white hover:bg-blue-700': variant === 'primary',
+          'bg-[#00D1FF] text-black font-semibold hover:bg-[#00FFFF]': variant === 'primary',
           'px-3 py-1.5 text-sm': size === 'sm',
           'px-4 py-2': size === 'md',
           'px-6 py-3': size === 'lg',

@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
 
 export function AnimatedBadge() {
   return (
@@ -10,7 +9,8 @@ export function AnimatedBadge() {
       className="relative inline-flex items-center mb-6"
     >
       {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-emerald-500/20 rounded-full blur-xl animate-pulse" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#00D1FF]/20 via-[#00FFFF]/20 to-[#00D1FF]/20 rounded-full blur-xl animate-pulse" />
+      
       {/* Badge container */}
       <div className="relative px-4 py-1.5 rounded-full backdrop-blur-sm border border-white/10 bg-black/50">
         {/* Animated gradient text */}
@@ -22,12 +22,13 @@ export function AnimatedBadge() {
             repeat: Infinity,
             ease: "linear"
           }}
-          className="text-sm font-medium bg-gradient-to-r from-purple-400 via-emerald-400 to-purple-400 bg-[length:200%_auto] bg-clip-text text-transparent"
+          className="text-sm font-medium bg-gradient-to-r from-[#00D1FF] via-[#00FFFF] to-[#00D1FF] bg-[length:200%_auto] bg-clip-text text-transparent"
         >
           AI-Powered Analysis | Next-Gen Trading Signals
         </motion.div>
+        
         {/* Subtle glow effect */}
-        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500/10 to-emerald-500/10 blur-sm opacity-50" />
+        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#00D1FF]/10 to-[#00FFFF]/10 blur-sm opacity-50" />
       </div>
     </motion.div>
   );

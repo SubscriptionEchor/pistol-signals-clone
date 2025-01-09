@@ -19,9 +19,9 @@ export function GradientCard({
       <div
         className={cn(
           'absolute -inset-[0.5px] rounded-xl transition-all duration-300',
-          'bg-gradient-to-r from-purple-500/10 to-blue-500/10',
+          'bg-gradient-to-r from-[#4F46E5]/10 to-[#8B5CF6]/10',
           'opacity-0 group-hover:opacity-100',
-          'blur-[2px] group-hover:blur-[3px]', // Reduced blur effect
+          'blur-[2px] group-hover:blur-[3px]',
           isPopular && 'opacity-50'
         )}
       />

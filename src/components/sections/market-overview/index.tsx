@@ -8,7 +8,7 @@ export function MarketOverview() {
   return (
     <Section id="market" className="relative overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-radial from-purple-500/10 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-radial from-[#4F46E5]/10 via-transparent to-transparent" />
       <div 
         className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)]" 
         style={{ backgroundSize: '32px 32px' }} 
@@ -24,7 +24,7 @@ export function MarketOverview() {
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Today's Cryptocurrency{' '}
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#4F46E5] via-[#6366F1] to-[#8B5CF6] bg-clip-text text-transparent">
               Market Overview
             </span>
           </h2>
@@ -33,7 +33,7 @@ export function MarketOverview() {
             <p className="text-sm md:text-base">
               The global crypto market cap is $3.46T, a{' '}
               <span className="text-red-500">5.10%</span> decrease over the last day.{' '}
-              <button className="text-primary hover:text-primary-light transition-colors">
+              <button className="text-[#6366F1] hover:text-[#4F46E5] transition-colors">
                 Read More
               </button>
             </p>

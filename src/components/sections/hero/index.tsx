@@ -1,82 +1,73 @@
-import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 export function Hero() {
   const navigate = useNavigate();
 
-  const handleGetStarted = () => {
-    navigate('/register');
-  };
-
-  const handleViewDemo = () => {
-    // Scroll to demo section or open demo modal
-    const demoSection = document.getElementById('demo');
-    if (demoSection) {
-      demoSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <section className="relative pt-32 pb-20 overflow-hidden">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#3366FF]/10 via-purple-500/5 to-rose-500/10" />
-        <div className="absolute w-full h-full bg-[radial-gradient(ellipse_at_bottom_left,rgba(120,119,198,0.1),transparent_50%)]" />
-        <div className="absolute w-full h-full bg-[radial-gradient(ellipse_at_top_right,rgba(220,119,198,0.1),transparent_50%)]" />
-      </div>
-      
-      <div className="max-w-7xl mx-auto px-6 text-center">
+    <section 
+      className="relative min-h-screen w-full flex items-center justify-center bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: 'url("/assets/images/hero-bg.jpg")'
+      }}
+    >
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/60" />
+
+      {/* Content */}
+      <div className="relative z-10 max-w-screen-xl mx-auto px-4 text-center">
+        {/* Status Badge */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#3366FF]/10 border border-[#3366FF]/20 text-[#3366FF] text-sm mb-6"
+          className="inline-flex items-center px-3 py-1 rounded-full bg-black/20 backdrop-blur-sm border border-white/10 mb-8"
         >
-          <span>Powered by Advanced AI</span>
-          <ArrowRight size={16} />
+          <span className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#00D1FF] animate-pulse" />
+            <span className="text-sm text-gray-200">AI-Powered Trading Signals</span>
+          </span>
         </motion.div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-4xl md:text-7xl font-bold mb-6 leading-tight"
-        >
-          AI-Powered Signals,{' '}
-          <span className="bg-gradient-to-r from-[#3366FF] via-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent">
-            Simplifying Trading
-          </span>
-        </motion.h1>
-
-        <motion.p
+        {/* Main Heading */}
+        <motion.h1 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-xl text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed"
+          className="text-5xl md:text-7xl font-bold tracking-tight max-w-4xl mx-auto leading-tight mb-6"
+        >
+          AI-Driven Trading,{' '}
+          <span className="text-[#00D1FF]">
+            Giving you the Edge
+          </span>
+        </motion.h1>
+
+        {/* Subtitle */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="text-xl text-gray-200 max-w-2xl mx-auto mb-8"
         >
           Let AI handle the complexity of technical analysis—receive tailored signals and make informed trading decisions.
         </motion.p>
 
+        {/* CTA Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <Button
-            variant="gradient"
-            onClick={handleGetStarted}
-            className="group inline-flex items-center justify-center"
-          >
-            <span>Get Started Now</span>
-            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
           <Button 
-            variant="secondary"
-            onClick={handleViewDemo}
+            onClick={() => navigate('/signin')} 
+            variant="gradient"
+            size="lg"
+            className="group"
           >
-            View Demo
+            Get Started Now
+            <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Button>
         </motion.div>
       </div>

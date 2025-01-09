@@ -5,6 +5,7 @@ export function Reviews() {
   return (
     <section className="relative py-24 px-6 overflow-hidden bg-black" id="reviews">
       {/* Background Grid */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#4F46E5]/10 via-[#6366F1]/5 to-[#8B5CF6]/10" />
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)]" 
         style={{ backgroundSize: '32px 32px' }} 
       />

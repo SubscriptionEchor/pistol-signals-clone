@@ -2,32 +2,39 @@ $theme-map: null !default;
 $font-family-inter: var(--font-inter);
 $typography: (
     font-family: $font-family-inter,
-    font-sizes: (xs: 0.75rem, // 12px
-        sm: 0.875rem, // 14px
-        base: 1rem, // 16px
-        md: 1.125rem, // 18px
-        lg: 1.25rem, // 20px
-        xl: 1.5rem, // 24px
-        xxl: 2.25rem, //36px
-        xxxl: 3.5rem // 56px
+    font-sizes: (
+        xs: 0.75rem,
+        sm: 0.875rem,
+        base: 1rem,
+        md: 1.125rem,
+        lg: 1.25rem,
+        xl: 1.5rem,
+        xxl: 2.25rem,
+        xxxl: 3.5rem
     ),
-    font-weight:(normal:400,
+    font-weight:(
+        normal:400,
         medium:500,
         semi-bold:600,
         bold:700,
         extra-bold:800,
-        double-extra-bold:900)) !default;
+        double-extra-bold:900
+    )
+) !default;
 
 $themes: (
-    light: (primary-color: red,
-        secondary-color: #7BF080,
+    light: (
+        primary-color: #00D1FF,
+        secondary-color: #9945FF,
         tertiary-color: #9A9B9E,
         quaternary-color: #ffffff,
         quinary-color:#1A1A1A,
         surface-low:#121212,
-        surface-lowest:#292828),
-    dark: (primary-color: #5E6AD2,
-        secondary-color: #7BF080,
+        surface-lowest:#292828
+    ),
+    dark: (
+        primary-color: #00D1FF,
+        secondary-color: #9945FF,
         tertiary-color: #9A9B9E,
         quaternary-color: #ffffff,
         quinary-color:#1A1A1A,
@@ -44,4 +51,6 @@ $themes: (
         alert:#EA3943,
         text-dark:rgba(255, 255, 255, 0.70),
         warning:#F3ED6F,
-        input-bg:#0F1011)) !default;
+        input-bg:#0F1011
+    )
+) !default;
