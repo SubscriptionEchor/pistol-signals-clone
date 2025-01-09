@@ -1,5 +1,5 @@
-```tsx
 import { ResponsiveNavbar } from '@/components/ResponsiveNavbar/responsive-navbar';
+import { MobileNav } from './mobile-nav';
 import { Sidebar } from './sidebar';
 import ConfirmationPopup from '../../popup';
 import { useEffect, useState } from 'react';
@@ -46,4 +46,3 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
     </div>
   );
 }
-```

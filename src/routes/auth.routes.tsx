@@ -16,6 +16,14 @@ export const authRoutes = [
     ),
   },
   {
+    path: '/signup',
+    element: (
+      <GuestGuard>
+        <SignUpPage />
+      </GuestGuard>
+    ),
+  },
+  {
     path: '/telegram',
     element: (
       <GuestGuard>
@@ -25,7 +33,6 @@ export const authRoutes = [
   },
   {
     path: '/forgot-password',
-
     element: (
       <GuestGuard>
         <ForgotPasswordPage />
@@ -37,13 +44,15 @@ export const authRoutes = [
     element: (
       <GuestGuard>
         <VerifyOTPPage />
-      </GuestGuard>),
+      </GuestGuard>
+    ),
   },
   {
     path: '/reset-password/new',
     element: (
       <GuestGuard>
         <ResetPasswordPage />
-      </GuestGuard>),
+      </GuestGuard>
+    ),
   }
 ];

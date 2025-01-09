@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { motion } from 'framer-motion';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, User } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../ui/button';
 import { authApi } from '@/services/api/auth';
@@ -16,6 +16,7 @@ function SignUpPageComponet() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
+    referralCode: '', // Add referral code field
     showPassword: false,
     isPrivacyChecked: false
   });
@@ -79,12 +80,14 @@ function SignUpPageComponet() {
     }
     if (newErrors.email || newErrors.password) {
       return
-
     }
     setIsLoading(true)
     let res = await signup(
       formData?.email,
       formData.password,
+      null,
+      null,
+      formData.referralCode // Pass referral code to signup function
     );
     setIsLoading(false)
     localStorage.setItem('auth_token', res?.data?.access_token);
@@ -96,21 +99,11 @@ function SignUpPageComponet() {
       ...res?.data,
     }));
 
-    // setUserDetails((prev: any) => ({
-    //   ...prev,
-    //   email: formData?.email,
-    //   password: formData?.password,
-    // }));
     navigate('/telegram');
   };
 
   const loginWithGoogle = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-      // setUserDetails((prev: any) => ({
-      //   ...prev,
-      //   access_token: tokenResponse?.access_token
-      // }))
-      // navigate('/telegram');
       let res = await signup(
         null,
         null,
@@ -126,21 +119,13 @@ function SignUpPageComponet() {
         ...res?.data,
         isEmailVerified: true
       }));
-      // setUserDetails((prev: any) => ({
-      //   ...prev,
-      //   email: formData?.email,
-      //   password: formData?.password,
-      // }));
       navigate('/dashboard', { replace: true });
     },
     onError: (error) => console.log(error),
   });
 
   return (
-    <div className="min-h-screen bg-black flex flex-col">
-      {/* Header */}
-
-      {/* Main Content */}
+    <div className="min-h-screen flex flex-col bg-black text-white">
       <main className="flex-1 flex items-center justify-center p-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -155,7 +140,6 @@ function SignUpPageComponet() {
             </p>
           </div>
 
-          {/* Google Sign In */}
           <button onClick={loginWithGoogle} className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-white/5 hover:bg-white/10 transition-colors rounded-lg border border-white/10">
             <img src="/assets/icons/google.svg" alt="" className="w-5 h-5" />
             Continue with Google
@@ -178,11 +162,10 @@ function SignUpPageComponet() {
                 type="email"
                 placeholder="Email address"
                 value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-                className={`w-full px-4 py-3 bg-white/5 border ${errors.email ? 'border-red-500' : 'border-gray-800'
-                  } rounded-lg focus:outline-none focus:border-primary transition-colors`}
+                onChange={e => setFormData({ ...formData, email: e.target.value })}
+                className={`w-full px-4 py-3 bg-white/5 border ${
+                  errors.email ? 'border-red-500' : 'border-gray-800'
+                } rounded-lg focus:outline-none focus:border-primary transition-colors`}
               />
               {errors.email && (
                 <p className="mt-1 text-sm text-red-500">{errors.email}</p>
@@ -192,22 +175,19 @@ function SignUpPageComponet() {
             <div className="relative">
               <input
                 type={formData.showPassword ? 'text' : 'password'}
-                placeholder="Create a password"
+                placeholder="Create password"
                 value={formData.password}
-                onChange={(e) =>
-                  setFormData({ ...formData, password: e.target.value })
-                }
-                className={`w-full px-4 py-3 bg-white/5 border ${errors.password ? 'border-red-500' : 'border-gray-800'
-                  } rounded-lg focus:outline-none focus:border-primary transition-colors pr-12`}
+                onChange={e => setFormData({ ...formData, password: e.target.value })}
+                className={`w-full px-4 py-3 bg-white/5 border ${
+                  errors.password ? 'border-red-500' : 'border-gray-800'
+                } rounded-lg focus:outline-none focus:border-primary transition-colors pr-12`}
               />
               <button
                 type="button"
-                onClick={() =>
-                  setFormData({
-                    ...formData,
-                    showPassword: !formData.showPassword,
-                  })
-                }
+                onClick={() => setFormData({
+                  ...formData,
+                  showPassword: !formData.showPassword,
+                })}
                 className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
               >
                 {formData.showPassword ? (
@@ -216,68 +196,50 @@ function SignUpPageComponet() {
                   <Eye className="w-5 h-5" />
                 )}
               </button>
-
             </div>
+
+            {/* Referral Code Field */}
+            <div className="relative">
+              <div className="flex items-center">
+                <User className="absolute left-4 text-gray-400" size={20} />
+                <input
+                  type="text"
+                  placeholder="Referral code (optional)"
+                  value={formData.referralCode}
+                  onChange={e => setFormData({ ...formData, referralCode: e.target.value })}
+                  className="w-full pl-12 pr-4 py-3 bg-white/5 border border-gray-800 rounded-lg focus:outline-none focus:border-primary transition-colors"
+                />
+              </div>
+            </div>
+
             {errors.password && (
               <p className="mt-1 text-sm text-red-500">{errors.password}</p>
             )}
-            {formData?.password && <div className="space-y-2">
-              <p className="text-sm text-gray-400">Password must contain</p>
-              {/* <div className="flex items-center gap-2">
-                <div
-                  className={`w-5 h-5 rounded-full flex items-center justify-center ${formData.password.length >= 8
-                    ? 'bg-green-500'
-                    : 'bg-gray-800'
-                    }`}
-                >
-                  <motion.svg
-                    initial={false}
-                    animate={{ scale: formData.password.length >= 8 ? 1 : 0 }}
-                    className="w-3 h-3 text-white"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                  >
-                    <polyline points="20 6 9 17 4 12" />
-                  </motion.svg>
-                </div>
-                <span
-                  className={
-                    formData.password.length >= 8
-                      ? 'text-white'
-                      : 'text-gray-500'
-                  }
-                >
-                  8 characters
-                </span>
-              </div> */}
-              <div className="grid grid-cols-1 gap-2">
-                {passwordRequirements.map((requirement, index) => (
-                  <div key={index} className="flex items-center gap-2">
-                    <div className={`${requirement?.met ? 'bg-gradient-to-r from-blue-600 to-purple-600' : 'bg-gray-400'} rounded-full p-0.5`}>
-                      <svg
-                        className={`w-3 h-3 text-white transition-opacity duration-200 ${requirement?.met ? 'opacity-100' : 'opacity-0'
-                          }`}
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                    </div>
-                    <span className={`text-sm ${requirement.met ? 'bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent' : 'text-gray-400'
-                      }`}>
-                      {requirement.label}
-                    </span>
+            {formData?.password && <div className="grid grid-cols-1 gap-2">
+              {passwordRequirements.map((requirement, index) => (
+                <div key={index} className="flex items-center gap-2">
+                  <div className={`${requirement?.met ? 'bg-gradient-to-r from-blue-600 to-purple-600' : 'bg-gray-400'} rounded-full p-0.5`}>
+                    <svg
+                      className={`w-3 h-3 text-white transition-opacity duration-200 ${requirement?.met ? 'opacity-100' : 'opacity-0'
+                        }`}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
                   </div>
-                ))}
-              </div>
+                  <span className={`text-sm ${requirement.met ? 'bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent' : 'text-gray-400'
+                    }`}>
+                    {requirement.label}
+                  </span>
+                </div>
+              ))}
             </div>}
 
             <Button
@@ -299,7 +261,6 @@ function SignUpPageComponet() {
           <p className="text-center text-sm text-gray-400">
             Already have an account?{' '}
             <button
-
               onClick={() => navigate('/signin')}
               className="text-primary underline hover:text-primary-light transition-colors font-medium"
             >

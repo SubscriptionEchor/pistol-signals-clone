@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, LogOut } from 'lucide-react';
 import { Button } from '../ui/button';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@/lib/context/user';
+import ConfirmationPopup from '../popup';
 
 const navItems = [
   { label: 'Features', href: '#features' },
@@ -15,8 +16,9 @@ const navItems = [
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isPopupOpen, setPopupOpen] = useState(false);
   const navigate = useNavigate();
-  const { userDetails } = useUser();
+  const { userDetails, setUserDetails } = useUser();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,6 +28,20 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleOpenPopup = () => {
+    setPopupOpen(true);
+  };
+
+  const handleClosePopup = () => {
+    setPopupOpen(false);
+  };
+
+  const handleConfirmLogout = () => {
+    localStorage.clear();
+    setUserDetails({});
+    navigate('/signin', { replace: true });
+  };
 
   return (
     <motion.nav
@@ -88,13 +104,23 @@ export default function Navbar() {
                 </Button>
               </>
             ) : (
-              <Button
-                onClick={() => navigate('/dashboard')}
-                variant="gradient"
-                className="text-sm"
-              >
-                Go to Dashboard
-              </Button>
+              <div className="flex items-center gap-4">
+                <Button
+                  onClick={() => navigate('/dashboard')}
+                  variant="gradient"
+                  className="text-sm"
+                >
+                  Dashboard
+                </Button>
+                <Button
+                  onClick={handleOpenPopup}
+                  variant="secondary"
+                  className="text-sm flex items-center gap-2"
+                >
+                  <LogOut className="w-4 h-4" />
+                  Sign out
+                </Button>
+              </div>
             )}
           </div>
 
@@ -169,26 +195,54 @@ export default function Navbar() {
 
                 <div className="p-4 border-t border-white/10">
                   <div className="flex flex-col gap-3">
-                    <Button
-                      onClick={() => {
-                        setIsMobileMenuOpen(false);
-                        navigate('/signin');
-                      }}
-                      variant="secondary"
-                      className="w-full"
-                    >
-                      Sign in
-                    </Button>
-                    <Button
-                      onClick={() => {
-                        setIsMobileMenuOpen(false);
-                        navigate('/signup');
-                      }}
-                      variant="gradient"
-                      className="w-full"
-                    >
-                      Get Started
-                    </Button>
+                    {!userDetails?.email ? (
+                      <>
+                        <Button
+                          onClick={() => {
+                            setIsMobileMenuOpen(false);
+                            navigate('/signin');
+                          }}
+                          variant="secondary"
+                          className="w-full"
+                        >
+                          Sign in
+                        </Button>
+                        <Button
+                          onClick={() => {
+                            setIsMobileMenuOpen(false);
+                            navigate('/signup');
+                          }}
+                          variant="gradient"
+                          className="w-full"
+                        >
+                          Get Started
+                        </Button>
+                      </>
+                    ) : (
+                      <>
+                        <Button
+                          onClick={() => {
+                            setIsMobileMenuOpen(false);
+                            navigate('/dashboard');
+                          }}
+                          variant="gradient"
+                          className="w-full"
+                        >
+                          Dashboard
+                        </Button>
+                        <Button
+                          onClick={() => {
+                            setIsMobileMenuOpen(false);
+                            handleOpenPopup();
+                          }}
+                          variant="secondary"
+                          className="w-full flex items-center justify-center gap-2"
+                        >
+                          <LogOut className="w-4 h-4" />
+                          Sign out
+                        </Button>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
@@ -196,6 +250,13 @@ export default function Navbar() {
           </>
         )}
       </AnimatePresence>
+
+      {/* Sign Out Confirmation Popup */}
+      <ConfirmationPopup
+        isOpen={isPopupOpen}
+        onClose={handleClosePopup}
+        onConfirm={handleConfirmLogout}
+      />
     </motion.nav>
   );
 }
