@@ -8,8 +8,13 @@ import {
   LogOut,
   User2Icon,
   MessageSquare,
-  LineChart
+  LineChart,
+  Send
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { TELEGRAM_CHANNEL_LINK } from '@/lib/config';
+import { OpenUrl } from '@/lib/utils';
+import { useUser } from '@/lib/context/user';
 
 interface SidebarProps {
   handleOpenPopup: () => void;
@@ -18,6 +23,7 @@ interface SidebarProps {
 export function Sidebar({ handleOpenPopup }: SidebarProps) {
   const navigate = useNavigate();
   const location = useLocation();
+  const { userDetails } = useUser();
 
   const menuItems = [
     { 
@@ -83,19 +89,31 @@ export function Sidebar({ handleOpenPopup }: SidebarProps) {
                 {isActive && (
                   <motion.div
                     layoutId="activeIndicator"
-                    className="absolute left-0 w-1 h-full bg-gradient-primary rounded-r"
+                    className="absolute left-0 w-1 h-full bg-gradient-to-r from-[#00D1FF] to-[#00FFFF] rounded-r"
                   />
                 )}
                 <Icon className="w-5 h-5 flex-shrink-0" />
                 <span className="flex-1 text-left">{item.label}</span>
                 {item.badge && (
-                  <span className="px-2 py-0.5 text-xs bg-gradient-primary rounded-full">
+                  <span className="px-2 py-0.5 text-xs bg-gradient-to-r from-[#00D1FF] to-[#00FFFF] text-black rounded-full font-medium">
                     {item.badge}
                   </span>
                 )}
               </button>
             );
           })}
+
+          {/* Telegram Connection Button */}
+          {!userDetails?.telegramId && (
+            <Button
+              onClick={() => OpenUrl(TELEGRAM_CHANNEL_LINK)}
+              variant="gradient"
+              className="w-full mt-4 flex items-center justify-center gap-2 bg-gradient-to-r from-[#00D1FF] to-[#00FFFF] text-black font-medium hover:opacity-90 transition-opacity"
+            >
+              <Send className="w-4 h-4" />
+              Connect Telegram
+            </Button>
+          )}
         </nav>
 
         {/* Footer */}

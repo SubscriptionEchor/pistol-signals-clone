@@ -1,4 +1,3 @@
-
 import { DashboardLayout } from './layout';
 import { MarketOverview } from './market-overview';
 import { SignalsGrid } from './components/signals-grid';
@@ -8,18 +7,20 @@ import { useUser } from '@/lib/context/user';
 
 export function Dashboard() {
   const { userDetails } = useUser();
-  const hasValidSubscription = userDetails?.subscriptionEndDate && new Date(userDetails.subscriptionEndDate) > new Date();
+  // Temporarily comment out subscription check
+  // const hasValidSubscription = userDetails?.subscriptionEndDate && new Date(userDetails.subscriptionEndDate) > new Date();
 
   return (
     <DashboardLayout>
       <div className="min-h-screen bg-[#0A0A0A] text-white">
         <main className="relative px-4 py-8 md:px-8 space-y-8">
-          {!hasValidSubscription && (
+          {/* Temporarily comment out subscription overlay */}
+          {/* {!hasValidSubscription && (
             <SubscriptionOverlay 
               expiryDate={userDetails?.subscriptionEndDate} 
             />
-          )}
-          <div className={!hasValidSubscription ? 'pointer-events-none filter blur-sm' : ''}>
+          )} */}
+          <div className="relative">
             <TelegramConnection />
             <MarketOverview />
             <div>

@@ -13,7 +13,6 @@ export function ConnectStep({ onSubmit }: ConnectStepProps) {
   const [error, setError] = useState('');
   const [loader, setLoader] = useState(false)
 
-
   const handleSubmit = () => {
     if (!handle) {
       setError('Please enter your Telegram handle');
@@ -23,6 +22,7 @@ export function ConnectStep({ onSubmit }: ConnectStepProps) {
     onSubmit(handle);
     setLoader(false)
   };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -42,7 +42,7 @@ export function ConnectStep({ onSubmit }: ConnectStepProps) {
               }}
               placeholder="yourusername"
               className={`w-full pl-8 pr-4 py-2 bg-white/5 border ${error ? 'border-red-500' : 'border-white/10'
-                } rounded-lg focus:outline-none focus:border-blue-500 transition-colors`}
+                } rounded-lg focus:outline-none focus:border-[#00D1FF] transition-colors`}
             />
             {error && (
               <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
@@ -74,11 +74,11 @@ export function ConnectStep({ onSubmit }: ConnectStepProps) {
 
       <div className="flex flex-wrap gap-6 text-sm">
         <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-blue-500" />
+          <div className="w-2 h-2 rounded-full bg-[#00D1FF]" />
           <span className="text-gray-400">Instant trading signals</span>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-purple-500" />
+          <div className="w-2 h-2 rounded-full bg-[#00FFFF]" />
           <span className="text-gray-400">Real-time market updates</span>
         </div>
         <div className="flex items-center gap-2">

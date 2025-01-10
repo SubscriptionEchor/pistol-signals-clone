@@ -11,49 +11,49 @@ export const protectedRoutes = [
   {
     path: '/dashboard',
     element: (
-      <AuthGuard>
+      // <AuthGuard>
         <Dashboard />
-      </AuthGuard>
+      // </AuthGuard>
     ),
   },
   {
     path: '/history',
     element: (
-      <AuthGuard>
+      // <AuthGuard>
         <SignalsHistory />
-      </AuthGuard>
+      // </AuthGuard>
     ),
   },
   {
     path: '/screener',
     element: (
-      <AuthGuard>
+      // <AuthGuard>
         <Screener />
-      </AuthGuard>
+      // </AuthGuard>
     ),
   },
   {
     path: '/support',
     element: (
-      <AuthGuard>
+      // <AuthGuard>
         <Support />
-      </AuthGuard>
+      // </AuthGuard>
     ),
   },
   {
     path: '/profile',
     element: (
-      <AuthGuard>
+      // <AuthGuard>
         <Profile />
-      </AuthGuard>
+      // </AuthGuard>
     ),
   },
   {
     path: '/feedback',
     element: (
-      <AuthGuard>
+      // <AuthGuard>
         <Feedback />
-      </AuthGuard>
+      // </AuthGuard>
     ),
   }
 ];

@@ -6,17 +6,19 @@ import { Section } from '../../ui/section';
 import { AnimatedBadge } from '@/components/ui/animated-badge';
 import { useNavigate } from 'react-router-dom';
 import { Particles } from '@/components/ui/particles';
+import { Globe } from '@/components/ui/globe';
 
 export function Hero() {
   const navigate = useNavigate()
   return (
     <Section className="min-h-[calc(100vh-5rem)] flex items-center justify-center overflow-hidden relative px-4 sm:px-6 lg:px-8">
-      {/* Particles Animation */}
+      {/* Background Effects */}
+      <Globe />
       <Particles />
 
-      {/* Background Image */}
+      {/* Background Image with reduced opacity */}
       <div 
-        className="absolute inset-0 -z-10 opacity-20"
+        className="absolute inset-0 -z-10 opacity-10"
         style={{
           backgroundImage: 'url(/assets/images/hero-bg.png)',
           backgroundSize: 'cover',
@@ -25,14 +27,14 @@ export function Hero() {
         }}
       />
 
-      {/* Gradient Overlays */}
+      {/* Gradient Overlays with reduced opacity */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary-end/5 to-primary/10" />
-        <div className="absolute w-full h-full bg-[radial-gradient(ellipse_at_bottom_left,rgba(147,51,234,0.1),transparent_50%)]" />
-        <div className="absolute w-full h-full bg-[radial-gradient(ellipse_at_top_right,rgba(34,197,94,0.1),transparent_50%)]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#00D1FF]/5 via-[#00FFFF]/2 to-[#00D1FF]/5" />
+        <div className="absolute w-full h-full bg-[radial-gradient(ellipse_at_bottom_left,rgba(0,209,255,0.1),transparent_50%)]" />
+        <div className="absolute w-full h-full bg-[radial-gradient(ellipse_at_top_right,rgba(0,255,255,0.1),transparent_50%)]" />
       </div>
 
-      <div className="w-full max-w-[90rem] mx-auto text-center">
+      <div className="w-full max-w-[90rem] mx-auto text-center relative z-10">
         <AnimatedBadge />
 
         <motion.h1

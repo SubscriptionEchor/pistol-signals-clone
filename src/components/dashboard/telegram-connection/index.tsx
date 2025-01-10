@@ -1,62 +1,101 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MessageCircle } from 'lucide-react';
+import { MessageCircle, ExternalLink } from 'lucide-react';
 import { ConnectionStatus } from './types';
 import { ConnectStep } from './steps/connect-step';
 import { JoinStep } from './steps/join-step';
-import { VerifyStep } from './steps/verify-step';
-import { ConnectedStep } from './steps/connected-step';
-import { authApi } from '@/services/api';
+import { Button } from '@/components/ui/button';
 import { useUser } from '@/lib/context/user';
+import { TELEGRAM_CHANNEL_LINK } from '@/lib/config';
+import { OpenUrl } from '@/lib/utils';
 
 export function TelegramConnection() {
   const [status, setStatus] = useState<ConnectionStatus>('not_connected');
   const [handle, setHandle] = useState('');
-  const { userDetails, setUserDetails } = useUser()
+  const { userDetails, setUserDetails } = useUser();
+  const [showChannelLink, setShowChannelLink] = useState(false);
 
   const onSubmit = async (value) => {
-    let result = await authApi.update({ telegram_id: value })
-    console.log(result, "result")
-    if (result?.status) {
-      setUserDetails(prev => ({ ...prev, telegramId: value }))
-      setStatus('pending_join');
-    }
-    // {
-    //   setHandle(value);
+    // Temporarily comment out API call
+    // let result = await authApi.update({ telegram_id: value })
+    // if (result?.status) {
+    //   setUserDetails(prev => ({ ...prev, telegramId: value }))
     //   setStatus('pending_join');
     // }
 
+    // For now, just update the UI state
+    setUserDetails(prev => ({ ...prev, telegramId: value }))
+    setStatus('pending_join');
   }
 
-  const renderStep = () => {
-    switch (status) {
-      case 'not_connected':
-        return <ConnectStep onSubmit={(value) => onSubmit(value)} />;
-      case 'pending_join':
-        return <JoinStep onJoined={() => setStatus('pending_approval')} />;
-      // case 'pending_approval':
-      //   return <VerifyStep />;
-      // // case 'connected':
-      //   return <ConnectedStep handle={handle} />;
-    }
+  const renderTelegramInfo = () => {
+    return (
+      <div className="bg-white/5 rounded-xl p-6 border border-white/10">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <div className="p-2 rounded-lg bg-gradient-to-r from-[#00D1FF]/20 to-[#00FFFF]/20">
+              <MessageCircle className="w-5 h-5 text-[#00D1FF]" />
+            </div>
+            <div>
+              <button 
+                onClick={() => setShowChannelLink(!showChannelLink)}
+                className="font-medium hover:text-[#00D1FF] transition-colors"
+              >
+                {userDetails?.telegramId}
+              </button>
+              <p className="text-sm text-gray-400">Connected Telegram Handle</p>
+            </div>
+          </div>
+          <div className="px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-sm">
+            Connected
+          </div>
+        </div>
+
+        {showChannelLink && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-4 p-4 bg-black/20 rounded-lg border border-white/10"
+          >
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-[#00D1FF]">{TELEGRAM_CHANNEL_LINK}</span>
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={() => OpenUrl(TELEGRAM_CHANNEL_LINK)}
+                className="flex items-center gap-2"
+              >
+                <span>Open Channel</span>
+                <ExternalLink className="w-4 h-4" />
+              </Button>
+            </div>
+          </motion.div>
+        )}
+      </div>
+    );
   };
-  if (userDetails?.telegramId || status == 'pending_approval') {
-    return null
+
+  if (userDetails?.telegramId) {
+    return renderTelegramInfo();
   }
+
+  if (status === 'pending_approval') {
+    return null;
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="relative group "
+      className="relative group"
     >
-      {/* Gradient border effect */}
-      <div className="absolute -inset-[1px] bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
+      <div className="absolute -inset-[1px] bg-gradient-to-r from-[#00D1FF]/20 to-[#00FFFF]/20 rounded-xl opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
 
       <div className="relative bg-[#111] rounded-xl p-6 border border-white/10">
         <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 rounded-lg bg-gradient-to-r from-blue-500/20 to-purple-500/20">
-            <MessageCircle className="w-5 h-5 text-blue-400" />
+          <div className="p-2 rounded-lg bg-gradient-to-r from-[#00D1FF]/20 to-[#00FFFF]/20">
+            <MessageCircle className="w-5 h-5 text-[#00D1FF]" />
           </div>
           <div>
             <h3 className="font-medium">Connect Telegram</h3>
@@ -64,7 +103,11 @@ export function TelegramConnection() {
           </div>
         </div>
 
-        {renderStep()}
+        {status === 'not_connected' ? (
+          <ConnectStep onSubmit={onSubmit} />
+        ) : (
+          <JoinStep onJoined={() => setStatus('pending_approval')} />
+        )}
       </div>
     </motion.div>
   );
