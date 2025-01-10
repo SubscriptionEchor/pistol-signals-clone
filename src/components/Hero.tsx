@@ -1,10 +1,10 @@
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useRouter } from 'next/navigation';
+import { useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';
 
 export function Hero() {
-  const router = useRouter();
+  const navigate = useNavigate();
 
   return (
     <section className="relative pt-32 pb-20 overflow-hidden">
@@ -23,7 +23,7 @@ export function Hero() {
             variant="gradient"
             size="lg"
             className="group"
-            onClick={() => router.push('/onboarding')}
+            onClick={() => navigate('/onboarding')}
           >
             <span>Get Started Now</span>
             <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />

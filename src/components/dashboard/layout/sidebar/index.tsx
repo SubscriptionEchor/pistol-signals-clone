@@ -1,4 +1,3 @@
-```tsx
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -19,7 +18,6 @@ interface SidebarProps {
 export function Sidebar({ handleOpenPopup }: SidebarProps) {
   const navigate = useNavigate();
   const location = useLocation();
-  const [isCollapsed, setIsCollapsed] = useState(false);
 
   const menuItems = [
     { 
@@ -56,7 +54,7 @@ export function Sidebar({ handleOpenPopup }: SidebarProps) {
   ];
 
   return (
-    <aside className="fixed left-0 top-0 bottom-0 w-64 bg-[#111]/90 backdrop-blur-sm border-r border-white/5 hidden xl:block">
+    <aside className="fixed left-0 top-0 bottom-0 w-64 bg-[#111]/80 backdrop-blur-sm border-r border-white/5 hidden xl:block">
       <div className="flex flex-col h-full">
         {/* Logo */}
         <div className="h-16 flex items-center px-6 border-b border-white/5">
@@ -114,4 +112,3 @@ export function Sidebar({ handleOpenPopup }: SidebarProps) {
     </aside>
   );
 }
-```

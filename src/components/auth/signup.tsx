@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff, User } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -6,24 +6,24 @@ import { Button } from '../ui/button';
 import { authApi } from '@/services/api/auth';
 import { useUser } from '@/lib/context/user/user-context';
 import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google';
-import { GOOGLE_AUTH_API_KEY, PRIVACY_POLICY, TERMS_OF_CONDITION } from '@/lib/config';
-import { OpenUrl } from '@/lib/utils';
+import { GOOGLE_AUTH_API_KEY } from '@/lib/config';
 import toast from 'react-hot-toast';
 
-function SignUpPageComponet() {
+function SignUpPageComponent() {
   const { setUserDetails, signup } = useUser();
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
     email: '',
     password: '',
-    referralCode: '', // Add referral code field
+    referralCode: '',
     showPassword: false,
-    isPrivacyChecked: false
   });
   const [errors, setErrors] = useState({
     email: '',
     password: '',
   });
+  const navigate = useNavigate();
+
   const passwordRequirements: PasswordRequirement[] = [
     {
       regex: /[A-Z]/,
@@ -51,7 +51,21 @@ function SignUpPageComponet() {
       met: formData.password.length >= 8
     }
   ];
-  const navigate = useNavigate();
+
+  const validateForm = () => {
+    const newErrors = {
+      email: !validateEmail(formData.email) ? 'Please enter a valid email' : '',
+      password: !validatePassword(formData.password)
+        ? 'Password validation failed'
+        : '',
+    };
+
+    setErrors(newErrors);
+    if (newErrors.email || newErrors.password) {
+      return false;
+    }
+    return true;
+  };
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -62,38 +76,28 @@ function SignUpPageComponet() {
     return passwordRequirements.every(req => req.met);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+    e?.preventDefault()
 
-    const newErrors = {
-      email: !validateEmail(formData.email) ? 'Please enter a valid email' : '',
-      password: !validatePassword(formData.password)
-        ? 'Password validation failed'
-        : '',
-      passwordValidation: !formData?.isPrivacyChecked ? 'please select terms and conditions ' : ''
-    };
+    if (!validateForm()) {
+      return;
+    }
 
-    setErrors(newErrors);
-    if (newErrors?.passwordValidation) {
-      toast.error(newErrors?.passwordValidation, { position: 'top-center' })
-      return
-    }
-    if (newErrors.email || newErrors.password) {
-      return
-    }
-    setIsLoading(true)
+    setIsLoading(true);
     let res = await signup(
       formData?.email,
       formData.password,
       null,
       null,
-      formData.referralCode // Pass referral code to signup function
+      formData.referralCode
     );
-    setIsLoading(false)
-    localStorage.setItem('auth_token', res?.data?.access_token);
+    setIsLoading(false);
+    
     if (!res || !res?.status) {
-      return toast.error(res?.message, { position: 'top-center' })
+      return;
     }
+
+    localStorage.setItem('auth_token', res?.data?.access_token);
     setUserDetails((prev: any) => ({
       ...prev,
       ...res?.data,
@@ -201,26 +205,23 @@ function SignUpPageComponet() {
             {/* Referral Code Field */}
             <div className="relative">
               <div className="flex items-center">
-                <User className="absolute left-4 text-gray-400" size={20} />
+                <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                 <input
                   type="text"
                   placeholder="Referral code (optional)"
                   value={formData.referralCode}
                   onChange={e => setFormData({ ...formData, referralCode: e.target.value })}
-                  className="w-full pl-12 pr-4 py-3 bg-white/5 border border-gray-800 rounded-lg focus:outline-none focus:border-primary transition-colors"
+                  className="w-full pl-12 pr-4 py-3 bg-white/5 border border-gray-800 rounded-lg focus:outline-none focus:border-[#00D1FF] transition-colors"
                 />
               </div>
             </div>
 
-            {errors.password && (
-              <p className="mt-1 text-sm text-red-500">{errors.password}</p>
-            )}
             {formData?.password && <div className="grid grid-cols-1 gap-2">
               {passwordRequirements.map((requirement, index) => (
                 <div key={index} className="flex items-center gap-2">
-                  <div className={`${requirement?.met ? 'bg-gradient-to-r from-blue-600 to-purple-600' : 'bg-gray-400'} rounded-full p-0.5`}>
+                  <div className={`${requirement?.met ? 'bg-gradient-to-r from-[#00D1FF] to-[#00FFFF]' : 'bg-gray-400'} rounded-full p-0.5`}>
                     <svg
-                      className={`w-3 h-3 text-white transition-opacity duration-200 ${requirement?.met ? 'opacity-100' : 'opacity-0'
+                      className={`w-3 h-3 text-black transition-opacity duration-200 ${requirement?.met ? 'opacity-100' : 'opacity-0'
                         }`}
                       fill="none"
                       viewBox="0 0 24 24"
@@ -234,7 +235,7 @@ function SignUpPageComponet() {
                       />
                     </svg>
                   </div>
-                  <span className={`text-sm ${requirement.met ? 'bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent' : 'text-gray-400'
+                  <span className={`text-sm ${requirement.met ? 'bg-gradient-to-r from-[#00D1FF] to-[#00FFFF] bg-clip-text text-transparent' : 'text-gray-400'
                     }`}>
                     {requirement.label}
                   </span>
@@ -243,26 +244,40 @@ function SignUpPageComponet() {
             </div>}
 
             <Button
-              className={`w-full mt-6 py-3 px-4 rounded-lg text-white font-medium transition-colors duration-200 bg-gradient-to-r from-blue-600 to-purple-600 `}
+              className="w-full mt-6 py-3 px-4 rounded-lg text-black font-semibold transition-colors duration-200 bg-gradient-to-r from-[#00D1FF] to-[#00FFFF] hover:opacity-90"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center">
-                  <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  <div className="w-6 h-6 border-2 border-black border-t-transparent rounded-full animate-spin" />
                 </div>
-              ) :
-                "Continue"}
+              ) : (
+                "Continue"
+              )}
             </Button>
-            <div className='flex'>
-              <input checked={formData?.isPrivacyChecked} onChange={(e) => setFormData(prev => ({ ...prev, isPrivacyChecked: e?.target.checked }))} type='checkbox' />
-              <p className='tracking-wide text-xs ms-1 font-regular text-white/50'>By continuing, i agree to the <span onClick={() => OpenUrl(TERMS_OF_CONDITION)} className='cursor-pointer underline text-white/70'> Terms of Service</span> and <span onClick={() => OpenUrl(PRIVACY_POLICY)} className='underline cursor-pointer text-white/70'>Privacy Policy</span></p>
-            </div>
+
+            <p className='text-xs text-gray-400'>
+              By continuing, you agree to the{' '}
+              <button 
+                onClick={() => navigate('/terms')} 
+                className='text-[#00D1FF] hover:underline'
+              >
+                Terms of Service
+              </button>{' '}
+              and{' '}
+              <button 
+                onClick={() => navigate('/privacy')} 
+                className='text-[#00D1FF] hover:underline'
+              >
+                Privacy Policy
+              </button>
+            </p>
           </form>
 
           <p className="text-center text-sm text-gray-400">
             Already have an account?{' '}
             <button
               onClick={() => navigate('/signin')}
-              className="text-primary underline hover:text-primary-light transition-colors font-medium"
+              className="text-[#00D1FF] hover:underline"
             >
               Sign in
             </button>
@@ -278,7 +293,7 @@ export default function SignUpPage() {
     <GoogleOAuthProvider
       clientId={GOOGLE_AUTH_API_KEY}
     >
-      <SignUpPageComponet />
+      <SignUpPageComponent />
     </GoogleOAuthProvider>
   )
 }

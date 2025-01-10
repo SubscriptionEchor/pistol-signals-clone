@@ -1,9 +1,10 @@
-import { Navbar } from '@/components/layout/navbar';
+import { ReactNode } from 'react';
+import Navbar from '@/components/layout/navbar';
 
 export default function FeaturesLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   return (
     <div className="min-h-screen bg-black">

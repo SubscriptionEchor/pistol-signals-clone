@@ -1,4 +1,3 @@
-```tsx
 import { forwardRef, InputHTMLAttributes } from 'react';
 
 interface FormFieldProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -51,4 +50,3 @@ export const FormField = forwardRef<HTMLInputElement, FormFieldProps>(
 );
 
 FormField.displayName = 'FormField';
-```

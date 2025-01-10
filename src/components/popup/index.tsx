@@ -1,4 +1,3 @@
-
 import { motion, AnimatePresence } from 'framer-motion';
 import { LogOut } from 'lucide-react';
 import { Button } from '../ui/button';
@@ -25,9 +24,6 @@ const ConfirmationPopup = ({ isOpen, onClose, onConfirm }: ConfirmationPopupProp
           onClick={(e) => e.stopPropagation()}
           className="relative w-full max-w-md"
         >
-          {/* Gradient border effect */}
-          <div className="absolute -inset-[1px] bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-xl opacity-100 blur-sm" />
-          
           <div className="relative bg-[#111] rounded-xl p-6 border border-white/10">
             <div className="flex items-center gap-4 mb-6">
               <div className="p-3 rounded-lg bg-red-500/10">
@@ -48,9 +44,8 @@ const ConfirmationPopup = ({ isOpen, onClose, onConfirm }: ConfirmationPopupProp
                 Cancel
               </Button>
               <Button
-                variant="gradient"
                 onClick={onConfirm}
-                className="flex-1 bg-gradient-to-r from-red-500 to-red-600"
+                className="flex-1 bg-red-500 hover:bg-red-600 text-white transition-colors"
               >
                 Sign Out
               </Button>

@@ -1,4 +1,3 @@
-```tsx
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 
@@ -37,4 +36,3 @@ export function PasswordStrength({ password }: PasswordStrengthProps) {
     </div>
   );
 }
-```

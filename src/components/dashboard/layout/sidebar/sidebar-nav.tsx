@@ -1,4 +1,3 @@
-```tsx
 import { useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
@@ -113,4 +112,3 @@ export function SidebarNav() {
     </div>
   );
 }
-```

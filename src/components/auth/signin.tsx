@@ -4,13 +4,13 @@ import { Eye, EyeOff, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../ui/button';
 import { authApi } from '@/services/api/auth';
-import { useUser } from '@/lib/context/user/user-context';
+import { useUser } from '@/lib/context/user';
 import toast from 'react-hot-toast';
 import { useGoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
-import { GOOGLE_AUTH_API_KEY, PRIVACY_POLICY, TERMS_OF_CONDITION } from '@/lib/config';
-import { OpenUrl } from '@/lib/utils';
+import { GOOGLE_AUTH_API_KEY } from '@/lib/config';
+
 function SignInPageComponent() {
-  const { userDetails, setUserDetails, login, signup } = useUser();
+  const { userDetails, setUserDetails, login } = useUser();
   const [isEmailVerified, setEmailVerified] = useState(true);
   const [formData, setFormData] = useState({
     email: '',
@@ -45,7 +45,6 @@ function SignInPageComponent() {
       localStorage.setItem('auth_token', res?.data?.access_token);
       if (!res?.data?.isEmailVerified) {
         setEmailVerified(false);
-
         return;
       }
       setUserDetails(res?.data);
@@ -77,7 +76,6 @@ function SignInPageComponent() {
       let payload: Payload = {
         authorizarion: userDetails?.access_token,
       };
-      //  return
       setUserDetails((prev) => ({ ...prev, isLoading: true }));
       let result = await authApi.getuser(payload);
       setUserDetails((prev) => ({ ...prev, isLoading: false }));
@@ -110,24 +108,12 @@ function SignInPageComponent() {
       }));
 
       navigate('/dashboard', { replace: true });
-      // if (!res?.data?.isUserExists) {
-      //   setUserDetails(prev => ({
-      //     ...prev,
-      //     access_token: tokenResponse?.access_token
-      //   }));
-      //   navigate('/telegram')
-      //   return
-      // }
-      // localStorage.setItem('auth_token', res?.data?.access_token)
-      // setUserDetails(res?.data);
-      // navigate('/dashboard')
     },
     onError: (error) => console.log(error),
   });
 
   return (
     <div className="min-h-screen bg-black flex flex-col">
-      {/* Main Content */}
       {isEmailVerified ? (
         <main className="flex-1 flex items-center justify-center p-6">
           <motion.div
@@ -143,7 +129,6 @@ function SignInPageComponent() {
               </p>
             </div>
 
-            {/* Google Sign In */}
             <button
               onClick={loginWithGoogle}
               className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-white/5 hover:bg-white/10 transition-colors rounded-lg border border-white/10"
@@ -215,30 +200,49 @@ function SignInPageComponent() {
                 <button
                   type="button"
                   onClick={() => navigate('/forgot-password')}
-                  className="text-sm text-primary hover:text-primary-light transition-colors"
+                  className="text-sm text-[#00D1FF] hover:text-[#47EBEB] transition-colors"
                 >
                   Forgot password?
                 </button>
               </div>
 
-              <Button type="submit" variant="gradient" className="w-full">
+              <Button 
+                type="submit" 
+                variant="gradient" 
+                className="w-full bg-gradient-to-r from-[#00D1FF] to-[#00FFFF] text-black font-semibold hover:opacity-90"
+              >
                 {userDetails?.isLoading ? (
                   <div className="flex items-center justify-center">
-                    <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    <div className="w-6 h-6 border-2 border-black border-t-transparent rounded-full animate-spin" />
                   </div>
                 ) : (
                   'Sign In'
                 )}
               </Button>
             </form>
-            <div className='flex'>
-              <p className='tracking-wide text-xs ms-1 font-regular text-white/50'>By continuing, i agree to the <span onClick={() => OpenUrl(TERMS_OF_CONDITION)} className='cursor-pointer underline text-white/70'> Terms of Service</span> and <span onClick={() => OpenUrl(PRIVACY_POLICY)} className='underline cursor-pointer text-white/70'>Privacy Policy</span></p>
+
+            <div className='text-xs text-gray-400'>
+              By continuing, you agree to the{' '}
+              <button 
+                onClick={() => navigate('/terms')} 
+                className='text-[#00D1FF] hover:underline'
+              >
+                Terms of Service
+              </button>{' '}
+              and{' '}
+              <button 
+                onClick={() => navigate('/privacy')} 
+                className='text-[#00D1FF] hover:underline'
+              >
+                Privacy Policy
+              </button>
             </div>
+
             <p className="text-center text-sm text-gray-400">
               New to Pistol Signals?{' '}
               <button
                 onClick={() => navigate('/signup')}
-                className="text-primary underline hover:text-primary-light transition-colors font-medium"
+                className="text-[#00D1FF] hover:underline"
               >
                 Create an account
               </button>
@@ -248,7 +252,6 @@ function SignInPageComponent() {
       ) : (
         <main className="flex-1 flex items-center justify-center p-4">
           <div className="w-full max-w-md space-y-8">
-            {/* Email Verification Step */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -277,12 +280,12 @@ function SignInPageComponent() {
 
               <Button
                 variant="gradient"
-                className="w-full bg-gradient-to-r from-[#3366FF] to-[#8B5CF6] hover:opacity-90 transition-opacity group"
+                className="w-full bg-gradient-to-r from-[#00D1FF] to-[#00FFFF] hover:opacity-90 transition-opacity group"
                 onClick={handleVerifyEmail}
               >
                 {userDetails?.isLoading ? (
                   <div className="flex items-center justify-center">
-                    <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    <div className="w-6 h-6 border-2 border-black border-t-transparent rounded-full animate-spin" />
                   </div>
                 ) : (
                   <>
