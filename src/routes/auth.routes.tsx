@@ -5,54 +5,63 @@ import TelegramPage from '@/components/telegram/telegram-page';
 import { ForgotPasswordPage } from '@/components/auth/forgot-password';
 import { VerifyOTPPage } from '@/components/auth/verify-otp';
 import { ResetPasswordPage } from '@/components/auth/reset-password';
+import VerifyEmail from '@/components/verify-email';
 
 export const authRoutes = [
   {
     path: '/signin',
     element: (
-      <GuestGuard>
+      // <GuestGuard>
         <SignInPage />
-      </GuestGuard>
+      // </GuestGuard>
     ),
   },
   {
     path: '/signup',
     element: (
-      <GuestGuard>
+      // <GuestGuard>
         <SignUpPage />
-      </GuestGuard>
+      // </GuestGuard>
+    ),
+  },
+  {
+    path: '/verify-email',
+    element: (
+      // <GuestGuard>
+        <VerifyEmail />
+      // </GuestGuard>
     ),
   },
   {
     path: '/telegram',
     element: (
-      <GuestGuard>
+      // <GuestGuard>
         <TelegramPage />
-      </GuestGuard>
+      // </GuestGuard>
     ),
   },
   {
     path: '/forgot-password',
     element: (
-      <GuestGuard>
+      // <GuestGuard>
         <ForgotPasswordPage />
-      </GuestGuard>
+      // </GuestGuard>
     ),
   },
   {
     path: '/reset-password/verify',
     element: (
-      <GuestGuard>
+      // <GuestGuard>
         <VerifyOTPPage />
-      </GuestGuard>
+      // </GuestGuard>
     ),
   },
   {
     path: '/reset-password/new',
     element: (
-      <GuestGuard>
+      // <GuestGuard>
         <ResetPasswordPage />
-      </GuestGuard>
+      // </GuestGuard>
     ),
   }
 ];

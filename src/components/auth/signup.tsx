@@ -103,7 +103,7 @@ function SignUpPageComponent() {
       ...res?.data,
     }));
 
-    navigate('/telegram');
+    navigate('/verify-email');
   };
 
   const loginWithGoogle = useGoogleLogin({
@@ -118,11 +118,7 @@ function SignUpPageComponent() {
         return toast.error(res?.message, { position: 'top-center' })
       }
       localStorage.setItem('auth_token', res?.data?.access_token);
-      setUserDetails((prev: any) => ({
-        ...prev,
-        ...res?.data,
-        isEmailVerified: true
-      }));
+      setUserDetails(prev => ({ ...prev, ...res?.data, isEmailVerified: true }));
       navigate('/dashboard', { replace: true });
     },
     onError: (error) => console.log(error),

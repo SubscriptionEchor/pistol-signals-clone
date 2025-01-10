@@ -1,8 +1,51 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
+import { useUser } from '@/lib/context/user';
+import { authApi } from '@/services/api';
+import { toast } from 'react-hot-toast';
 
 export default function VerifyEmail() {
+  const navigate = useNavigate();
+  const { userDetails, setUserDetails } = useUser();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const openGmail = () => {
+    window.open('https://mail.google.com', '_blank');
+  };
+
+  const handleResendEmail = async () => {
+    try {
+      let result = await authApi.resendemail({ email: userDetails?.email });
+      if (result?.status) {
+        toast.success(result?.message);
+      }
+    } catch (error) {
+      toast.error('Failed to resend email');
+    }
+  };
+
+  const handleVerifyEmail = async () => {
+    try {
+      setIsLoading(true);
+      let result = await authApi.getuser();
+      if (result?.status) {
+        if (!result?.data?.isEmailVerified) {
+          toast.error('Email not verified yet');
+          return;
+        }
+        setUserDetails(result?.data);
+        navigate('/pricing');
+      }
+    } catch (error) {
+      toast.error('Failed to verify email');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-black text-white">
       {/* Header */}
@@ -44,20 +87,43 @@ export default function VerifyEmail() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="space-y-6"
           >
-            {/* Resend Email Link */}
-            <button
-              className="text-[#22C55E] hover:text-[#16A34A] transition-colors text-sm w-full text-center"
-            >
-              Resend email
-            </button>
+            {/* Gmail and Resend Email Buttons Side by Side */}
+            <div className="grid grid-cols-2 gap-4">
+              <Button
+                variant="secondary"
+                onClick={openGmail}
+                className="flex items-center justify-center gap-2 group bg-white/10"
+              >
+                <Mail className="w-4 h-4" />
+                <span>Open Gmail</span>
+              </Button>
+
+              <Button
+                variant="secondary"
+                onClick={handleResendEmail}
+                className="flex items-center justify-center gap-2 border border-white/10 bg-transparent hover:bg-white/5"
+              >
+                <span>Resend Email</span>
+              </Button>
+            </div>
 
             {/* Verify Button */}
             <Button
               variant="gradient"
-              className="w-full bg-gradient-to-r from-[#3366FF] to-[#8B5CF6] hover:opacity-90 transition-opacity group"
+              onClick={handleVerifyEmail}
+              disabled={isLoading}
+              className="w-full bg-gradient-to-r from-[#00D1FF] to-[#00FFFF] text-black font-semibold hover:opacity-90 transition-opacity group"
             >
-              <span>I've verified my email</span>
-              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              {isLoading ? (
+                <div className="flex items-center justify-center">
+                  <div className="w-6 h-6 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                </div>
+              ) : (
+                <>
+                  <span>I've verified my email</span>
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </>
+              )}
             </Button>
           </motion.div>
         </div>

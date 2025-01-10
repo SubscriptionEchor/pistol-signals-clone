@@ -41,14 +41,14 @@ export function SignUpForm() {
           <PasswordStrength password={formData.password} />
         </div>
 
-        <Button 
+        {/* <Button 
           type="submit" 
           variant="secondary"
           className="w-full"
           disabled={isLoading}
         >
           {isLoading ? 'Creating account...' : 'Create account'}
-        </Button>
+        </Button> */}
       </form>
 
       <p className="text-center text-sm text-gray-400">

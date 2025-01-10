@@ -5,6 +5,8 @@ import { protectedRoutes } from './protected.routes';
 import { TermsOfService } from '@/components/terms';
 import { PrivacyPolicy } from '@/components/privacy';
 import { Payment } from '@/components/payment';
+import { PricingPage } from '@/components/pricing';
+import { SubscriptionCheckout } from '@/components/checkout';
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +24,14 @@ export const router = createBrowserRouter([
   {
     path: '/payment',
     element: <Payment />,
+  },
+  {
+    path: '/pricing',
+    element: <PricingPage />,
+  },
+  {
+    path: '/checkout',
+    element: <SubscriptionCheckout />,
   },
   ...authRoutes,
   ...protectedRoutes,
