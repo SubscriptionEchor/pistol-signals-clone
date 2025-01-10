@@ -53,17 +53,17 @@ export function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="relative group bg-white/5 rounded-2xl p-8 border border-white/10 overflow-hidden"
+            className="relative group bg-white/5 rounded-2xl p-6 sm:p-8 border border-white/10 overflow-hidden"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-[#00D1FF]/10 to-[#00FFFF]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6">
               <div>
-                <h3 className="text-2xl font-bold mb-2">Join Our Trading Community</h3>
-                <p className="text-gray-400">Get instant access to trading signals and market updates via Telegram</p>
+                <h3 className="text-xl sm:text-2xl font-bold mb-2 text-center sm:text-left">Join Our Trading Community</h3>
+                <p className="text-gray-400 text-center sm:text-left">Get instant access to trading signals and market updates via Telegram</p>
               </div>
               <button 
                 onClick={() => OpenUrl(TELEGRAM_COMMUNITY_LINK)}
-                className="flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-[#00D1FF] to-[#00FFFF] rounded-lg font-medium text-black hover:opacity-90 transition-opacity group"
+                className="flex items-center gap-2 px-6 sm:px-8 py-3 bg-gradient-to-r from-[#00D1FF] to-[#00FFFF] rounded-lg font-medium text-black hover:opacity-90 transition-opacity group whitespace-nowrap"
               >
                 <MessageSquare className="w-5 h-5" />
                 Join Telegram Channel
@@ -87,10 +87,9 @@ export function Footer() {
             <div>
               <h3 className="text-lg font-semibold mb-6">Quick Links</h3>
               <ul className="space-y-4">
-                <li><a href="/features" className="text-gray-400 hover:text-white transition-colors">Features</a></li>
-                <li><a href="/pricing" className="text-gray-400 hover:text-white transition-colors">Pricing</a></li>
-                <li><a href="/about" className="text-gray-400 hover:text-white transition-colors">About Us</a></li>
-                <li><a href="/contact" className="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                <li><a href="#features" className="text-gray-400 hover:text-white transition-colors">Features</a></li>
+                <li><a href="#pricing" className="text-gray-400 hover:text-white transition-colors">Pricing</a></li>
+                <li><a href="#faq" className="text-gray-400 hover:text-white transition-colors">FAQ</a></li>
               </ul>
             </div>
 
@@ -114,9 +113,9 @@ export function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
-            className="flex flex-col md:flex-row items-center justify-between gap-6 pt-8 border-t border-white/10"
+            className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-8 border-t border-white/10"
           >
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-gray-400 text-center sm:text-left">
               © {new Date().getFullYear()} Pistol Signals. All rights reserved.
             </p>
             <LegalLinks />

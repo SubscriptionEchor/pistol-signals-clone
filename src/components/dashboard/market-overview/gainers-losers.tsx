@@ -9,7 +9,6 @@ const WatermarkPattern: React.FC = () => {
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="flex items-center gap-3 text-3xl font-bold tracking-widest opacity-[0.04] transform-rotate-12">
-
           <img src="/assets/favicons/apple-touch-icon.png" alt="Logo" className="h-9" />
           Pistol Signals
         </div>
@@ -49,13 +48,12 @@ function CoinRow({ data }) {
   )
 }
 
-
 const Shimmer: React.FC = () => {
   return (
     <div className="flex items-center justify-between bg-[#111] animate-pulse py-1 hover:bg-white/5 px-3 rounded-lg">
       <div className="flex items-center gap-3">
         <div className="w-8 h-8 rounded-full bg-zinc-800 animate-pulse p-1.5"></div>
-        <span className="font-medium bg-zinc-800 rounded-md  animate-pulse w-20 h-5"></span>
+        <span className="font-medium bg-zinc-800 rounded-md animate-pulse w-20 h-5"></span>
       </div>
       <div className="text-right">
         <div className="font-medium bg-zinc-800 rounded-md animate-pulse w-20 h-5"></div>
@@ -72,7 +70,6 @@ interface GainersLosersProps {
   data: any[]
 }
 
-
 export function GainersLosers({ data, type }: GainersLosersProps) {
   const cardContent = (
     <motion.div
@@ -81,7 +78,7 @@ export function GainersLosers({ data, type }: GainersLosersProps) {
       transition={{ duration: 0.5 }}
       className="relative group"
     >
-      <div className="absolute -inset-[1px] bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-xl opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
+      <div className="absolute -inset-[1px] bg-gradient-to-r from-[#00D1FF]/20 to-[#00FFFF]/20 rounded-xl opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
 
       <div className="relative rounded-xl p-5 border border-white/10">
         <div className="flex items-center justify-between mb-4">

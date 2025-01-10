@@ -1,12 +1,13 @@
 import { Hero } from './components/sections/hero';
 import { Features } from './components/sections/features';
-import { KnowledgeBase } from './components/sections/knowledge-base';
+import { CryptoSignals } from './components/sections/knowledge-base';
 import { OneSimpleShortcut } from './components/sections/one-simple-shortcut';
 import { Integrations } from './components/sections/integrations';
 import { Documentation } from './components/sections/documentation';
 import { Pricing } from './components/sections/pricing';
 import { CTA } from './components/sections/cta';
 import { Footer } from './components/sections/footer';
+import { FAQ } from './components/sections/faq';
 import Navbar from './components/layout/navbar';
 
 function Home() {
@@ -16,11 +17,12 @@ function Home() {
       <main>
         <Hero />
         <Features />
-        <KnowledgeBase />
+        <CryptoSignals />
         <OneSimpleShortcut />
         <Integrations />
         <Documentation />
-        <Pricing /> {/* Added Pricing section here */}
+        <Pricing />
+        <FAQ />
         <CTA />
       </main>
       <Footer />

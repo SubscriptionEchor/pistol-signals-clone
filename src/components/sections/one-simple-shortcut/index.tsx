@@ -1,5 +1,8 @@
 import { motion } from 'framer-motion';
-import { Command, Zap, TrendingUp, Bell } from 'lucide-react';
+import { MessageCircle, Zap, TrendingUp, Bell, ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { TELEGRAM_CHANNEL_LINK } from '@/lib/config';
+import { OpenUrl } from '@/lib/utils';
 
 export function OneSimpleShortcut() {
   return (
@@ -25,12 +28,12 @@ export function OneSimpleShortcut() {
             Instant Trading Signals
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Access real-time trading signals and market insights with a single command
+            Get real-time trading signals delivered instantly to your dashboard and Telegram
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          {/* Signal Command Interface */}
+          {/* Signal Preview */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -41,19 +44,7 @@ export function OneSimpleShortcut() {
             <div className="absolute -inset-[1px] bg-gradient-to-r from-[#00D1FF]/20 to-[#00FFFF]/20 rounded-xl opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
             
             <div className="relative bg-[#111] rounded-xl overflow-hidden border border-[#222]">
-              {/* Command Header */}
-              <div className="p-4 border-b border-[#222] flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Command className="w-4 h-4 text-gray-400" />
-                  <span className="text-sm text-gray-400">Quick Access</span>
-                </div>
-                <div className="flex items-center gap-1 px-2 py-1 bg-[#222] rounded text-xs text-gray-500">
-                  <Command className="w-3 h-3" />
-                  <span>K</span>
-                </div>
-              </div>
-              
-              {/* Signal Content */}
+              {/* Dashboard Preview */}
               <div className="p-6 space-y-4">
                 {/* Latest Signal */}
                 <div className="bg-[#0A0A0A] rounded-lg p-4 border border-[#222] space-y-3">
@@ -68,7 +59,7 @@ export function OneSimpleShortcut() {
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-400">Entry</span>
-                      <span className="text-white">$48,250</span>
+                      <span className="text-white">$48,250 - $48,500</span>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-gray-400">Target</span>
@@ -77,62 +68,80 @@ export function OneSimpleShortcut() {
                   </div>
                 </div>
 
-                {/* Market Analysis */}
+                {/* Telegram Preview */}
                 <div className="bg-[#0A0A0A] rounded-lg p-4 border border-[#222]">
                   <div className="flex items-center gap-2 text-[#00D1FF]">
-                    <TrendingUp className="w-4 h-4" />
-                    <span className="text-sm font-medium">Market Analysis</span>
+                    <MessageCircle className="w-4 h-4" />
+                    <span className="text-sm font-medium">Telegram Notification</span>
+                  </div>
+                  <div className="mt-2 text-sm text-gray-400">
+                    Instant delivery to your Telegram
                   </div>
                 </div>
 
-                {/* Portfolio Overview */}
+                {/* Dashboard Stats */}
                 <div className="bg-[#0A0A0A] rounded-lg p-4 border border-[#222]">
                   <div className="flex items-center gap-2 text-[#00D1FF]">
-                    <Bell className="w-4 h-4" />
-                    <span className="text-sm font-medium">Signal Alerts</span>
+                    <TrendingUp className="w-4 h-4" />
+                    <span className="text-sm font-medium">Signal Performance</span>
+                  </div>
+                  <div className="mt-2 text-sm text-green-400">
+                    99.2% Accuracy Rate
                   </div>
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Keyboard Shortcuts */}
+          {/* Features List */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="space-y-4"
+            className="space-y-8"
           >
-            {[
-              { shortcut: ['⌘', 'K'], action: 'View Latest Signals', description: 'Access the most recent trading signals' },
-              { shortcut: ['⌘', 'J'], action: 'Market Analysis', description: 'Quick market trend analysis' },
-              { shortcut: ['⌘', 'L'], action: 'Signal Alerts', description: 'Manage your signal notifications' }
-            ].map((item, index) => (
-              <div 
-                key={index}
-                className="relative group"
-              >
-                <div className="absolute -inset-[1px] bg-gradient-to-r from-[#00D1FF]/20 to-[#00FFFF]/20 rounded-xl opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
-                
-                <div className="relative flex items-center justify-between p-4 bg-[#111] rounded-lg border border-[#222] hover:border-[#333] transition-colors">
-                  <div className="space-y-1">
-                    <span className="text-gray-200 font-medium">{item.action}</span>
-                    <p className="text-sm text-gray-500">{item.description}</p>
+            <div className="space-y-6">
+              {[
+                {
+                  icon: Zap,
+                  title: "Instant Delivery",
+                  description: "Receive signals the moment our AI detects profitable opportunities"
+                },
+                {
+                  icon: Bell,
+                  title: "Multi-Channel Alerts",
+                  description: "Get signals on both dashboard and Telegram for maximum convenience"
+                },
+                {
+                  icon: TrendingUp,
+                  title: "Real-time Updates",
+                  description: "Stay informed with live market updates and signal modifications"
+                }
+              ].map((feature, index) => (
+                <div 
+                  key={index}
+                  className="flex items-start gap-4 p-4 bg-[#111] rounded-lg border border-[#222] hover:border-[#333] transition-colors"
+                >
+                  <div className="p-2 rounded-lg bg-[#00D1FF]/10">
+                    <feature.icon className="w-5 h-5 text-[#00D1FF]" />
                   </div>
-                  <div className="flex items-center gap-2">
-                    {item.shortcut.map((key, keyIndex) => (
-                      <kbd 
-                        key={keyIndex}
-                        className="px-2 py-1 bg-[#0A0A0A] rounded text-sm text-gray-400 border border-[#222]"
-                      >
-                        {key}
-                      </kbd>
-                    ))}
+                  <div>
+                    <h3 className="font-medium mb-1">{feature.title}</h3>
+                    <p className="text-sm text-gray-400">{feature.description}</p>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+
+            <Button
+              onClick={() => OpenUrl(TELEGRAM_CHANNEL_LINK)}
+              variant="gradient"
+              className="group"
+            >
+              <span>Join Telegram Channel</span>
+              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
           </motion.div>
         </div>
       </div>

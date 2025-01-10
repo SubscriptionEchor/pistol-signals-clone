@@ -25,25 +25,6 @@ const Shimmer: React.FC = () => {
 
 const MarketStats = () => {
   const { marketData: data } = useUser()
-  // const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //   (async () => {
-  //     let result = await marketApi.getMarket();
-  //     if (result?.status) {
-  //       result = result?.data.map((item: any) => {
-  //         return {
-  //           name: new Date(item.timestamp * 1000).toLocaleString(),
-  //           value: item.marketCap,
-  //           volume: item.volume
-  //         };
-  //       });
-  //       setData(result);
-  //     }
-  //     setLoading(false); // Set loading to false after data is fetched
-  //   })();
-  // }, []);
 
   return (
     <motion.div
@@ -53,10 +34,6 @@ const MarketStats = () => {
       className="relative group"
     >
       {data?.length > 0 && <div className="relative bg-[#111] rounded-xl p-5 border border-white/10">
-        {/* {loading ? (
-          <Shimmer />
-        ) : ( */}
-        {/* <> */}
         <div className="flex items-center justify-between mb-2">
           <h3 className="text-lg font-medium">Total Market Cap</h3>
           <div className="flex items-center gap-2 text-emerald-500 bg-emerald-500/10 px-2 py-1 rounded-lg">
@@ -80,10 +57,21 @@ const MarketStats = () => {
               }
               return null;
             }} />
-            <Line type="monotone" dataKey="value" stroke="#FFD700" strokeWidth={2} dot={false} />
+            <Line 
+              type="monotone" 
+              dataKey="value" 
+              stroke="url(#gradient)" 
+              strokeWidth={2} 
+              dot={false} 
+            />
+            <defs>
+              <linearGradient id="gradient" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="#00D1FF" />
+                <stop offset="100%" stopColor="#00FFFF" />
+              </linearGradient>
+            </defs>
           </LineChart>
         </ResponsiveContainer>
-
       </div>}
     </motion.div>
   );
