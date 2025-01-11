@@ -1,4 +1,3 @@
-
 import { AuthGuard } from '@/lib/guards/auth.guard';
 import { Dashboard } from '@/components/dashboard';
 import { Support } from '@/components/support';
@@ -6,6 +5,7 @@ import { Profile } from '@/components/profile';
 import { SignalsHistory } from '@/components/history';
 import { Feedback } from '@/components/feedback';
 import { Screener } from '@/components/screener';
+import { Subscription } from '@/components/subscription';
 
 export const protectedRoutes = [
   {
@@ -45,6 +45,14 @@ export const protectedRoutes = [
     element: (
       // <AuthGuard>
         <Profile />
+      // </AuthGuard>
+    ),
+  },
+  {
+    path: '/subscription',
+    element: (
+      // <AuthGuard>
+        <Subscription />
       // </AuthGuard>
     ),
   },

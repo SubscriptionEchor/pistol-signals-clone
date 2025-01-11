@@ -1,6 +1,6 @@
 import { DashboardLayout } from '../dashboard/layout';
 import { motion } from 'framer-motion';
-import { User, Mail, Lock, Bell, MessageCircle, Shield } from 'lucide-react';
+import { User, Mail, Lock, Bell, MessageCircle, Shield, CreditCard, Calendar } from 'lucide-react';
 import { Button } from '../ui/button';
 import { useUser } from '@/lib/context/user';
 import { useState } from 'react';
@@ -8,10 +8,12 @@ import { authApi } from '@/services/api';
 import toast from 'react-hot-toast';
 import { TELEGRAM_CHANNEL_LINK } from '@/lib/config';
 import { OpenUrl } from '@/lib/utils';
+import { useNavigate } from 'react-router-dom';
 
 export function Profile() {
   const { userDetails, setUserDetails } = useUser();
   const [isEditing, setIsEditing] = useState(false);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: userDetails?.name || '',
     email: userDetails?.email || '',
@@ -141,6 +143,54 @@ export function Profile() {
                     <Mail className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
                   </div>
                 </div>
+              </div>
+            </motion.section>
+
+            {/* Subscription Section */}
+            <motion.section
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="bg-[#111] rounded-xl p-6 border border-white/10"
+            >
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-semibold">Subscription</h2>
+                <span className="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">
+                  Active
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                  <p className="text-gray-400 mb-1">Current Plan</p>
+                  <p className="text-lg font-semibold">Pro Monthly</p>
+                  <p className="text-sm text-gray-400">$120.00/month</p>
+                </div>
+
+                <div>
+                  <div className="flex items-center gap-2 text-gray-400 mb-1">
+                    <Calendar className="w-4 h-4" />
+                    <p>Next billing date</p>
+                  </div>
+                  <p className="text-lg font-semibold">December 26, 2024</p>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button
+                  variant="gradient"
+                  onClick={() => navigate('/pricing')}
+                  className="flex-1"
+                >
+                  Upgrade Plan
+                </Button>
+                <Button
+                  variant="secondary"
+                  onClick={() => navigate('/subscription')}
+                  className="flex-1"
+                >
+                  Manage Subscription
+                </Button>
               </div>
             </motion.section>
 

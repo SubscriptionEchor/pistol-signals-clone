@@ -9,7 +9,8 @@ import {
   User2Icon,
   MessageSquare,
   LineChart,
-  Send
+  Send,
+  CreditCard
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { TELEGRAM_CHANNEL_LINK } from '@/lib/config';
@@ -45,6 +46,11 @@ export function Sidebar({ handleOpenPopup }: SidebarProps) {
       label: 'Profile',
       icon: User2Icon,
       path: '/profile'
+    },
+    {
+      label: 'Subscription',
+      icon: CreditCard,
+      path: '/subscription'
     },
     {
       label: 'Feedback',
