@@ -12,12 +12,12 @@ function Particles() {
         <motion.div
           key={index}
           className="absolute w-1 h-1 bg-white/10 rounded-full"
-          initial={{ 
+          initial={{
             x: Math.random() * 100 + '%',
             y: Math.random() * 100 + '%',
             scale: 0
           }}
-          animate={{ 
+          animate={{
             y: [null, '-100%'],
             scale: [0, 1, 0]
           }}
@@ -37,8 +37,8 @@ export function Footer() {
     <footer className="relative bg-black py-20">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-radial from-purple-500/5 via-transparent to-transparent" />
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)]" 
-        style={{ backgroundSize: '32px 32px' }} 
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)]"
+        style={{ backgroundSize: '32px 32px' }}
       />
       <Particles />
 
@@ -76,7 +76,7 @@ export function Footer() {
           >
             <LegalLinks />
             <p className="text-sm text-gray-400">
-              © {new Date().getFullYear()} Pistol Signals. All rights reserved.
+              © {new Date().getFullYear()} AI Technical Analyst. All rights reserved.
             </p>
           </motion.div>
         </div>

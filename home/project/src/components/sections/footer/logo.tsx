@@ -3,7 +3,7 @@ import { Zap } from 'lucide-react';
 
 export function Logo() {
   return (
-    <motion.div 
+    <motion.div
       className="flex items-center gap-2 group"
       whileHover={{ scale: 1.05 }}
       transition={{ type: "spring", stiffness: 400, damping: 10 }}
@@ -15,7 +15,7 @@ export function Logo() {
         </div>
       </div>
       <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-        Pistol Signals
+        AI Technical Analyst
       </span>
     </motion.div>
   );

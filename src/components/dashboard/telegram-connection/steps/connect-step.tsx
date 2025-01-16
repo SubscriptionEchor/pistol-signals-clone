@@ -8,19 +8,17 @@ interface ConnectStepProps {
   onSubmit: (handle: string) => void;
 }
 
-export function ConnectStep({ onSubmit }: ConnectStepProps) {
+export function ConnectStep({ onSubmit, loader }: ConnectStepProps) {
   const [handle, setHandle] = useState('');
   const [error, setError] = useState('');
-  const [loader, setLoader] = useState(false)
 
   const handleSubmit = () => {
     if (!handle) {
       setError('Please enter your Telegram handle');
       return;
     }
-    setLoader(true)
     onSubmit(handle);
-    setLoader(false)
+
   };
 
   return (
@@ -37,7 +35,7 @@ export function ConnectStep({ onSubmit }: ConnectStepProps) {
               type="text"
               value={handle}
               onChange={(e) => {
-                setHandle(e.target.value);
+                setHandle(e.target.value?.toLowerCase());
                 setError('');
               }}
               placeholder="yourusername"

@@ -5,6 +5,7 @@ import { Button } from '../ui/button';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@/lib/context/user';
 import ConfirmationPopup from '../popup';
+import { ROUTE_NAMES } from '@/routes/routenames';
 
 const navItems = [
   { label: 'Features', href: '#features' },
@@ -40,18 +41,18 @@ export default function Navbar() {
   const handleConfirmLogout = () => {
     localStorage.clear();
     setUserDetails({});
-    navigate('/signin', { replace: true });
+    setPopupOpen(false);
+    // navigate('/signin', { replace: true });
   };
 
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-black/80 backdrop-blur-xl border-b border-white/10'
-          : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+        ? 'bg-black/80 backdrop-blur-xl border-b border-white/10'
+        : 'bg-transparent'
+        }`}
     >
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
@@ -106,7 +107,7 @@ export default function Navbar() {
             ) : (
               <div className="flex items-center gap-4">
                 <Button
-                  onClick={() => navigate('/dashboard')}
+                  onClick={() => navigate(ROUTE_NAMES.DASHBOARD)}
                   variant="gradient"
                   className="text-sm"
                 >
@@ -200,7 +201,7 @@ export default function Navbar() {
                         <Button
                           onClick={() => {
                             setIsMobileMenuOpen(false);
-                            navigate('/signin');
+                            navigate(ROUTE_NAMES.SIGNIN);
                           }}
                           variant="secondary"
                           className="w-full"
@@ -210,7 +211,7 @@ export default function Navbar() {
                         <Button
                           onClick={() => {
                             setIsMobileMenuOpen(false);
-                            navigate('/signup');
+                            navigate(ROUTE_NAMES.SIGNUP);
                           }}
                           variant="gradient"
                           className="w-full"
@@ -223,7 +224,7 @@ export default function Navbar() {
                         <Button
                           onClick={() => {
                             setIsMobileMenuOpen(false);
-                            navigate('/dashboard');
+                            navigate(ROUTE_NAMES.DASHBOARD);
                           }}
                           variant="gradient"
                           className="w-full"

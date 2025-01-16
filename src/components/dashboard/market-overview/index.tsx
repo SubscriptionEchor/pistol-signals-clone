@@ -27,7 +27,7 @@ export function MarketOverview() {
     })
   }, [])
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 mt-10">
       {/* Section Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}

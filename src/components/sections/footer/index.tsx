@@ -15,12 +15,12 @@ function Particles() {
         <motion.div
           key={index}
           className="absolute w-1 h-1 bg-white/10 rounded-full"
-          initial={{ 
+          initial={{
             x: Math.random() * 100 + '%',
             y: Math.random() * 100 + '%',
             scale: 0
           }}
-          animate={{ 
+          animate={{
             y: [null, '-100%'],
             scale: [0, 1, 0]
           }}
@@ -40,8 +40,8 @@ export function Footer() {
     <footer className="relative bg-black py-20">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-radial from-[#00D1FF]/5 via-transparent to-transparent" />
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)]" 
-        style={{ backgroundSize: '32px 32px' }} 
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)]"
+        style={{ backgroundSize: '32px 32px' }}
       />
       <Particles />
 
@@ -61,12 +61,12 @@ export function Footer() {
                 <h3 className="text-xl sm:text-2xl font-bold mb-2 text-center sm:text-left">Join Our Trading Community</h3>
                 <p className="text-gray-400 text-center sm:text-left">Get instant access to trading signals and market updates via Telegram</p>
               </div>
-              <button 
+              <button
                 onClick={() => OpenUrl(TELEGRAM_COMMUNITY_LINK)}
                 className="flex items-center gap-2 px-6 sm:px-8 py-3 bg-gradient-to-r from-[#00D1FF] to-[#00FFFF] rounded-lg font-medium text-black hover:opacity-90 transition-opacity group whitespace-nowrap"
               >
                 <MessageSquare className="w-5 h-5" />
-                Join Telegram Channel
+                Join Telegram Community
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               </button>
             </div>
@@ -116,7 +116,7 @@ export function Footer() {
             className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-8 border-t border-white/10"
           >
             <p className="text-sm text-gray-400 text-center sm:text-left">
-              © {new Date().getFullYear()} Pistol Signals. All rights reserved.
+              © {new Date().getFullYear()} AI Technical Analyst. All rights reserved.
             </p>
             <LegalLinks />
           </motion.div>

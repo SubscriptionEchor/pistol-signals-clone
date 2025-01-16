@@ -46,7 +46,7 @@ export function SignalsTable({ data, setHistory }) {
   const onClickNext = async () => {
     if (loading) return; // Prevent clicking if loading
 
-    const length = page * (data?.signals?.length);
+    const length = page * 10;
     if (length >= data?.total) return;
 
     setLoading(true); // Set loading to true when starting the request
@@ -126,7 +126,7 @@ export function SignalsTable({ data, setHistory }) {
 
       <div className="mt-6 flex items-center justify-between">
         <p className="text-sm text-gray-400">
-          Showing {page === 1 ? 1 : (page - 1) * data?.signals?.length + 1} - {Math.min(page * data?.signals?.length, data?.total)} of {data?.total} trades
+          Showing {page === 1 ? 1 : (page - 1) * 10 + 1} - {Math.min(page * 10, data?.total)} of {data?.total} trades
         </p>
         <div className="flex gap-2">
           <button

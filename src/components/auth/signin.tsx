@@ -1,17 +1,23 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff, ArrowRight } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { Button } from '../ui/button';
 import { authApi } from '@/services/api/auth';
 import { useUser } from '@/lib/context/user';
 import toast from 'react-hot-toast';
 import { useGoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import { GOOGLE_AUTH_API_KEY } from '@/lib/config';
+import { ROUTE_NAMES } from '@/routes/routenames';
+import { SUBSCRIBE_PLANS } from '@/constant';
 
 function SignInPageComponent() {
   const { userDetails, setUserDetails, login } = useUser();
   const [isEmailVerified, setEmailVerified] = useState(true);
+  const location = useLocation()
+  const searchParams = new URLSearchParams(location.search);
+  // Get a specific parameter, e.g., 'planId'
+  const planId = searchParams.get('planId');
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -48,7 +54,7 @@ function SignInPageComponent() {
         return;
       }
       setUserDetails(res?.data);
-      navigate('/dashboard');
+      navigate(ROUTE_NAMES.DASHBOARD);
     }
   };
 
@@ -85,7 +91,10 @@ function SignInPageComponent() {
           return;
         }
         setUserDetails(result?.data);
-        navigate('/dashboard');
+        if (result?.data?.plan == SUBSCRIBE_PLANS.PAID) {
+          toast.success('User login successful')
+        }
+        navigate(ROUTE_NAMES.DASHBOARD);
       }
     } catch (error) {
       setUserDetails((prev) => ({ ...prev, isLoading: false }));
@@ -96,9 +105,9 @@ function SignInPageComponent() {
     onSuccess: async (tokenResponse) => {
       let res = await authApi.googleLogin({ access_token: tokenResponse?.access_token })
       if (!res || !res?.status) {
-        return toast.error(res?.message, {
-          position: 'top-center'
-        })
+        // return toast.error(res?.message, {
+        //   position: 'top-center'
+        // })
       }
       localStorage.setItem('auth_token', res?.data?.access_token);
       setUserDetails((prev: any) => ({
@@ -106,8 +115,11 @@ function SignInPageComponent() {
         ...res?.data,
         isEmailVerified: true
       }));
+      if (res?.data?.plan == SUBSCRIBE_PLANS.PAID) {
+        toast.success('User login successful')
+      }
 
-      navigate('/dashboard', { replace: true });
+      navigate(ROUTE_NAMES.DASHBOARD, { replace: true });
     },
     onError: (error) => console.log(error),
   });
@@ -154,8 +166,12 @@ function SignInPageComponent() {
                   type="email"
                   placeholder="Email address"
                   value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
+                  onChange={(e) => {
+                    let res: any = { ...errors }
+                    delete res["email"]
+                    setErrors(res)
+                    setFormData({ ...formData, email: e.target.value?.toLowerCase() })
+                  }
                   }
                   className={`w-full px-4 py-3 bg-white/5 border ${errors.email ? 'border-red-500' : 'border-gray-800'
                     } rounded-lg focus:outline-none focus:border-primary transition-colors`}
@@ -171,8 +187,12 @@ function SignInPageComponent() {
                     type={formData.showPassword ? 'text' : 'password'}
                     placeholder="Password"
                     value={formData.password}
-                    onChange={(e) =>
+                    onChange={(e) => {
+                      let res: any = { ...errors }
+                      delete res["password"]
+                      setErrors(res)
                       setFormData({ ...formData, password: e.target.value })
+                    }
                     }
                     className={`w-full px-4 py-3 bg-white/5 border ${errors.password ? 'border-red-500' : 'border-gray-800'
                       } rounded-lg focus:outline-none focus:border-primary transition-colors pr-12`}
@@ -199,16 +219,16 @@ function SignInPageComponent() {
                 )}
                 <button
                   type="button"
-                  onClick={() => navigate('/forgot-password')}
+                  onClick={() => navigate(ROUTE_NAMES.FORGOT_PASSWORD)}
                   className="text-sm text-[#00D1FF] hover:text-[#47EBEB] transition-colors"
                 >
                   Forgot password?
                 </button>
               </div>
 
-              <Button 
-                type="submit" 
-                variant="gradient" 
+              <Button
+                type="submit"
+                variant="gradient"
                 className="w-full bg-gradient-to-r from-[#00D1FF] to-[#00FFFF] text-black font-semibold hover:opacity-90"
               >
                 {userDetails?.isLoading ? (
@@ -223,15 +243,15 @@ function SignInPageComponent() {
 
             <div className='text-xs text-gray-400'>
               By continuing, you agree to the{' '}
-              <button 
-                onClick={() => navigate('/terms')} 
+              <button
+                onClick={() => navigate('/terms')}
                 className='text-[#00D1FF] hover:underline'
               >
                 Terms of Service
               </button>{' '}
               and{' '}
-              <button 
-                onClick={() => navigate('/privacy')} 
+              <button
+                onClick={() => navigate('/privacy')}
                 className='text-[#00D1FF] hover:underline'
               >
                 Privacy Policy
@@ -241,7 +261,8 @@ function SignInPageComponent() {
             <p className="text-center text-sm text-gray-400">
               New to Pistol Signals?{' '}
               <button
-                onClick={() => navigate('/signup')}
+                onClick={() => navigate(ROUTE_NAMES.SIGNUP)}
+
                 className="text-[#00D1FF] hover:underline"
               >
                 Create an account

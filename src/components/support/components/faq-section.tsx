@@ -5,7 +5,7 @@ import { FAQItem } from './faq-item';
 
 const faqs = [
   {
-    "question": "What types of signals does Pistol Signals provide?",
+    "question": "What types of signals does AI Technical Analyst provide?",
     "answer": "We provide both spot and future trading signals on a daily basis."
   },
   {
@@ -13,7 +13,7 @@ const faqs = [
     "answer": "Yes, users have the flexibility to view our signal history to analyze past performance."
   },
   {
-    "question": "How do I connect my Telegram channel to Pistol Signals?",
+    "question": "How do I connect my Telegram channel to AI Technical Analyst?",
     "answer": "You can connect your Telegram channel through the settings section. Please note that once connected, you cannot change your Telegram ID."
   },
   {

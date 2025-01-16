@@ -5,6 +5,7 @@ import { GradientText } from '../ui/gradient-text';
 import { Section } from '../ui/section';
 import { AnimatedBadge } from '@/components/ui/animated-badge';
 import { useNavigate } from 'react-router-dom';
+import { ROUTE_NAMES } from '@/routes/routenames';
 
 export function Hero() {
   const navigate = useNavigate()
@@ -44,7 +45,7 @@ export function Hero() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <Button onClick={() => navigate('/signin')} variant="gradient" className="group flex items-center gap-2">
+          <Button onClick={() => navigate(ROUTE_NAMES.SIGNIN)} variant="gradient" className="group flex items-center gap-2">
             Get Started Now
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </Button>

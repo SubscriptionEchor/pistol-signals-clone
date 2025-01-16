@@ -10,7 +10,7 @@ const WatermarkPattern: React.FC = () => {
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="flex items-center gap-3 text-3xl font-bold tracking-widest opacity-[0.04] transform-rotate-12">
           <img src="/assets/favicons/apple-touch-icon.png" alt="Logo" className="h-9" />
-          Pistol Signals
+          AI Technical Analyst
         </div>
       </div>
     </div>

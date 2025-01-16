@@ -59,7 +59,7 @@ export default function Profile() {
                         onChange={() => { }} />
                 </div>
             </div>
-            <p className="col-12 mt-3 col-sm-7 col-lg-5 disclaminer">Pistol Signals will process your data to send you information about our products and services, promotions, surveys, raffles, based on our legitimate interest. Your data will not be disclosed to third parties. They will be communicated outside the EU under the terms of the privacy policy. You can opt out of our notifications with the slider.</p>
+            <p className="col-12 mt-3 col-sm-7 col-lg-5 disclaminer">AI Technical Analyst will process your data to send you information about our products and services, promotions, surveys, raffles, based on our legitimate interest. Your data will not be disclosed to third parties. They will be communicated outside the EU under the terms of the privacy policy. You can opt out of our notifications with the slider.</p>
         </div>
     )
 }

@@ -7,7 +7,7 @@ const reviews = [
     name: "Sarah Johnson",
     role: "Professional Trader",
     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
-    content: "Pistol Signals has transformed my trading strategy. The AI-powered signals are incredibly accurate and have helped me achieve consistent profits.",
+    content: "AI Technical Analyst has transformed my trading strategy. The AI-powered signals are incredibly accurate and have helped me achieve consistent profits.",
     rating: 5
   },
   {
@@ -21,7 +21,7 @@ const reviews = [
     name: "Emma Davis",
     role: "Day Trader",
     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80",
-    content: "The telegram signals are timely and precise. I've seen a significant improvement in my trading performance since joining Pistol Signals.",
+    content: "The telegram signals are timely and precise. I've seen a significant improvement in my trading performance since joining AI Technical Analyst.",
     rating: 5
   }
 ];
@@ -30,7 +30,7 @@ export function Reviews() {
   return (
     <Section className="bg-white/5">
       <div className="text-center mb-16">
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -39,7 +39,7 @@ export function Reviews() {
         >
           Trusted by Traders Worldwide
         </motion.h2>
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}

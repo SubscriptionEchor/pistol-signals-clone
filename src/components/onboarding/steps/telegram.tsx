@@ -18,7 +18,7 @@ export function TelegramStep() {
       <header className="flex items-center justify-between p-6">
         <img
           src="/assets/images/nav-logo.png"
-          alt="Pistol Signals"
+          alt="AI Technical Analyst"
           className="h-8"
         />
         <a href="/" className="text-gray-400 hover:text-white transition-colors">
@@ -37,7 +37,7 @@ export function TelegramStep() {
           >
             <h1 className="text-3xl font-bold">Enter telegram handle</h1>
             <p className="text-gray-400">
-              Share your Telegram handle with us! This is your key to receiving all trading signals, 
+              Share your Telegram handle with us! This is your key to receiving all trading signals,
               and remember, you can't change it once it's submitted.
             </p>
           </motion.div>
@@ -55,9 +55,8 @@ export function TelegramStep() {
                 value={state.username}
                 onChange={(e) => updateUsername(e.target.value)}
                 placeholder="Enter telegram username"
-                className={`w-full pl-12 pr-4 py-3 bg-white/5 border ${
-                  state.error ? 'border-red-500' : 'border-gray-800'
-                } rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors`}
+                className={`w-full pl-12 pr-4 py-3 bg-white/5 border ${state.error ? 'border-red-500' : 'border-gray-800'
+                  } rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors`}
               />
               {state.error && (
                 <p className="mt-2 text-sm text-red-500">{state.error}</p>

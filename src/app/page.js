@@ -17,7 +17,7 @@ export default function Home() {
       <section className="py-24 px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-5xl font-bold text-center mb-20">
-            Why Choose Pistol Signals?
+            Why Choose AI Technical Analyst?
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
@@ -59,7 +59,7 @@ export default function Home() {
             Ready to Start Trading Smarter?
           </h2>
           <p className="text-xl text-gray-400 mb-12">
-            Join thousands of traders who are already using Pistol Signals to
+            Join thousands of traders who are already using AI Technical Analyst to
             make data-driven trading decisions.
           </p>
           <a

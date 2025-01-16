@@ -62,7 +62,7 @@ export function NotificationSettings() {
       </div>
 
       <p className="text-xs text-gray-500">
-        Pistol Signals will process your data to send you information about our
+        AI Technical Analyst will process your data to send you information about our
         products and services. Your data will not be disclosed to third parties.
         You can opt out of notifications using the toggles above.
       </p>

@@ -39,9 +39,9 @@ export function Features() {
     <section className="py-20 px-6" id="features">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold mb-4">Why Choose Pistol Signals?</h2>
+          <h2 className="text-3xl font-bold mb-4">Why Choose AI Technical Analyst?</h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
-          Our platform combines data-driven analysis with real-time market monitoring to help inform your trading decisions.
+            Our platform combines data-driven analysis with real-time market monitoring to help inform your trading decisions.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

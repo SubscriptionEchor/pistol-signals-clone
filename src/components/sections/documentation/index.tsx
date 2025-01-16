@@ -4,10 +4,10 @@ import { FileText, Share2 } from 'lucide-react';
 export function Documentation() {
   return (
     <section className="relative py-32 px-6 bg-black">
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)]" 
-        style={{ backgroundSize: '32px 32px' }} 
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)]"
+        style={{ backgroundSize: '32px 32px' }}
       />
-      
+
       <div className="relative z-10 max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -47,7 +47,7 @@ export function Documentation() {
               className="relative group"
             >
               <div className="absolute -inset-px bg-gradient-to-r from-[#00D1FF]/20 to-[#00FFFF]/20 rounded-xl opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
-              
+
               <div className="relative bg-white/5 backdrop-blur-sm rounded-xl p-6">
                 <div className="p-3 rounded-lg bg-[#00D1FF]/10 w-fit mb-4">
                   <feature.icon className="w-6 h-6 text-[#00D1FF]" />

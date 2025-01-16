@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { toast } from 'react-hot-toast';
 import { authApi } from '@/services/api';
 import { useUser } from '@/lib/context/user';
+import { ROUTE_NAMES } from '@/routes/routenames';
 
 export function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
@@ -20,13 +21,13 @@ export function ForgotPasswordPage() {
     try {
       let result = await authApi.resendOtp(email)
       if (result?.status) {
-        navigate('/reset-password/verify')
         setUserDetails({ email })
         toast.success(result?.message, { position: 'top-center' });
+        navigate(ROUTE_NAMES.VERIFY_OTP)
       }
 
     } catch (error) {
-      toast.error('Failed to send reset instructions. Please try again.', { position: 'top-center' });
+      // toast.error('Failed to send reset instructions. Please try again.', { position: 'top-center' });
     } finally {
       setIsLoading(false);
     }
@@ -38,7 +39,7 @@ export function ForgotPasswordPage() {
       {/* <header className="p-6 flex justify-between items-center">
         <img
           src="/assets/images/nav-logo.png"
-          alt="Pistol Signals"
+          alt="AI Technical Analyst"
           className="h-8 cursor-pointer"
           onClick={() => navigate('/')}
         />
@@ -75,7 +76,7 @@ export function ForgotPasswordPage() {
                   type="email"
                   placeholder="Enter your email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value?.toLowerCase())}
                   className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
                   required
                 />
@@ -88,7 +89,7 @@ export function ForgotPasswordPage() {
                 disabled={isLoading}
               >
                 {isLoading ? <div className="flex items-center justify-center">
-                  <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  <div className="w-6 h-6 border-2 border-black border-t-transparent rounded-full animate-spin" />
                 </div> : 'Send Email'}
               </Button>
             </form>

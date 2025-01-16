@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff, User } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '../ui/button';
 import { authApi } from '@/services/api/auth';
 import { useUser } from '@/lib/context/user/user-context';
 import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google';
 import { GOOGLE_AUTH_API_KEY } from '@/lib/config';
 import toast from 'react-hot-toast';
+import { ROUTE_NAMES } from '@/routes/routenames';
 
 function SignUpPageComponent() {
   const { setUserDetails, signup } = useUser();
@@ -23,6 +24,17 @@ function SignUpPageComponent() {
     password: '',
   });
   const navigate = useNavigate();
+  const location = useLocation()
+  const searchParams = new URLSearchParams(location.search);
+
+  // Get a specific parameter, e.g., 'planId'
+  const referral = searchParams.get('referral');
+
+  useEffect(() => {
+    if (referral) {
+      setFormData(prev => ({ ...prev, referralCode: referral }))
+    }
+  }, [referral])
 
   const passwordRequirements: PasswordRequirement[] = [
     {
@@ -77,33 +89,37 @@ function SignUpPageComponent() {
   };
 
   const handleSubmit = async (e) => {
-    e?.preventDefault()
+    try {
+      e?.preventDefault()
+      if (!validateForm()) {
+        return;
+      }
 
-    if (!validateForm()) {
-      return;
+      setIsLoading(true);
+      let res = await signup(
+        formData?.email,
+        formData.password,
+        null,
+        null,
+        formData.referralCode
+      );
+      setIsLoading(false);
+
+      if (!res || !res?.status) {
+        return;
+      }
+
+      localStorage.setItem('auth_token', res?.data?.access_token);
+      setUserDetails((prev: any) => ({
+        ...prev,
+        ...res?.data,
+      }));
+
+      navigate(ROUTE_NAMES.VERIFY_EMAIL);
     }
-
-    setIsLoading(true);
-    let res = await signup(
-      formData?.email,
-      formData.password,
-      null,
-      null,
-      formData.referralCode
-    );
-    setIsLoading(false);
-    
-    if (!res || !res?.status) {
-      return;
+    catch (e) {
+      setIsLoading(false);
     }
-
-    localStorage.setItem('auth_token', res?.data?.access_token);
-    setUserDetails((prev: any) => ({
-      ...prev,
-      ...res?.data,
-    }));
-
-    navigate('/verify-email');
   };
 
   const loginWithGoogle = useGoogleLogin({
@@ -112,14 +128,15 @@ function SignUpPageComponent() {
         null,
         null,
         null,
-        tokenResponse?.access_token
+        tokenResponse?.access_token,
+        formData.referralCode
       );
       if (!res || !res?.status) {
         return toast.error(res?.message, { position: 'top-center' })
       }
       localStorage.setItem('auth_token', res?.data?.access_token);
       setUserDetails(prev => ({ ...prev, ...res?.data, isEmailVerified: true }));
-      navigate('/dashboard', { replace: true });
+      navigate(ROUTE_NAMES.DASHBOARD, { replace: true });
     },
     onError: (error) => console.log(error),
   });
@@ -162,10 +179,14 @@ function SignUpPageComponent() {
                 type="email"
                 placeholder="Email address"
                 value={formData.email}
-                onChange={e => setFormData({ ...formData, email: e.target.value })}
-                className={`w-full px-4 py-3 bg-white/5 border ${
-                  errors.email ? 'border-red-500' : 'border-gray-800'
-                } rounded-lg focus:outline-none focus:border-primary transition-colors`}
+                onChange={e => {
+                  let res: any = { ...errors }
+                  delete res["email"]
+                  setErrors(res)
+                  setFormData({ ...formData, email: e.target.value?.toLowerCase() })
+                }}
+                className={`w-full px-4 py-3 bg-white/5 border ${errors.email ? 'border-red-500' : 'border-gray-800'
+                  } rounded-lg focus:outline-none focus:border-primary transition-colors`}
               />
               {errors.email && (
                 <p className="mt-1 text-sm text-red-500">{errors.email}</p>
@@ -177,10 +198,14 @@ function SignUpPageComponent() {
                 type={formData.showPassword ? 'text' : 'password'}
                 placeholder="Create password"
                 value={formData.password}
-                onChange={e => setFormData({ ...formData, password: e.target.value })}
-                className={`w-full px-4 py-3 bg-white/5 border ${
-                  errors.password ? 'border-red-500' : 'border-gray-800'
-                } rounded-lg focus:outline-none focus:border-primary transition-colors pr-12`}
+                onChange={e => {
+                  let res: any = { ...errors }
+                  delete res["password"]
+                  setErrors(res)
+                  setFormData({ ...formData, password: e.target.value })
+                }}
+                className={`w-full px-4 py-3 bg-white/5 border ${errors.password ? 'border-red-500' : 'border-gray-800'
+                  } rounded-lg focus:outline-none focus:border-primary transition-colors pr-12`}
               />
               <button
                 type="button"
@@ -197,7 +222,9 @@ function SignUpPageComponent() {
                 )}
               </button>
             </div>
-
+            {errors.password && (
+              <p className="mt-1 text-sm text-red-500">{errors.password}</p>
+            )}
             {/* Referral Code Field */}
             <div className="relative">
               <div className="flex items-center">
@@ -253,15 +280,15 @@ function SignUpPageComponent() {
 
             <p className='text-xs text-gray-400'>
               By continuing, you agree to the{' '}
-              <button 
-                onClick={() => navigate('/terms')} 
+              <button
+                onClick={() => navigate('/terms')}
                 className='text-[#00D1FF] hover:underline'
               >
                 Terms of Service
               </button>{' '}
               and{' '}
-              <button 
-                onClick={() => navigate('/privacy')} 
+              <button
+                onClick={() => navigate('/privacy')}
                 className='text-[#00D1FF] hover:underline'
               >
                 Privacy Policy

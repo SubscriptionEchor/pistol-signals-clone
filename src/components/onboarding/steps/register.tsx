@@ -37,8 +37,8 @@ export function RegisterStep() {
           {state.isLogin ? 'Welcome back' : 'Create your account'}
         </h2>
         <p className="mt-2 text-sm text-gray-400">
-          {state.isLogin 
-            ? 'Sign in to continue to your account' 
+          {state.isLogin
+            ? 'Sign in to continue to your account'
             : 'Get started with your trading journey'}
         </p>
       </div>
@@ -50,9 +50,8 @@ export function RegisterStep() {
             placeholder="Email address"
             value={state.email}
             onChange={e => updateState({ email: e.target.value })}
-            className={`w-full px-4 py-3 bg-white/5 border ${
-              errors.email ? 'border-red-500' : 'border-gray-800'
-            } rounded-lg focus:outline-none focus:border-primary transition-colors`}
+            className={`w-full px-4 py-3 bg-white/5 border ${errors.email ? 'border-red-500' : 'border-gray-800'
+              } rounded-lg focus:outline-none focus:border-primary transition-colors`}
           />
           {errors.email && (
             <p className="text-sm text-red-500">{errors.email}</p>
@@ -66,9 +65,8 @@ export function RegisterStep() {
               placeholder={state.isLogin ? 'Enter password' : 'Create password'}
               value={state.password}
               onChange={e => updateState({ password: e.target.value })}
-              className={`w-full px-4 py-3 bg-white/5 border ${
-                errors.password ? 'border-red-500' : 'border-gray-800'
-              } rounded-lg focus:outline-none focus:border-primary transition-colors pr-12`}
+              className={`w-full px-4 py-3 bg-white/5 border ${errors.password ? 'border-red-500' : 'border-gray-800'
+                } rounded-lg focus:outline-none focus:border-primary transition-colors pr-12`}
             />
             <button
               type="button"
@@ -83,7 +81,7 @@ export function RegisterStep() {
           )}
         </div>
 
-        <Button 
+        <Button
           variant="gradient"
           className="w-full"
           onClick={handleSubmit}
@@ -94,7 +92,7 @@ export function RegisterStep() {
         <p className="text-center text-sm text-gray-400">
           {state.isLogin ? (
             <>
-              New to Pistol Signals?{' '}
+              New to AI Technical Analyst?{' '}
               <button
                 onClick={() => updateState({ isLogin: false })}
                 className="text-blue-400 hover:text-blue-300"

@@ -57,8 +57,8 @@ export function MobileMenu({ isOpen, onClose, menuItems, currentPath, onNavigate
                 transition={{ delay: 0.1 }}
                 className="flex-1 overflow-y-auto py-4 px-3"
               >
-                {userDetails?.telegramId ? <Button
-                  onClick={() => OpenUrl(TELEGRAM_CHANNEL_LINK)}
+                {(!userDetails?.tel_chat_id && userDetails?.invite_link && userDetails?.telegramId) ? <Button
+                  onClick={() => OpenUrl(userDetails?.invite_link)}
                   variant="gradient"
                   className="flex my-5 items-center gap-2 whitespace-nowrap"
                 >

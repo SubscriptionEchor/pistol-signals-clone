@@ -3,7 +3,7 @@ export function Header() {
     <header className="flex items-center justify-between p-6">
       <img
         src="/assets/images/nav-logo.png"
-        alt="Pistol Signals"
+        alt="AI Technical Analyst"
         className="h-8"
       />
       <a

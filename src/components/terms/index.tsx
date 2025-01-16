@@ -10,7 +10,7 @@ export function TermsOfService() {
     <div className="min-h-screen bg-black text-white">
       <header className="fixed top-0 left-0 right-0 bg-black/80 backdrop-blur-sm border-b border-white/10 z-50">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <img src="/assets/images/nav-logo.png" alt="Pistol Signals" className="h-8" />
+          <img src="/assets/images/nav-logo.png" alt="AI Technical Analyst" className="h-8" />
           <a href="/" className="text-gray-400 hover:text-white transition-colors">
             Back to home
           </a>
@@ -25,18 +25,18 @@ export function TermsOfService() {
           className="space-y-8"
         >
           <h1 className="text-4xl font-bold">Terms of Service</h1>
-          
+
           <section className="space-y-4">
             <h2 className="text-2xl font-semibold">1. Acceptance of Terms</h2>
             <p className="text-gray-400">
-              By accessing and using Pistol Signals, you agree to be bound by these Terms of Service. These terms govern your access to and use of our crypto trading signals platform, including any content, functionality, and services offered.
+              By accessing and using AI Technical Analyst, you agree to be bound by these Terms of Service. These terms govern your access to and use of our crypto trading signals platform, including any content, functionality, and services offered.
             </p>
           </section>
 
           <section className="space-y-4">
             <h2 className="text-2xl font-semibold">2. Service Description</h2>
             <p className="text-gray-400">
-              Pistol Signals provides AI-powered cryptocurrency trading signals and market analysis. Our services include but are not limited to:
+              AI Technical Analyst provides AI-powered cryptocurrency trading signals and market analysis. Our services include but are not limited to:
             </p>
             <ul className="list-disc list-inside text-gray-400 space-y-2">
               <li>Real-time trading signals</li>
@@ -76,7 +76,7 @@ export function TermsOfService() {
           <section className="space-y-4">
             <h2 className="text-2xl font-semibold">6. Limitation of Liability</h2>
             <p className="text-gray-400">
-              Pistol Signals shall not be liable for any losses, damages, or costs arising from the use of our services or any trading decisions made based on our signals.
+              AI Technical Analyst shall not be liable for any losses, damages, or costs arising from the use of our services or any trading decisions made based on our signals.
             </p>
           </section>
 

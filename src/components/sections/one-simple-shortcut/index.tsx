@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { MessageCircle, Zap, TrendingUp, Bell, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { TELEGRAM_CHANNEL_LINK } from '@/lib/config';
+import { TELEGRAM_CHANNEL_LINK, TELEGRAM_COMMUNITY_LINK } from '@/lib/config';
 import { OpenUrl } from '@/lib/utils';
 
 export function OneSimpleShortcut() {
@@ -10,8 +10,8 @@ export function OneSimpleShortcut() {
       {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-radial from-[#00D1FF]/5 via-transparent to-transparent" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)]" 
-          style={{ backgroundSize: '32px 32px' }} 
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)]"
+          style={{ backgroundSize: '32px 32px' }}
         />
       </div>
 
@@ -42,7 +42,7 @@ export function OneSimpleShortcut() {
             className="relative group"
           >
             <div className="absolute -inset-[1px] bg-gradient-to-r from-[#00D1FF]/20 to-[#00FFFF]/20 rounded-xl opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
-            
+
             <div className="relative bg-[#111] rounded-xl overflow-hidden border border-[#222]">
               {/* Dashboard Preview */}
               <div className="p-6 space-y-4">
@@ -119,7 +119,7 @@ export function OneSimpleShortcut() {
                   description: "Stay informed with live market updates and signal modifications"
                 }
               ].map((feature, index) => (
-                <div 
+                <div
                   key={index}
                   className="flex items-start gap-4 p-4 bg-[#111] rounded-lg border border-[#222] hover:border-[#333] transition-colors"
                 >
@@ -135,11 +135,11 @@ export function OneSimpleShortcut() {
             </div>
 
             <Button
-              onClick={() => OpenUrl(TELEGRAM_CHANNEL_LINK)}
+              onClick={() => OpenUrl(TELEGRAM_COMMUNITY_LINK)}
               variant="gradient"
               className="group"
             >
-              <span>Join Telegram Channel</span>
+              <span>Join Telegram Community</span>
               <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Button>
           </motion.div>

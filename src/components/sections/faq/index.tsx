@@ -4,7 +4,7 @@ import { ChevronDown } from 'lucide-react';
 
 const faqs = [
   {
-    question: "What types of signals does Pistol Signals provide?",
+    question: "What types of signals does AI Technical Analyst provide?",
     answer: "We provide both spot and futures trading signals for major cryptocurrencies. Our AI-powered system analyzes market data 24/7 to generate accurate trading opportunities with specific entry points, take-profit levels, and stop-losses."
   },
   {
@@ -37,8 +37,8 @@ export function FAQ() {
       {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-radial from-[#00D1FF]/5 via-transparent to-transparent" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)]" 
-          style={{ backgroundSize: '32px 32px' }} 
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)]"
+          style={{ backgroundSize: '32px 32px' }}
         />
       </div>
 
@@ -71,7 +71,7 @@ export function FAQ() {
               className="relative group"
             >
               <div className="absolute -inset-[1px] bg-gradient-to-r from-[#00D1FF]/20 to-[#00FFFF]/20 rounded-xl opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
-              
+
               <div className="relative bg-[#111] rounded-xl overflow-hidden">
                 <button
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
@@ -85,7 +85,7 @@ export function FAQ() {
                     <ChevronDown className="w-5 h-5 text-gray-400" />
                   </motion.div>
                 </button>
-                
+
                 <motion.div
                   initial={false}
                   animate={{

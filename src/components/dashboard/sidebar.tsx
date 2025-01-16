@@ -27,7 +27,7 @@ export function Sidebar({ handleOpenPopup }) {
   const location = useLocation();
   const { userDetails } = useUser()
   const menuItems = [
-    { icon: Home, label: 'Home', href: '/' },
+    // { icon: Home, label: 'Home', href: '/' },
     { icon: LayoutDashboard, label: 'Dashboard', href: '/dashboard' },
     { icon: Clock, label: 'History', href: '/history' },
     // { icon: Clipboard, label: 'Subscription', href: '/subscription' },
@@ -67,11 +67,12 @@ export function Sidebar({ handleOpenPopup }) {
               <span>{item.label}</span>
             </button>
           ))}
-          {userDetails?.telegramId ? <Button
-            onClick={() => OpenUrl(TELEGRAM_CHANNEL_LINK)}
-            variant="gradient"
-            className="flex mt-10 items-center gap-2 whitespace-nowrap"
-          >
+          {!userDetails?.tel_chat_id &&
+            (userDetails?.invite_link && userDetails?.telegramId) ? <Button
+              onClick={() => OpenUrl(userDetails?.invite_link)}
+              variant="gradient"
+              className="flex mt-10 items-center gap-2 whitespace-nowrap"
+            >
             <Send className="w-4 h-4 " />
             Connect Telegram
           </Button> : null}

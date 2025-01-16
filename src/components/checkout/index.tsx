@@ -1,112 +1,40 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Copy, ExternalLink, ArrowRight, AlertCircle, ArrowLeft, Shield } from 'lucide-react';
+import { Copy, ExternalLink, ArrowRight, AlertCircle, ArrowLeft, Shield, Timer } from 'lucide-react';
 import { Button } from '../ui/button';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
-import confetti from 'canvas-confetti';
+import Countdown from 'react-countdown';
 
-export function SubscriptionCheckout() {
+import { ROUTE_NAMES } from '@/routes/routenames';
+
+export function SubscriptionCheckout({ details, isProcessing }) {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const plan = location.state?.plan;
+  const plan = details;
 
   const paymentDetails = {
-    walletAddress: '0x1234567890abcdef1234567890abcdef12345678',
-    contractAddress: '0xdac17f958d2ee523a2206206994597c13d831ec7',
-    network: 'Ethereum (ERC20)',
-    amount: '150 USDT',
-    explorerUrl: 'https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7',
-    bscscanUrl: 'https://bscscan.com/token/0x55d398326f99059ff775485246999027b3197955'
+    contractAddress: '0x935f51628d80b623eaab3b655ac64be5c8383a17',
+    network: 'BNB',
+    bscscanUrl: 'https://testnet.bscscan.com/token/0x935f51628d80b623eaab3b655ac64be5c8383a17'
   };
 
-  const triggerConfetti = () => {
-    const count = 200;
-    const defaults = {
-      origin: { y: 0.7 },
-      zIndex: 1500
-    };
-
-    function fire(particleRatio: number, opts: confetti.Options) {
-      confetti({
-        ...defaults,
-        ...opts,
-        particleCount: Math.floor(count * particleRatio)
-      });
-    }
-
-    fire(0.25, {
-      spread: 26,
-      startVelocity: 55,
-      origin: { x: 0.2 }
-    });
-
-    fire(0.2, {
-      spread: 60,
-      origin: { x: 0.5 }
-    });
-
-    fire(0.35, {
-      spread: 100,
-      decay: 0.91,
-      scalar: 0.8,
-      origin: { x: 0.8 }
-    });
-
-    fire(0.1, {
-      spread: 120,
-      startVelocity: 25,
-      decay: 0.92,
-      scalar: 1.2,
-      colors: ['#00D1FF', '#00FFFF']
-    });
-
-    fire(0.1, {
-      spread: 120,
-      startVelocity: 45,
-      colors: ['#00D1FF', '#00FFFF']
-    });
-  };
 
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text);
-    toast.success('Copied to clipboard');
+    toast.success('Address copied to clipboard');
   };
 
-  const handlePaymentConfirm = async () => {
-    setIsLoading(true);
-    try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      triggerConfetti();
-      toast.success('Payment confirmed successfully!');
-      setTimeout(() => {
-        navigate('/dashboard');
-      }, 1500);
-    } catch (error) {
-      toast.error('Failed to confirm payment');
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   if (!plan) {
-    navigate('/pricing');
+    navigate(ROUTE_NAMES.SUBSCRIPTION);
     return null;
   }
 
+
   return (
     <div className="min-h-screen bg-black text-white">
-      <header className="p-6 flex justify-between items-center border-b border-white/10">
-        <img src="/assets/images/nav-logo.png" alt="Logo" className="h-8" />
-        <button
-          onClick={() => navigate('/pricing')}
-          className="text-gray-400 hover:text-white transition-colors flex items-center gap-2"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to pricing
-        </button>
-      </header>
 
       <main className="max-w-2xl mx-auto p-6 pt-12">
         <motion.div
@@ -116,35 +44,45 @@ export function SubscriptionCheckout() {
           className="space-y-8"
         >
           {/* Plan Summary */}
-          <div className="text-center">
+          {/* <div className="text-center">
             <h1 className="text-3xl font-bold mb-2">Complete Your Purchase</h1>
-            <p className="text-gray-400">
-              You selected the {plan.name} plan at {plan.price}{plan.period}
+            <p className="text-gray-400 font-bold">
+              You selected the {plan.name} plan at ${plan.price}/{plan.period}
             </p>
-          </div>
-
+          </div> */}
+          <p className="text-gray-400 text-center font-semibold text-red-400">
+            * Please don't close or reload the page until payment completes
+          </p>
           {/* Payment Details */}
           <div className="bg-white/5 rounded-xl p-6 border border-white/10 space-y-6">
-            <div>
-              <h2 className="text-xl font-semibold mb-4">Payment Details</h2>
-              <p className="text-gray-400 text-sm">
-                Send exactly {paymentDetails.amount} to the following address:
-              </p>
+            <div className='flex justify-between'>
+              <div>
+                <h2 className="text-xl font-semibold mb-4">Payment Details</h2>
+                <p className="text-gray-400 text-sm">
+                  Send exactly ${details.amount} to the following address:
+                </p>
+              </div>
+              {details && (
+                <div className="flex items-center gap-1.5 text-xs text-gray-400">
+                  <Timer className="w-3.5 h-3.5" />
+                  <span>Time remaining:</span>
+                  <Countdown daysInHours date={Date.now() + (details?.ttl * 1000 - Date.now())} />
+                </div>
+              )}
             </div>
-
             {/* Wallet Address */}
             <div className="space-y-2">
               <label className="text-sm text-gray-400">Wallet Address</label>
               <div className="flex gap-2">
                 <input
                   type="text"
-                  value={paymentDetails.walletAddress}
+                  value={details.address}
                   readOnly
                   className="flex-1 px-4 py-3 bg-black/50 border border-white/10 rounded-lg text-sm"
                 />
                 <Button
                   variant="secondary"
-                  onClick={() => handleCopy(paymentDetails.walletAddress)}
+                  onClick={() => handleCopy(details.address)}
                 >
                   <Copy className="w-4 h-4" />
                 </Button>
@@ -160,7 +98,7 @@ export function SubscriptionCheckout() {
             </div>
 
             {/* Contract Address */}
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <label className="text-sm text-gray-400">Contract Address</label>
               <div className="flex gap-2">
                 <input
@@ -177,41 +115,13 @@ export function SubscriptionCheckout() {
                 </Button>
                 <Button
                   variant="secondary"
-                  onClick={() => window.open(paymentDetails.explorerUrl, '_blank')}
+                  onClick={() => window.open(paymentDetails.bscscanUrl, '_blank')}
                 >
                   <ExternalLink className="w-4 h-4" />
                 </Button>
               </div>
-            </div>
+            </div> */}
 
-            {/* Verification Links */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <a
-                href={paymentDetails.explorerUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-between px-4 py-3 bg-black/50 border border-white/10 rounded-lg hover:bg-white/5 transition-colors group"
-              >
-                <div className="flex items-center gap-2">
-                  <img src="/ethereum.svg" alt="Ethereum" className="w-5 h-5" />
-                  <span className="text-sm">Verify on Etherscan</span>
-                </div>
-                <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" />
-              </a>
-
-              <a
-                href={paymentDetails.bscscanUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-between px-4 py-3 bg-black/50 border border-white/10 rounded-lg hover:bg-white/5 transition-colors group"
-              >
-                <div className="flex items-center gap-2">
-                  <img src="/binance.svg" alt="BSC" className="w-5 h-5" />
-                  <span className="text-sm">Verify on BSCScan</span>
-                </div>
-                <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" />
-              </a>
-            </div>
 
             {/* Security Note */}
             <div className="flex items-start gap-3 p-4 bg-green-500/10 border border-green-500/20 rounded-lg">
@@ -241,13 +151,13 @@ export function SubscriptionCheckout() {
           {/* Confirmation Button */}
           <Button
             variant="gradient"
-            onClick={handlePaymentConfirm}
+
             disabled={isLoading}
             className="w-full group"
           >
-            {isLoading ? (
+            {isProcessing ? (
               <div className="flex items-center justify-center">
-                <div className="w-6 h-6 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
               </div>
             ) : (
               <>

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { 
-  LayoutDashboard, 
-  History, 
+import {
+  LayoutDashboard,
+  History,
   HelpCircle,
   LogOut,
   User2Icon,
@@ -27,19 +27,19 @@ export function Sidebar({ handleOpenPopup }: SidebarProps) {
   const { userDetails } = useUser();
 
   const menuItems = [
-    { 
-      label: 'Dashboard', 
-      icon: LayoutDashboard, 
+    {
+      label: 'Dashboard',
+      icon: LayoutDashboard,
       path: '/dashboard',
     },
-    { 
-      label: 'History', 
-      icon: History, 
+    {
+      label: 'History',
+      icon: History,
       path: '/history',
     },
-    { 
-      label: 'Support & FAQ', 
-      icon: HelpCircle, 
+    {
+      label: 'Support & FAQ',
+      icon: HelpCircle,
       path: '/support',
     },
     {
@@ -86,8 +86,8 @@ export function Sidebar({ handleOpenPopup }: SidebarProps) {
                 className={`
                   w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm
                   transition-colors relative group
-                  ${isActive 
-                    ? 'text-white bg-white/10' 
+                  ${isActive
+                    ? 'text-white bg-white/10'
                     : 'text-gray-400 hover:text-white hover:bg-white/5'
                   }
                 `}
@@ -110,9 +110,9 @@ export function Sidebar({ handleOpenPopup }: SidebarProps) {
           })}
 
           {/* Telegram Connection Button */}
-          {!userDetails?.telegramId && (
+          {(!userDetails?.tel_chat_id && userDetails?.invite_link && userDetails?.telegramId) && (
             <Button
-              onClick={() => OpenUrl(TELEGRAM_CHANNEL_LINK)}
+              onClick={() => OpenUrl(userDetails?.invite_link)}
               variant="gradient"
               className="w-full mt-4 flex items-center justify-center gap-2 bg-gradient-to-r from-[#00D1FF] to-[#00FFFF] text-black font-medium hover:opacity-90 transition-opacity"
             >

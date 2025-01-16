@@ -1,28 +1,38 @@
 import { DashboardLayout } from '../dashboard/layout';
 import { motion } from 'framer-motion';
-import { User, Mail, Lock, Bell, MessageCircle, Shield, CreditCard, Calendar } from 'lucide-react';
+import { User, Mail, Lock, Bell, MessageCircle, Shield, CreditCard, Calendar, Check, Copy } from 'lucide-react';
 import { Button } from '../ui/button';
 import { useUser } from '@/lib/context/user';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { authApi } from '@/services/api';
 import toast from 'react-hot-toast';
-import { TELEGRAM_CHANNEL_LINK } from '@/lib/config';
-import { OpenUrl } from '@/lib/utils';
+import { APP_URL, TELEGRAM_CHANNEL_LINK } from '@/lib/config';
+import { cn, OpenUrl } from '@/lib/utils';
 import { useNavigate } from 'react-router-dom';
+import { getFormattedDateFromTimestamp } from '@/utils/utils';
 
 export function Profile() {
+  const [copied, setCopied] = useState(false);
   const { userDetails, setUserDetails } = useUser();
+  const [userLoader, setUserLoader] = useState(false)
+  const [passwordLoader, setPasswordLoader] = useState(false)
   const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: userDetails?.name || '',
-    email: userDetails?.email || '',
+    name: '',
+    email: '',
     password: '',
     notifications: {
       email: true,
       telegram: true
     }
   });
+
+  useEffect(() => {
+    if (userDetails) {
+      setFormData(prev => ({ ...prev, name: userDetails?.name, email: userDetails?.email }))
+    }
+  }, [userDetails])
 
   const passwordRequirements = [
     { regex: /[A-Z]/, label: 'One uppercase letter' },
@@ -36,30 +46,37 @@ export function Profile() {
     return passwordRequirements.every(req => req.regex.test(password));
   };
 
-  const handleSave = async () => {
+  const handleSave = async (key) => {
     try {
       let payload = {};
-      
-      if (userDetails?.name !== formData.name) {
+
+      // if(!formData?.name&& !formData.password){
+
+      // }
+
+      if (userDetails?.name !== formData.name?.trim() && key == "name") {
         payload['name'] = formData.name;
+        setUserLoader(true)
       }
-      
-      if (formData.password) {
+
+      if (formData.password?.trim() && key == "password") {
         if (!validatePassword(formData.password)) {
           toast.error('Please ensure password meets all requirements');
           return;
         }
-        payload['password'] = formData.password;
+        payload['password'] = formData.password?.trim();
+        setUserLoader(true)
       }
-
       if (Object.keys(payload).length === 0) {
         setIsEditing(false);
         return;
       }
 
       const result = await authApi.update(payload);
+      setUserLoader(false)
+      setPasswordLoader(false)
       if (!result?.status) {
-        toast.error(result?.message);
+        // toast.error(result?.message);
         return;
       }
 
@@ -69,7 +86,24 @@ export function Profile() {
       setIsEditing(false);
       setFormData(prev => ({ ...prev, password: '' }));
     } catch (error) {
-      toast.error('Failed to update profile');
+      console.log(error)
+      setUserLoader(false)
+      setPasswordLoader(false)
+      // toast.error('Failed to update profile');
+    }
+  };
+
+
+
+  const handleCopyCode = async () => {
+    let referralCode = `${APP_URL}/signup?referral=${userDetails?.refCode}`
+    try {
+      await navigator.clipboard.writeText(referralCode);
+      toast.success('Copied to clipboard')
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
     }
   };
 
@@ -120,13 +154,19 @@ export function Profile() {
                       variant="secondary"
                       onClick={() => {
                         if (isEditing) {
-                          handleSave();
+
+                          handleSave("name");
+
                         } else {
                           setIsEditing(true);
                         }
                       }}
                     >
-                      {isEditing ? 'Save' : 'Edit'}
+                      {userLoader ?
+                        <div className="flex items-center justify-center">
+                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        </div> :
+                        isEditing ? 'Save' : 'Edit'}
                     </Button>
                   </div>
                 </div>
@@ -163,8 +203,8 @@ export function Profile() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div>
                   <p className="text-gray-400 mb-1">Current Plan</p>
-                  <p className="text-lg font-semibold">Pro Monthly</p>
-                  <p className="text-sm text-gray-400">$120.00/month</p>
+                  {/* <p className="text-lg font-semibold">Pro Monthly</p> */}
+                  <p className="text-sm font-bold text-gray-400">{userDetails?.plan?.toUpperCase()}</p>
                 </div>
 
                 <div>
@@ -172,11 +212,11 @@ export function Profile() {
                     <Calendar className="w-4 h-4" />
                     <p>Next billing date</p>
                   </div>
-                  <p className="text-lg font-semibold">December 26, 2024</p>
+                  <p className="text-lg font-semibold">{getFormattedDateFromTimestamp(userDetails?.planExpiry, true)}</p>
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4">
+              {/* <div className="flex flex-col sm:flex-row gap-4">
                 <Button
                   variant="gradient"
                   onClick={() => navigate('/pricing')}
@@ -191,6 +231,58 @@ export function Profile() {
                 >
                   Manage Subscription
                 </Button>
+              </div> */}
+
+
+              <div className=" flex gap-6 mb-6">
+                <div>
+                  <div className="flex items-center gap-2 text-gray-400 mb-1">
+                    <p>Invite Link</p>
+                  </div>
+                  <a onClick={handleCopyCode} className="text-sm underline  text-blue-400 cursor-pointer font-semibold">{`${APP_URL}/signup?referral=${userDetails?.refCode}`}</a>
+                </div>
+                <button
+                  onClick={handleCopyCode}
+                  className={cn(
+                    'p-3 rounded-lg',
+                    'bg-white/5 hover:bg-white/10',
+                    'border border-white/10 hover:border-white/20',
+                    'transition-all duration-200',
+                    'group w-fit h-fit'
+                  )}
+                >
+                  {copied ? <Check className="w-5 h-5  text-emerald-500" /> : <Copy className="w-5 h-5 text-gray-400 group-hover:text-white" />}
+                </button>
+              </div>
+              <div className="  gap-6 mb-6">
+
+                <div className="flex items-center gap-2 text-gray-400 mb-1 mb-3">
+                  <p>Invite Code</p>
+                </div>
+                <div className='flex'>
+
+                  <a onClick={handleCopyCode}
+                    className={cn(
+                      'p-3 rounded-lg ',
+                      'bg-white/5 hover:bg-white/10',
+                      'border border-white/10 hover:border-white/20',
+                      'transition-all duration-200',
+                      'group w-fit h-fit me-3'
+                    )}>{userDetails?.refCode}</a>
+
+                  <button
+                    onClick={handleCopyCode}
+                    className={cn(
+                      'p-3 rounded-lg',
+                      'bg-white/5 hover:bg-white/10',
+                      'border border-white/10 hover:border-white/20',
+                      'transition-all duration-200',
+                      'group'
+                    )}
+                  >
+                    {copied ? <Check className="w-5 h-5  text-emerald-500" /> : <Copy className="w-5 h-5 text-gray-400 group-hover:text-white" />}
+                  </button>
+                </div>
               </div>
             </motion.section>
 
@@ -232,10 +324,13 @@ export function Profile() {
 
                 <Button
                   variant="gradient"
-                  onClick={handleSave}
+                  onClick={() => handleSave("password")}
                   disabled={!formData.password || !validatePassword(formData.password)}
                 >
-                  Update Password
+                  {userLoader ?
+                    <div className="flex items-center justify-center">
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    </div> : 'Update Password'}
                 </Button>
               </div>
             </motion.section>
@@ -265,13 +360,14 @@ export function Profile() {
                 <Shield className="w-5 h-5 text-green-400" />
               </div>
 
-              <Button
-                variant="gradient"
-                onClick={() => OpenUrl(TELEGRAM_CHANNEL_LINK)}
-                className="w-full sm:w-auto"
-              >
+              {!userDetails?.tel_chat_id &&
+                (userDetails?.invite_link && userDetails?.telegramId) ? <Button
+                  variant="gradient"
+                  onClick={() => OpenUrl(userDetails?.invite_link)}
+                  className="w-full sm:w-auto"
+                >
                 Join Telegram Channel
-              </Button>
+              </Button> : null}
             </motion.section>
 
             {/* Notifications */}

@@ -16,7 +16,7 @@ export function NavLogo() {
         <Zap className="w-5 h-5 text-primary" />
       </div> */}
       {/* <span className="text-lg font-medium">
-        Pistol Signals
+        AI Technical Analyst
       </span> */}
     </motion.div>
   );

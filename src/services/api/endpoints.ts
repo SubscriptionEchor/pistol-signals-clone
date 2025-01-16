@@ -10,12 +10,12 @@ export const API_ENDPOINTS = {
     RESEND_OTP: '/user/send-otp',
     VERIFY_OTP: "/user/reset-password",
     RESET_PASSWORD: '/user/reset-password',
-    GOOGLE_LOGIN: '/user/google-login'
+    GOOGLE_LOGIN: '/user/google-login',
   },
   USER: {
     PROFILE: '/user/profile',
     UPDATE_PROFILE: '/user/profile/update',
-    CHANGE_PASSWORD: '/user/password/change',
+    CHANGE_PASSWORD: '/user/password/change'
   },
 
   TRADING: {
@@ -30,6 +30,8 @@ export const API_ENDPOINTS = {
   },
   BASIC: {
     PLAN: '/plan',
-    FEEDBACK: '/feedback'
+    FEEDBACK: '/feedback',
+    SUBSCRIBE: '/plan/subscribe',
+    VERIFY_PAYMENT: '/plan/verify-payment'
   }
 } as const;

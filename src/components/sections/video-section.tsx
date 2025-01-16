@@ -6,16 +6,16 @@ export function VideoSection() {
   return (
     <Section className="overflow-hidden">
       <div className="text-center mb-16">
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
           className="text-4xl font-bold mb-6"
         >
-          See <GradientText>Pistol Signals</GradientText> in Action
+          See <GradientText>AI Technical Analyst</GradientText> in Action
         </motion.h2>
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
@@ -25,7 +25,7 @@ export function VideoSection() {
           Watch how our AI-powered platform delivers accurate trading signals in real-time
         </motion.p>
       </div>
-      
+
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
@@ -36,7 +36,7 @@ export function VideoSection() {
         <div className="relative w-full h-0 pb-[56.25%]">
           <iframe
             src="https://www.youtube.com/embed/Ab7tRyN62yI"
-            title="Pistol Signals Demo"
+            title="AI Technical Analyst Demo"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             className="absolute top-0 left-0 w-full h-full rounded-2xl"

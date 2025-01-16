@@ -27,7 +27,7 @@ export function ResponsiveNavbar({ handleOpenPopup }) {
   const navigate = useNavigate();
   const location = useLocation();
   const menuItems = [
-    { icon: Home, label: 'Home', href: '/' },
+    // { icon: Home, label: 'Home', href: '/' },
     { icon: LayoutDashboard, label: 'Dashboard', href: '/dashboard' },
     { icon: Clock, label: 'History', href: '/history' },
     { icon: HelpCircle, label: 'Support', href: '/support' },

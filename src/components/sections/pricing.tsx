@@ -5,58 +5,12 @@ import { Check } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { commonApi } from '@/services/api/common';
 import { useNavigate } from 'react-router-dom';
+import { ROUTE_NAMES } from '@/routes/routenames';
+import { useUser } from '@/lib/context/user';
 
-const plans = [
-  {
-    name: "Monthly",
-    price: "$49",
-    period: "/month",
-    description: "Perfect for beginners",
-    features: [
-      "Basic trading signals",
-      "Market analysis",
-      "Email support",
-      "Basic risk management",
-      "Monthly market reports",
-      "Basic API access"
-    ]
-  },
-  {
-    name: "Quarterly",
-    price: "$129",
-    period: "/quarter",
-    description: "Most popular choice",
-    isPopular: true,
-    features: [
-      "Advanced trading signals",
-      "Real-time market analysis",
-      "Priority telegram signals",
-      "24/7 support",
-      "Advanced risk management",
-      "Custom alerts",
-      "Quarterly strategy review",
-      "Full API access"
-    ]
-  },
-  {
-    name: "Yearly",
-    price: "$399",
-    period: "/year",
-    description: "Best value for professionals",
-    features: [
-      "Premium trading signals",
-      "Advanced AI predictions",
-      "VIP telegram channel",
-      "1-on-1 consultation",
-      "Custom risk parameters",
-      "Priority API access",
-      "White-glove support",
-      "Annual strategy planning"
-    ]
-  }
-];
 
 export function Pricing() {
+  const { setPlan } = useUser()
   const [data, setData] = useState([])
   const navigate = useNavigate()
   useEffect(() => {
@@ -67,6 +21,10 @@ export function Pricing() {
       }
     })()
   }, [])
+  const onClick = (plan: any) => {
+    setPlan(plan)
+    navigate(ROUTE_NAMES.DASHBOARD)
+  }
   return (
     <Section id="pricing" className="relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-radial from-purple-500/10 via-transparent to-transparent" />
@@ -127,11 +85,9 @@ export function Pricing() {
                 <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
                 <p className="text-gray-400 mb-6">{plan.description}</p>
                 <div className="mb-8">
-                  <span className="text-4xl line-through font-bold">{plan.price}</span>
+                  <span className="text-4xl  font-bold">${plan.price}</span>
                   <span className="text-gray-400">/{plan.duration}</span>
-                  <span className="inline-flex ms-2 items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                    Your Free Week
-                  </span>
+
                 </div>
                 <ul className="space-y-4 mb-8 flex-grow"> {/* Add flex-grow here to allow flexibility */}
                   {plan.features.map((feature, i) => (
@@ -144,7 +100,7 @@ export function Pricing() {
                   ))}
                 </ul>
                 <Button
-                  onClick={() => navigate('/signin')}
+                  onClick={() => onClick(plan)}
                   variant="gradient"
                   className="w-full mt-auto" // Ensure button stays at bottom
                 >

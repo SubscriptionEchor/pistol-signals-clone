@@ -2,14 +2,15 @@ import { motion } from 'framer-motion';
 import { LineChart, TrendingUp, Clock, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
+import { ROUTE_NAMES } from '@/routes/routenames';
 
 export function CryptoSignals() {
   const navigate = useNavigate();
 
   return (
-    <section className="relative py-32 px-6 bg-black">
+    <section id="market" className="relative py-32 px-6 bg-black">
       <div className="absolute inset-0">
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
           style={{ backgroundImage: 'url(/assets/images/hero-bg.png)' }}
         />
@@ -42,7 +43,7 @@ export function CryptoSignals() {
             className="relative group"
           >
             <div className="absolute -inset-[1px] bg-gradient-to-r from-[#00D1FF]/20 to-[#00FFFF]/20 rounded-xl opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
-            
+
             <div className="relative bg-[#111] rounded-xl p-6 border border-[#222]">
               {/* Signal Example */}
               <div className="space-y-6">
@@ -62,7 +63,7 @@ export function CryptoSignals() {
                       LONG
                     </span>
                   </div>
-                  
+
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                       <span className="text-gray-400">Entry Zone</span>
@@ -123,7 +124,7 @@ export function CryptoSignals() {
                 description: "Signals based on analysis across multiple timeframes for higher accuracy"
               }
             ].map((feature, index) => (
-              <div 
+              <div
                 key={index}
                 className="flex items-start gap-4 p-6 bg-[#111] rounded-lg border border-[#222] hover:border-[#333] transition-colors"
               >
@@ -138,7 +139,7 @@ export function CryptoSignals() {
             ))}
 
             <Button
-              onClick={() => navigate('/signin')}
+              onClick={() => navigate(ROUTE_NAMES.DASHBOARD)}
               variant="gradient"
               className="w-full sm:w-auto"
             >

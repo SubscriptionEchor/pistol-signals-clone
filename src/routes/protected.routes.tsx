@@ -6,62 +6,63 @@ import { SignalsHistory } from '@/components/history';
 import { Feedback } from '@/components/feedback';
 import { Screener } from '@/components/screener';
 import { Subscription } from '@/components/subscription';
+import { ROUTE_NAMES } from './routenames';
 
 export const protectedRoutes = [
   {
-    path: '/dashboard',
+    path: ROUTE_NAMES.DASHBOARD,
     element: (
-      // <AuthGuard>
+      <AuthGuard>
         <Dashboard />
-      // </AuthGuard>
+      </AuthGuard>
     ),
   },
   {
-    path: '/history',
+    path: ROUTE_NAMES.HISTORY,
     element: (
-      // <AuthGuard>
+      <AuthGuard>
         <SignalsHistory />
-      // </AuthGuard>
+      </AuthGuard>
     ),
   },
+  // {
+  //   path: '/screener',
+  //   element: (
+  //     <AuthGuard>
+  //       <Screener />
+  //     </AuthGuard>
+  //   ),
+  // },
   {
-    path: '/screener',
+    path: ROUTE_NAMES.SUPPORT,
     element: (
-      // <AuthGuard>
-        <Screener />
-      // </AuthGuard>
-    ),
-  },
-  {
-    path: '/support',
-    element: (
-      // <AuthGuard>
+      <AuthGuard>
         <Support />
-      // </AuthGuard>
+      </AuthGuard>
     ),
   },
   {
-    path: '/profile',
+    path: ROUTE_NAMES.PROFILE,
     element: (
-      // <AuthGuard>
+      <AuthGuard>
         <Profile />
-      // </AuthGuard>
+      </AuthGuard>
     ),
   },
   {
-    path: '/subscription',
+    path: ROUTE_NAMES.SUBSCRIPTION,
     element: (
-      // <AuthGuard>
+      <AuthGuard>
         <Subscription />
-      // </AuthGuard>
+      </AuthGuard>
     ),
   },
   {
-    path: '/feedback',
+    path: ROUTE_NAMES.FEEDBACK,
     element: (
-      // <AuthGuard>
+      <AuthGuard>
         <Feedback />
-      // </AuthGuard>
+      </AuthGuard>
     ),
   }
 ];

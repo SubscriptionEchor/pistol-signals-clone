@@ -46,8 +46,8 @@ export function SignInForm() {
           </button>
         </div>
 
-        <Button 
-          type="submit" 
+        <Button
+          type="submit"
           variant="secondary"
           className="w-full"
           disabled={isLoading}
@@ -57,7 +57,7 @@ export function SignInForm() {
       </form>
 
       <p className="text-center text-sm text-gray-400">
-        New to Pistol Signals?{' '}
+        New to AI Technical Analyst?{' '}
         <button
           onClick={() => navigate('/auth/signup')}
           className="text-primary hover:text-primary-light transition-colors font-medium"

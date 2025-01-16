@@ -47,7 +47,7 @@ export default function OnboardingPage() {
               </p>
             </div>
 
-            <Button 
+            <Button
               variant="secondary"
               className="w-full"
               onClick={() => googleLogin()}
@@ -91,7 +91,7 @@ export default function OnboardingPage() {
                 </button>
               </div>
 
-              <Button 
+              <Button
                 variant="gradient"
                 className="w-full"
                 onClick={() => setStep(steps.TELEGRAM)}
@@ -102,7 +102,7 @@ export default function OnboardingPage() {
               <p className="text-center text-sm text-gray-400">
                 {isLogin ? (
                   <>
-                    New to Pistol Signals?{' '}
+                    New to AI Technical Analyst?{' '}
                     <button
                       onClick={() => setIsLogin(false)}
                       className="text-blue-400 hover:text-blue-300"
@@ -135,7 +135,7 @@ export default function OnboardingPage() {
           >
             <h2 className="text-2xl font-bold">Enter telegram handle</h2>
             <p className="text-gray-400">
-              Share your Telegram handle with us! This is your key to receiving all trading signals, 
+              Share your Telegram handle with us! This is your key to receiving all trading signals,
               and remember, you can't change it once it's submitted.
             </p>
 
@@ -150,7 +150,7 @@ export default function OnboardingPage() {
               />
             </div>
 
-            <Button 
+            <Button
               variant="gradient"
               className="w-full"
               onClick={() => setStep(steps.VERIFY)}
@@ -169,11 +169,11 @@ export default function OnboardingPage() {
           >
             <h2 className="text-2xl font-bold">Next up, verify your email</h2>
             <p className="text-gray-400">
-              To continue subscribing a plan, head over to your inbox and click the verification 
+              To continue subscribing a plan, head over to your inbox and click the verification
               link we just sent you.
             </p>
 
-            <Button 
+            <Button
               variant="gradient"
               className="w-full group"
               onClick={() => setStep(steps.PLAN)}

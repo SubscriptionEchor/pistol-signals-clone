@@ -20,6 +20,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
   const [marketData, setMarketData] = useState()
   const [indexData, setIndexData] = useState()
   const [dominance, setDominance] = useState()
+  const [plan, setPlan] = useState(null)
 
 
   useEffect(() => {
@@ -92,21 +93,22 @@ export function UserProvider({ children }: { children: ReactNode }) {
       let result = await authApi.login(payload);
       return result;
     } catch (error) {
-      const message =
-        error instanceof Error ? error.message : 'Failed to login';
-      setError(message);
-      toast.error(message, { position: 'top-center' });
+      // const message =
+      //   error instanceof Error ? error.message : 'Failed to login';
+      // setError(message);
+      // toast.error(message, { position: 'top-center' });
     } finally {
       setLoading(false);
     }
   };
 
-  const signup = async (email: string, password: string, telegram: string, access_token: string) => {
+  const signup = async (email: string, password: string, telegram: string, access_token: string, ref_code: string) => {
     // Add your signup API call here
     interface Payload {
       email: string | undefined;
       password: string | undefined;
       telegram_id: string | undefined;
+      ref_code: string | undefined
     }
     let payload: Payload = {
       email: email,
@@ -115,6 +117,9 @@ export function UserProvider({ children }: { children: ReactNode }) {
     };
     if (access_token) {
       payload['access_token'] = access_token
+    }
+    if (ref_code) {
+      payload['ref_code'] = ref_code
     }
     let result = await authApi.signup(payload);
     return result;
@@ -204,7 +209,9 @@ export function UserProvider({ children }: { children: ReactNode }) {
     setIsLoading,
     marketData,
     indexData,
-    dominance
+    dominance,
+    plan,
+    setPlan
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

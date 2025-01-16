@@ -6,62 +6,63 @@ import { ForgotPasswordPage } from '@/components/auth/forgot-password';
 import { VerifyOTPPage } from '@/components/auth/verify-otp';
 import { ResetPasswordPage } from '@/components/auth/reset-password';
 import VerifyEmail from '@/components/verify-email';
+import { ROUTE_NAMES } from './routenames';
 
 export const authRoutes = [
   {
-    path: '/signin',
+    path: ROUTE_NAMES.SIGNIN,
     element: (
-      // <GuestGuard>
+      <GuestGuard>
         <SignInPage />
-      // </GuestGuard>
+      </GuestGuard>
     ),
   },
   {
-    path: '/signup',
+    path: ROUTE_NAMES.SIGNUP,
     element: (
-      // <GuestGuard>
+      <GuestGuard>
         <SignUpPage />
-      // </GuestGuard>
+      </GuestGuard>
     ),
   },
   {
-    path: '/verify-email',
+    path: ROUTE_NAMES.VERIFY_EMAIL,
     element: (
-      // <GuestGuard>
+      <GuestGuard>
         <VerifyEmail />
-      // </GuestGuard>
+      </GuestGuard>
     ),
   },
   {
-    path: '/telegram',
+    path: ROUTE_NAMES.TELEGRAM,
     element: (
-      // <GuestGuard>
+      <GuestGuard>
         <TelegramPage />
-      // </GuestGuard>
+      </GuestGuard>
     ),
   },
   {
-    path: '/forgot-password',
+    path: ROUTE_NAMES.FORGOT_PASSWORD,
     element: (
-      // <GuestGuard>
+      <GuestGuard>
         <ForgotPasswordPage />
-      // </GuestGuard>
+      </GuestGuard>
     ),
   },
   {
-    path: '/reset-password/verify',
+    path: ROUTE_NAMES.VERIFY_OTP,
     element: (
-      // <GuestGuard>
+      <GuestGuard>
         <VerifyOTPPage />
-      // </GuestGuard>
+      </GuestGuard>
     ),
   },
   {
-    path: '/reset-password/new',
+    path: ROUTE_NAMES.NEW_PASSWORD,
     element: (
-      // <GuestGuard>
+      <GuestGuard>
         <ResetPasswordPage />
-      // </GuestGuard>
+      </GuestGuard>
     ),
   }
 ];

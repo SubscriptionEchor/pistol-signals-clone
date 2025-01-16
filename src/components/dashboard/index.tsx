@@ -21,10 +21,10 @@ export function Dashboard() {
             />
           )} */}
           <div className="relative">
-            <TelegramConnection />
+            {!userDetails?.tel_chat_id && <TelegramConnection />}
             <MarketOverview />
             <div>
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex mt-10 items-center justify-between mb-6">
                 <h2 className="text-xl font-semibold">Active Signals</h2>
               </div>
               <SignalsGrid />

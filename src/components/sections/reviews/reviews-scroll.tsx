@@ -13,7 +13,7 @@ const reviews = [
     avatar:
       'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&h=200',
     content:
-      'Pistol Signals has transformed my trading strategy. The AI-powered signals are incredibly accurate and have helped me achieve consistent profits.',
+      'AI Technical Analyst has transformed my trading strategy. The AI-powered signals are incredibly accurate and have helped me achieve consistent profits.',
   },
   {
     name: 'Michael Chen',
@@ -29,7 +29,7 @@ const reviews = [
     avatar:
       'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=200&h=200',
     content:
-      "The telegram signals are timely and precise. I've seen a significant improvement in my trading performance since joining Pistol Signals.",
+      "The telegram signals are timely and precise. I've seen a significant improvement in my trading performance since joining AI Technical Analyst.",
   },
   {
     name: 'Daniel Smith',
@@ -37,7 +37,7 @@ const reviews = [
     avatar:
       'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&h=200',
     content:
-      "The accuracy of these signals is remarkable. I've been able to consistently grow my portfolio since subscribing to Pistol Signals.",
+      "The accuracy of these signals is remarkable. I've been able to consistently grow my portfolio since subscribing to AI Technical Analyst.",
   },
 ];
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Lock } from 'lucide-react';
@@ -8,6 +8,7 @@ import { toast } from 'react-hot-toast';
 import { ROUTES } from '@/lib/config';
 import { useUser } from '@/lib/context/user';
 import { authApi } from '@/services/api';
+import { ROUTE_NAMES } from '@/routes/routenames';
 
 export function ResetPasswordPage() {
   const [passwords, setPasswords] = useState({
@@ -21,6 +22,12 @@ export function ResetPasswordPage() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { userDetails, setUserDetails } = useUser()
+
+  useEffect(() => {
+    if (!userDetails?.access_token) {
+      navigate(-1)
+    }
+  }, [userDetails])
   const passwordRequirements: PasswordRequirement[] = [
     {
       regex: /[A-Z]/,
@@ -82,9 +89,9 @@ export function ResetPasswordPage() {
         toast(result?.message)
         return
       }
-      navigate('/signin', { replace: true });
+      navigate(ROUTE_NAMES.DASHBOARD, { replace: true });
     } catch (error) {
-      toast.error('Failed to reset password. Please try again.', { position: 'top-center' });
+      // toast.error('Failed to reset password. Please try again.', { position: 'top-center' });
     } finally {
       setIsLoading(false);
     }
@@ -96,7 +103,7 @@ export function ResetPasswordPage() {
       <header className="p-6 flex justify-between items-center border-b border-white/10">
         <img
           src="/assets/images/nav-logo.png"
-          alt="Pistol Signals"
+          alt="AI Technical Analyst"
           className="h-8"
         />
         <button

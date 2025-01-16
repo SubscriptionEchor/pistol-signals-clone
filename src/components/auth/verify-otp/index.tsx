@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, KeyRound } from 'lucide-react';
@@ -8,6 +8,7 @@ import { toast } from 'react-hot-toast';
 import { ROUTES } from '@/lib/config';
 import { authApi } from '@/services/api';
 import { useUser } from '@/lib/context/user';
+import { ROUTE_NAMES } from '@/routes/routenames';
 
 export function VerifyOTPPage() {
   const [otp, setOTP] = useState<string[]>(Array(6).fill(''));
@@ -15,6 +16,12 @@ export function VerifyOTPPage() {
   const [error, setError] = useState('');
   const { userDetails, setUserDetails } = useUser()
   const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   if (!userDetails?.email) {
+  //     navigate(-1)
+  //   }
+  // }, [userDetails])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,11 +47,11 @@ export function VerifyOTPPage() {
         return
       }
       setUserDetails(res?.data)
-      navigate('/reset-password/new', { replace: true });
+      navigate(ROUTE_NAMES.NEW_PASSWORD, { replace: true });
       toast.success('OTP verified successfully', { position: 'top-center' });
     } catch (error) {
       setError('Invalid OTP. Please try again.');
-      toast.error('Failed to verify OTP', { position: 'top-center' });
+      // toast.error('Failed to verify OTP', { position: 'top-center' });
     } finally {
       setIsLoading(false);
     }
@@ -66,7 +73,7 @@ export function VerifyOTPPage() {
       {/* <header className="p-6 flex justify-between items-center">
         <img
           src="/assets/images/nav-logo.png"
-          alt="Pistol Signals"
+          alt="AI Technical Analyst"
           className="h-8 cursor-pointer"
           onClick={() => navigate('/')}
         />
@@ -116,7 +123,7 @@ export function VerifyOTPPage() {
                 disabled={isLoading}
               >
                 {isLoading ? <div className="flex items-center justify-center">
-                  <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  <div className="w-6 h-6 border-2 border-black border-t-transparent rounded-full animate-spin" />
                 </div> : 'Verify Code'}
               </Button>
             </form>

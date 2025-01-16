@@ -5,6 +5,7 @@ import ConfirmationPopup from '../popup';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@/lib/context/user';
+import { ROUTE_NAMES } from '@/routes/routenames';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -15,7 +16,6 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   const [isPopupOpen, setPopupOpen] = useState(false); // State to manage modal visibility
   const navigate = useNavigate()
   useEffect(() => {
-    console.log(navigate)
     window.scrollTo(0, 0);
   }, [navigate]);
   const handleOpenPopup = () => {
@@ -29,7 +29,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   const handleConfirmLogout = () => {
     localStorage.clear();
     setUserDetails({})
-    navigate('/signin', { replace: true })// Clear local storage
+    navigate(ROUTE_NAMES.SIGNIN, { replace: true })// Clear local storage
     // Navigate to sign-in page (implementation here depends on your routing setup)
     // For example: navigate('/signin', { replace: true });
   };

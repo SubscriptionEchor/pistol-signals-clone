@@ -15,7 +15,7 @@ export function ConnectedStep({ handle }: ConnectedStepProps) {
       <CheckCircle2 className="w-5 h-5 text-green-400" />
       <div>
         <p className="text-sm font-medium">Successfully connected</p>
-        <p className="text-sm text-gray-400">@{handle} is now connected to Pistol Signals</p>
+        <p className="text-sm text-gray-400">@{handle} is now connected to AI Technical Analyst</p>
       </div>
     </motion.div>
   );

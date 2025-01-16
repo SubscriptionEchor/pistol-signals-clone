@@ -10,7 +10,7 @@ export function AuthLayout() {
       <header className="p-6 flex justify-between items-center">
         <img
           src="/assets/images/nav-logo.png"
-          alt="Pistol Signals"
+          alt="AI Technical Analyst"
           className="h-8 cursor-pointer"
           onClick={() => navigate('/')}
         />

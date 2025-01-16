@@ -30,9 +30,11 @@ a {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -43,6 +45,6 @@ a {
   animation: gradient 15s ease infinite;
 }
 
-.bg-gradient-glow {
+/* .bg-gradient-glow {
   background: radial-gradient(circle at center, rgba(51, 102, 255, 0.15) 0%, transparent 70%);
-}
+} */

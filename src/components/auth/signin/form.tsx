@@ -48,7 +48,7 @@ export function SignInForm() {
             Forgot password?
           </button>
         </div>
-        
+
 
         <Button
           type="submit"
@@ -61,7 +61,7 @@ export function SignInForm() {
       </form>
 
       <p className="text-center text-sm text-gray-400">
-        New to Pistol Signals?{' '}
+        New to AI Technical Analyst?{' '}
         <button
           onClick={() => navigate('/auth/signup')}
           className="text-primary hover:text-primary-light transition-colors font-medium"

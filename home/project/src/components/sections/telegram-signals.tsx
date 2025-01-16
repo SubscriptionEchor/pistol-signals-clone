@@ -19,7 +19,7 @@ export function TelegramSignals() {
           <p className="text-gray-400 mb-8 text-lg">
             Never miss a trading opportunity with our real-time Telegram signals. Our AI-powered system delivers accurate trading signals directly to your phone.
           </p>
-          
+
           <div className="space-y-6 mb-8">
             {[
               {
@@ -61,7 +61,7 @@ export function TelegramSignals() {
           >
             <button className="flex items-center gap-2 px-8 py-3 rounded-lg font-medium bg-gradient-primary hover:opacity-90 transition-opacity">
               <MessageSquare className="w-5 h-5" />
-              <span>Join Telegram Channel</span>
+              {/* <span>Join Telegram Channel</span> */}
             </button>
           </motion.div>
         </motion.div>

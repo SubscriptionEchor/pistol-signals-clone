@@ -10,7 +10,7 @@ export function PrivacyPolicy() {
     <div className="min-h-screen bg-black text-white">
       <header className="fixed top-0 left-0 right-0 bg-black/80 backdrop-blur-sm border-b border-white/10 z-50">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <img src="/assets/images/nav-logo.png" alt="Pistol Signals" className="h-8" />
+          <img src="/assets/images/nav-logo.png" alt="AI Technical Analyst" className="h-8" />
           <a href="/" className="text-gray-400 hover:text-white transition-colors">
             Back to home
           </a>

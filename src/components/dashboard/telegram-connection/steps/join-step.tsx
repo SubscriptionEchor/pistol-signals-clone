@@ -7,7 +7,7 @@ interface JoinStepProps {
   onJoined: () => void;
 }
 
-export function JoinStep({ onJoined }: JoinStepProps) {
+export function JoinStep({ onJoined, link }: JoinStepProps) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -16,22 +16,22 @@ export function JoinStep({ onJoined }: JoinStepProps) {
     >
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
         <a
-          href={TELEGRAM_CHANNEL_LINK}
+          href={link}
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 px-4 py-2 bg-[#00D1FF]/10 border border-[#00D1FF]/20 rounded-lg hover:bg-[#00D1FF]/20 transition-colors group"
         >
-          <span className="text-[#00D1FF]">{TELEGRAM_CHANNEL_LINK}</span>
+          <span className="text-[#00D1FF]">{link}</span>
           <ExternalLink className="w-4 h-4 text-[#00D1FF] group-hover:translate-x-1 transition-transform" />
         </a>
-        <Button
+        {/* <Button
           variant="gradient"
           onClick={onJoined}
           className="flex items-center gap-2"
         >
           <span>I've Joined the Channel</span>
           <ArrowRight className="w-4 h-4" />
-        </Button>
+        </Button> */}
       </div>
 
       <div className="flex items-start gap-4 p-4 bg-white/5 rounded-lg border border-white/10">

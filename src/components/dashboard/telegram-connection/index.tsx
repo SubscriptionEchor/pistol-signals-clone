@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { MessageCircle, ExternalLink } from 'lucide-react';
 import { ConnectionStatus } from './types';
@@ -8,24 +8,41 @@ import { Button } from '@/components/ui/button';
 import { useUser } from '@/lib/context/user';
 import { TELEGRAM_CHANNEL_LINK } from '@/lib/config';
 import { OpenUrl } from '@/lib/utils';
+import { authApi } from '@/services/api';
+import { validateTelegramHandle } from '@/components/onboarding/utils/validation';
+import toast from 'react-hot-toast';
+import { validateTelegramId } from '@/utils/utils';
+
 
 export function TelegramConnection() {
   const [status, setStatus] = useState<ConnectionStatus>('not_connected');
   const [handle, setHandle] = useState('');
   const { userDetails, setUserDetails } = useUser();
   const [showChannelLink, setShowChannelLink] = useState(false);
+  const [loader, setLoader] = useState(false)
+
+  useEffect(() => {
+    if (userDetails?.telegramId) {
+      setStatus("pending_join")
+    }
+
+  }, [userDetails])
 
   const onSubmit = async (value) => {
     // Temporarily comment out API call
-    // let result = await authApi.update({ telegram_id: value })
-    // if (result?.status) {
-    //   setUserDetails(prev => ({ ...prev, telegramId: value }))
-    //   setStatus('pending_join');
-    // }
+    let validateTelegram = validateTelegramId(value)
+    if (validateTelegram) {
+      return toast.error(validateTelegram)
+    }
+    setLoader(true)
+    let result = await authApi.update({ telegram_id: value })
+    setLoader(false)
+    if (result?.status) {
+      toast.success("telegram joined successfully")
+      setUserDetails(prev => ({ ...prev, telegramId: value }))
+      setStatus('pending_join');
+    }
 
-    // For now, just update the UI state
-    setUserDetails(prev => ({ ...prev, telegramId: value }))
-    setStatus('pending_join');
   }
 
   const renderTelegramInfo = () => {
@@ -37,7 +54,7 @@ export function TelegramConnection() {
               <MessageCircle className="w-5 h-5 text-[#00D1FF]" />
             </div>
             <div>
-              <button 
+              <button
                 onClick={() => setShowChannelLink(!showChannelLink)}
                 className="font-medium hover:text-[#00D1FF] transition-colors"
               >
@@ -75,9 +92,9 @@ export function TelegramConnection() {
     );
   };
 
-  if (userDetails?.telegramId) {
-    return renderTelegramInfo();
-  }
+  // if (userDetails?.telegramId) {
+  //   return renderTelegramInfo();
+  // }
 
   if (status === 'pending_approval') {
     return null;
@@ -104,9 +121,9 @@ export function TelegramConnection() {
         </div>
 
         {status === 'not_connected' ? (
-          <ConnectStep onSubmit={onSubmit} />
+          <ConnectStep loader={loader} onSubmit={onSubmit} />
         ) : (
-          <JoinStep onJoined={() => setStatus('pending_approval')} />
+          <JoinStep link={userDetails?.invite_link} onJoined={() => setStatus('pending_approval')} />
         )}
       </div>
     </motion.div>

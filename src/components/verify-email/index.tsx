@@ -52,7 +52,7 @@ export default function VerifyEmail() {
       <header className="flex items-center justify-between p-6">
         <img
           src="/assets/images/nav-logo.png"
-          alt="Pistol Signals"
+          alt="AI Technical Analyst"
           className="h-8"
         />
         <a
@@ -75,7 +75,7 @@ export default function VerifyEmail() {
           >
             <h1 className="text-3xl font-bold">Next up, verify your email</h1>
             <p className="text-gray-400">
-              To continue subscribing a plan, head over to your inbox and click the verification 
+              To continue subscribing a plan, head over to your inbox and click the verification
               link we just sent you.
             </p>
           </motion.div>

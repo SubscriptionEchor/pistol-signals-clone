@@ -5,10 +5,10 @@ import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
-    <div 
+    <div
       className="min-h-screen relative bg-black"
       style={{
-        backgroundImage: 'url(/assets/images/hero-bg.png)',
+        // backgroundImage: 'url(/assets/images/hero-bg.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',

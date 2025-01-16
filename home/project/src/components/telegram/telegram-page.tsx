@@ -37,8 +37,8 @@ export default function TelegramPage() {
     }
 
     // Match validation
-    if (formData.username && formData.confirmUsername && 
-        formData.username !== formData.confirmUsername) {
+    if (formData.username && formData.confirmUsername &&
+      formData.username !== formData.confirmUsername) {
       newErrors.match = 'Telegram handles do not match';
     }
 
@@ -68,7 +68,7 @@ export default function TelegramPage() {
       <header className="flex items-center justify-between p-6">
         <img
           src="/assets/images/nav-logo.png"
-          alt="Pistol Signals"
+          alt="AI Technical Analyst"
           className="h-8"
         />
         <a
@@ -113,9 +113,8 @@ export default function TelegramPage() {
                       placeholder="Enter telegram username"
                       value={formData.username}
                       onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-                      className={`w-full pl-12 pr-4 py-3 bg-white/5 border ${
-                        errors.username ? 'border-red-500' : 'border-gray-800'
-                      } rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors`}
+                      className={`w-full pl-12 pr-4 py-3 bg-white/5 border ${errors.username ? 'border-red-500' : 'border-gray-800'
+                        } rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors`}
                     />
                     {errors.username && (
                       <div className="flex items-center gap-2 mt-2 text-red-500 text-sm">
@@ -132,9 +131,8 @@ export default function TelegramPage() {
                       placeholder="Confirm telegram username"
                       value={formData.confirmUsername}
                       onChange={(e) => setFormData({ ...formData, confirmUsername: e.target.value })}
-                      className={`w-full pl-12 pr-4 py-3 bg-white/5 border ${
-                        errors.confirmUsername || errors.match ? 'border-red-500' : 'border-gray-800'
-                      } rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors`}
+                      className={`w-full pl-12 pr-4 py-3 bg-white/5 border ${errors.confirmUsername || errors.match ? 'border-red-500' : 'border-gray-800'
+                        } rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors`}
                     />
                     {(errors.confirmUsername || errors.match) && (
                       <div className="flex items-center gap-2 mt-2 text-red-500 text-sm">
