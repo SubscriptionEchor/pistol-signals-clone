@@ -9,6 +9,7 @@ import toast from 'react-hot-toast';
 import { useGoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import { GOOGLE_AUTH_API_KEY } from '@/lib/config';
 import { ROUTE_NAMES } from '@/routes/routenames';
+import { SUBSCRIBE_PLANS } from '@/constant';
 
 function SignInPageComponent() {
   const { userDetails, setUserDetails, login } = useUser();
@@ -90,6 +91,9 @@ function SignInPageComponent() {
           return;
         }
         setUserDetails(result?.data);
+        if (result?.data?.plan == SUBSCRIBE_PLANS.PAID) {
+          toast.success('User login successful')
+        }
         navigate(ROUTE_NAMES.DASHBOARD);
       }
     } catch (error) {
@@ -111,6 +115,9 @@ function SignInPageComponent() {
         ...res?.data,
         isEmailVerified: true
       }));
+      if (res?.data?.plan == SUBSCRIBE_PLANS.PAID) {
+        toast.success('User login successful')
+      }
 
       navigate(ROUTE_NAMES.DASHBOARD, { replace: true });
     },

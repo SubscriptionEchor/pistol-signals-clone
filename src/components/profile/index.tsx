@@ -87,7 +87,9 @@ export function Profile() {
       setFormData(prev => ({ ...prev, password: '' }));
     } catch (error) {
       console.log(error)
-      toast.error('Failed to update profile');
+      setUserLoader(false)
+      setPasswordLoader(false)
+      // toast.error('Failed to update profile');
     }
   };
 
@@ -104,7 +106,7 @@ export function Profile() {
       console.error('Failed to copy:', err);
     }
   };
-  console.log(userDetails)
+
   return (
     <DashboardLayout>
       <div className="min-h-screen bg-[#0A0A0A] text-white">
@@ -232,7 +234,7 @@ export function Profile() {
               </div> */}
 
 
-              <div className=" flex gap-6 mb-6">
+              {/* <div className=" flex gap-6 mb-6">
                 <div>
                   <div className="flex items-center gap-2 text-gray-400 mb-1">
                     <p>Invite Link</p>
@@ -252,6 +254,36 @@ export function Profile() {
                   {copied ? <Check className="w-5 h-5  text-emerald-500" /> : <Copy className="w-5 h-5 text-gray-400 group-hover:text-white" />}
                 </button>
               </div>
+              <div className="  gap-6 mb-6">
+
+                <div className="flex items-center gap-2 text-gray-400 mb-1 mb-3">
+                  <p>Invite Code</p>
+                </div>
+                <div className='flex'>
+
+                  <a onClick={handleCopyCode}
+                    className={cn(
+                      'p-3 rounded-lg ',
+                      'bg-white/5 hover:bg-white/10',
+                      'border border-white/10 hover:border-white/20',
+                      'transition-all duration-200',
+                      'group w-fit h-fit me-3'
+                    )}>{userDetails?.refCode}</a>
+
+                  <button
+                    onClick={handleCopyCode}
+                    className={cn(
+                      'p-3 rounded-lg',
+                      'bg-white/5 hover:bg-white/10',
+                      'border border-white/10 hover:border-white/20',
+                      'transition-all duration-200',
+                      'group'
+                    )}
+                  >
+                    {copied ? <Check className="w-5 h-5  text-emerald-500" /> : <Copy className="w-5 h-5 text-gray-400 group-hover:text-white" />}
+                  </button>
+                </div>
+              </div> */}
             </motion.section>
 
             {/* Security */}
@@ -328,13 +360,14 @@ export function Profile() {
                 <Shield className="w-5 h-5 text-green-400" />
               </div>
 
-              <Button
-                variant="gradient"
-                onClick={() => OpenUrl(userDetails?.invite_link)}
-                className="w-full sm:w-auto"
-              >
+              {!userDetails?.tel_chat_id &&
+                (userDetails?.invite_link && userDetails?.telegramId) ? <Button
+                  variant="gradient"
+                  onClick={() => OpenUrl(userDetails?.invite_link)}
+                  className="w-full sm:w-auto"
+                >
                 Join Telegram Channel
-              </Button>
+              </Button> : null}
             </motion.section>
 
             {/* Notifications */}

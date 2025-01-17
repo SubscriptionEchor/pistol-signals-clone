@@ -226,7 +226,7 @@ function SignUpPageComponent() {
               <p className="mt-1 text-sm text-red-500">{errors.password}</p>
             )}
             {/* Referral Code Field */}
-            <div className="relative">
+            {/* <div className="relative">
               <div className="flex items-center">
                 <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                 <input
@@ -237,7 +237,7 @@ function SignUpPageComponent() {
                   className="w-full pl-12 pr-4 py-3 bg-white/5 border border-gray-800 rounded-lg focus:outline-none focus:border-[#00D1FF] transition-colors"
                 />
               </div>
-            </div>
+            </div> */}
 
             {formData?.password && <div className="grid grid-cols-1 gap-2">
               {passwordRequirements.map((requirement, index) => (

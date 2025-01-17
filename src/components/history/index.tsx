@@ -15,14 +15,14 @@ export function SignalsHistory() {
       try {
         setLoader(true)
         const currentDate = new Date();
-        const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Adding 1 because months are 0-indexed
+        const month = String(currentDate.getMonth() + 1).padStart(1, '0');
         const year = currentDate.getFullYear();
         const dateParam = `${month}-${year}`
         const [analyticsResponse, historyResponse] = await Promise.all([
           tradingApi.getAnalytics({ month: dateParam }),
           tradingApi.getHistory()
         ]);
-
+        console
         if (analyticsResponse?.status) {
           setAnalytics(analyticsResponse.data);
         }

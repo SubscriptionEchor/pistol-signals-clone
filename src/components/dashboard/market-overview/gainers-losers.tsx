@@ -9,8 +9,8 @@ const WatermarkPattern: React.FC = () => {
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="flex items-center gap-3 text-3xl font-bold tracking-widest opacity-[0.04] transform-rotate-12">
-          <img src="/assets/favicons/apple-touch-icon.png" alt="Logo" className="h-9" />
-          AI Technical Analyst
+          <img src="/assets/favicons/apple-touch-icon.png" alt="Logo" />
+          {/* AI Technical Analyst */}
         </div>
       </div>
     </div>
@@ -76,15 +76,15 @@ export function GainersLosers({ data, type }: GainersLosersProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="relative group"
+      className="relative group h-full "
     >
       <div className="absolute -inset-[1px] bg-gradient-to-r from-[#00D1FF]/20 to-[#00FFFF]/20 rounded-xl opacity-0 group-hover:opacity-100 blur-sm transition-opacity duration-500" />
 
-      <div className="relative rounded-xl p-5 border border-white/10">
+      <div className="relative rounded-xl p-5 border border-white/10 h-full">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-medium">{type === 'gainers' ? 'Top Gainers' : 'Top Losers'}</h3>
         </div>
-        <div className="space-y-2">
+        <div className="space-y-2 ">
           {
             data.length === 0
               ? Array.from({ length: 5 }).map((_, index) => <Shimmer key={index} />) :
@@ -99,7 +99,7 @@ export function GainersLosers({ data, type }: GainersLosersProps) {
   return (
     <div className="relative bg-[#111] rounded-xl">
       <WatermarkPattern />
-      <div className="relative z-10">
+      <div className="relative z-10 h-full ">
         {cardContent}
       </div>
     </div>

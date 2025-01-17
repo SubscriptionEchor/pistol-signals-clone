@@ -59,7 +59,7 @@ export default function Navbar() {
           {/* Logo */}
           <motion.a
             href="/"
-            className="relative z-10 group"
+            className="relative z-10 group flex"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
@@ -69,6 +69,10 @@ export default function Navbar() {
               alt="Logo"
               className="w-auto h-8 md:h-10 relative"
             />
+            <div className='ms-2 text-sm column  items-center'>
+              <p>AI </p>
+              <p>Techinal Analyst</p>
+            </div>
           </motion.a>
 
           {/* Desktop Navigation */}

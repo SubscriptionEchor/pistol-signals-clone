@@ -110,7 +110,7 @@ export function Sidebar({ handleOpenPopup }: SidebarProps) {
           })}
 
           {/* Telegram Connection Button */}
-          {(userDetails?.invite_link && userDetails?.telegramId) && (
+          {(!userDetails?.tel_chat_id && userDetails?.invite_link && userDetails?.telegramId) && (
             <Button
               onClick={() => OpenUrl(userDetails?.invite_link)}
               variant="gradient"

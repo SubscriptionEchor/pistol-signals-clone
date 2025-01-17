@@ -9,8 +9,8 @@ const WatermarkPattern: React.FC = () => {
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="flex items-center gap-3 text-2xl font-bold tracking-widest opacity-[0.04] ">
-          <img src="/assets/favicons/apple-touch-icon.png" alt="Logo" className="h-9" />
-          AI Technical Analyst
+          <img src="/assets/images/nav-logo.png" alt="Logo" />
+          {/* AI Technical Analyst */}
         </div>
       </div>
     </div>
@@ -57,6 +57,7 @@ export function SignalCard(props: SignalCardPropsWithLoading) {
             />
 
             <SignalMetrics
+              type={props?.signalType}
               entry={props.entry}
               exit={props.exit}
             />

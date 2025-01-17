@@ -38,7 +38,7 @@ export function TelegramConnection() {
     let result = await authApi.update({ telegram_id: value })
     setLoader(false)
     if (result?.status) {
-      toast.success("telegram joined successfully")
+      toast.success("Please join telegram ")
       setUserDetails(prev => ({ ...prev, telegramId: value }))
       setStatus('pending_join');
     }

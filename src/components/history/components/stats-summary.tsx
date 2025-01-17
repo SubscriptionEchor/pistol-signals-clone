@@ -147,7 +147,7 @@ export function StatsSummary({ data, setAnalytics, loader }) {
                 <span className="text-gray-400">Overall profit</span>
                 <div className="flex items-center gap-1">
                   <ArrowUpRight className="text-green-500 w-4 h-4" />
-                  <span className="text-2xl font-bold text-green-500">${data?.summary?.overall_profit}</span>
+                  <span className="text-2xl font-bold text-green-500">{data?.summary?.overall_profit}%</span>
                 </div>
               </div>
               <div>

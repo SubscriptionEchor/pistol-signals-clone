@@ -43,7 +43,11 @@ export function Sidebar({ handleOpenPopup }) {
       <div className="flex flex-col h-full">
         {/* Logo */}
         <div onClick={() => navigate('/dashboard')} className="cursor-pointer h-16 flex items-center px-6">
-          <img src="/assets/images/nav-logo.png" alt="Logo" className="h-8" />
+          <img src="/assets/images/nav-logo.png" alt="Logo" className="h-10" />
+          <div className='ms-2 text-sm column  items-center'>
+            <p>AI </p>
+            <p>Techinal Analyst</p>
+          </div>
         </div>
 
         {/* Menu Items */}
@@ -67,11 +71,12 @@ export function Sidebar({ handleOpenPopup }) {
               <span>{item.label}</span>
             </button>
           ))}
-          {(userDetails?.invite_link && userDetails?.telegramId) ? <Button
-            onClick={() => OpenUrl(userDetails?.invite_link)}
-            variant="gradient"
-            className="flex mt-10 items-center gap-2 whitespace-nowrap"
-          >
+          {!userDetails?.tel_chat_id &&
+            (userDetails?.invite_link && userDetails?.telegramId) ? <Button
+              onClick={() => OpenUrl(userDetails?.invite_link)}
+              variant="gradient"
+              className="flex mt-10 items-center gap-2 whitespace-nowrap"
+            >
             <Send className="w-4 h-4 " />
             Connect Telegram
           </Button> : null}

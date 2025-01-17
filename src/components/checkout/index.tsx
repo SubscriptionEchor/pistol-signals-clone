@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Copy, ExternalLink, ArrowRight, AlertCircle, ArrowLeft, Shield } from 'lucide-react';
+import { Copy, ExternalLink, ArrowRight, AlertCircle, ArrowLeft, Shield, Timer } from 'lucide-react';
 import { Button } from '../ui/button';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import Countdown from 'react-countdown';
 
 import { ROUTE_NAMES } from '@/routes/routenames';
 
@@ -11,7 +12,6 @@ export function SubscriptionCheckout({ details, isProcessing }) {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const plan = details;
 
   const paymentDetails = {
     contractAddress: '0x935f51628d80b623eaab3b655ac64be5c8383a17',
@@ -26,7 +26,7 @@ export function SubscriptionCheckout({ details, isProcessing }) {
   };
 
 
-  if (!plan) {
+  if (!details) {
     navigate(ROUTE_NAMES.SUBSCRIPTION);
     return null;
   }
@@ -43,22 +43,32 @@ export function SubscriptionCheckout({ details, isProcessing }) {
           className="space-y-8"
         >
           {/* Plan Summary */}
-          <div className="text-center">
+          {/* <div className="text-center">
             <h1 className="text-3xl font-bold mb-2">Complete Your Purchase</h1>
             <p className="text-gray-400 font-bold">
               You selected the {plan.name} plan at ${plan.price}/{plan.period}
             </p>
-          </div>
-
+          </div> */}
+          <p className="text-gray-400 text-center font-semibold text-red-400">
+            * Please don't close or reload the page until payment completes
+          </p>
           {/* Payment Details */}
           <div className="bg-white/5 rounded-xl p-6 border border-white/10 space-y-6">
-            <div>
-              <h2 className="text-xl font-semibold mb-4">Payment Details</h2>
-              <p className="text-gray-400 text-sm">
-                Send exactly ${details.amount} to the following address:
-              </p>
+            <div className='flex justify-between'>
+              <div>
+                <h2 className="text-xl font-semibold mb-4">Payment Details</h2>
+                <p className="text-gray-400 text-sm">
+                  Send exactly ${details.price} to the following address:
+                </p>
+              </div>
+              {details && (
+                <div className="flex items-center gap-1.5 text-xs text-gray-400">
+                  <Timer className="w-3.5 h-3.5" />
+                  <span>Time remaining:</span>
+                  <Countdown daysInHours date={Date.now() + (details?.ttl * 1000 - Date.now())} />
+                </div>
+              )}
             </div>
-
             {/* Wallet Address */}
             <div className="space-y-2">
               <label className="text-sm text-gray-400">Wallet Address</label>

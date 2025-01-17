@@ -189,8 +189,8 @@ export function PricingPage() {
         return
       }
       if (payload?.data.status == PAYMENT_STATUS.PENDING) {
-        data = { ...data, ...payload?.data }
-        setPlanDetails(data)
+        let updated = { ...data, ...payload?.data }
+        setPlanDetails(updated)
         Polling(payload?.data?.id)
         setIsProcessing(true)
 
@@ -211,7 +211,6 @@ export function PricingPage() {
     }
 
   }
-
   const onHandleSuccess = async () => {
     try {
       setDataLoader(true)
@@ -234,7 +233,7 @@ export function PricingPage() {
   }
 
   if (isProcessing) {
-    return <SubscriptionCheckout isProcessing={isProcessing} details={planDetails} />
+    return <SubscriptionCheckout key={planDetails?.price} isProcessing={isProcessing} details={planDetails} />
   }
 
   if (planSuccess) {
@@ -336,7 +335,13 @@ export function PricingPage() {
     <div className="min-h-screen bg-black text-white">
       <header className="fixed top-0 left-0 right-0 bg-black/80 backdrop-blur-sm border-b border-white/10 z-50">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <img src="/assets/images/nav-logo.png" alt="AI Technical Analyst" className="h-8" />
+          <div className='flex'>
+            <img src="/assets/images/nav-logo.png" alt="AI Technical Analyst" className="h-10" />
+            <div className='ms-2 text-sm column  items-center'>
+              <p>AI </p>
+              <p>Techinal Analyst</p>
+            </div>
+          </div>
           <a href="/" className="text-gray-400 hover:text-white transition-colors">
             Back to home
           </a>

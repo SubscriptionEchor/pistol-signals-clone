@@ -17,7 +17,7 @@ export function MarketOverview() {
         return
       }
       const GData = wsData?.filter(ticker => ticker.P >= 0).sort((a, b) => b.P - a.P).slice(0, 5)
-      const LData = wsData?.filter(ticker => ticker.P < 0).sort((a, b) => a.P - b.P).slice(0, 5)
+      const LData = wsData?.filter(ticker => ticker.P < 0).sort((a, b) => a.P - b.P).slice(0, 3)
       if (GData?.length) {
         setGainersData(GData)
       }
