@@ -67,12 +67,11 @@ export function Sidebar({ handleOpenPopup }) {
               <span>{item.label}</span>
             </button>
           ))}
-          {!userDetails?.tel_chat_id &&
-            (userDetails?.invite_link && userDetails?.telegramId) ? <Button
-              onClick={() => OpenUrl(userDetails?.invite_link)}
-              variant="gradient"
-              className="flex mt-10 items-center gap-2 whitespace-nowrap"
-            >
+          {(userDetails?.invite_link && userDetails?.telegramId) ? <Button
+            onClick={() => OpenUrl(userDetails?.invite_link)}
+            variant="gradient"
+            className="flex mt-10 items-center gap-2 whitespace-nowrap"
+          >
             <Send className="w-4 h-4 " />
             Connect Telegram
           </Button> : null}

@@ -35,7 +35,7 @@ export function ConnectStep({ onSubmit, loader }: ConnectStepProps) {
               type="text"
               value={handle}
               onChange={(e) => {
-                setHandle(e.target.value?.toLowerCase());
+                setHandle(e.target.value);
                 setError('');
               }}
               placeholder="yourusername"
